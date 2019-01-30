@@ -21,13 +21,13 @@ vector<room> dataIO::roomIO(char *direct_name){
     dir = opendir(direct_name);
     if(!dir){
         cout << "Room Directory Not Found, Error\n" << endl;
-        return 0;
+        return NULL;
     }
 
     //read all file names in the given directory
     while((entry = readdir(dir)) != NULL){
         if(entry->d_name[0] != '.'){
-            string name = string(entyr->d_name);
+            string name = string(entry->d_name);
             fileNames.push_back(name);
         }
     }
