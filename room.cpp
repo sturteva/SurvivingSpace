@@ -7,6 +7,10 @@ using namespace std;
 #include <string>
 #include <iostream>
 
+room::room(){
+
+    visited = false;
+}
 
 /********************************************************
  ** Function: room ()
@@ -19,6 +23,15 @@ room::room(string n, room *nextRoom)
 	next = nextRoom;
 	visited = false;
 }
+
+/********************************************************
+ ** Function: setName()
+ ** Description: sets the room name
+ ** Parameters: string
+ ********************************************************/
+ void room::setName(string newName){
+    name = newName;
+ }
 
 /********************************************************
  ** Function: getName()

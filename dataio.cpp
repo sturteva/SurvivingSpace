@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
 
 vector<room> dataIO::roomIO(char *direct_name){
@@ -35,11 +36,40 @@ vector<room> dataIO::roomIO(char *direct_name){
     //After that, we go through all of the vector, and process any with file extension *.roomdat
     for(int i = 0; i < fileNames.size(); ++i){
         if(fileNames.at(i).find(".roomdat") != std::string::npos){
-            //create new room
-            //Open the file
-            //For each attribute, add it to new room
-            //close file at EOF
+            room newRoom;
+
+            //Open the File
+            ifstream roomFile(fileNames.at(i));
+
+            if(roomFile.is_open()){
+                string line;
+                //For each attribute, add it to new room
+                //Assuming Attributes are only ever 1 line
+                while(getline(roomFile,line)){
+                     size_t pos;
+                    if(line.find("<Name>")){
+
+                        //Removes the Tags from the line
+                        pos = line.find("<Name>");
+                        line.erase(pos,6);
+                        pos = line.find("</Name>");
+                        line.erase(pos,7);
+
+                        //Gives the new room its name
+                        newRoom.setName(line);
+
+                    }
+                }
+
+                //close file at EOF
+                roomFile.close();
+            }
+            else cout << "Unable to open Room Data File:" << fileNames.at(i);
+
+
+
             //add new room to roomVec
+            roomVec.push_back(newRoom);
 
         }
     }

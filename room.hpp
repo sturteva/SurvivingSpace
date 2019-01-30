@@ -9,16 +9,18 @@ using namespace std;
 
 class room
 {
-	private:  
+	private:
     	string name;
     	room *next;
     	bool visited;
 
 	public:
+	    room();
         room(string, room *);
         string getName();
+        void setName(string);
         void printDescription();
-       
+
 };
 
 #endif
