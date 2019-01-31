@@ -1,16 +1,12 @@
-/********************************************************
+/********************************************************************************
 ** Program: main.cpp
-** Description: A text adventure game. 
-********************************************************/
-using namespace std;
-//  .___________. __________   ___ .___________.        ___       _______  ____    ____  _______ .__   __. .___________. __    __  .______       _______ 
-//  |           ||   ____\  \ /  / |           |       /   \     |       \ \   \  /   / |   ____||  \ |  | |           ||  |  |  | |   _  \     |   ____|
-//  `---|  |----`|  |__   \  V  /  `---|  |----`      /  ^  \    |  .--.  | \   \/   /  |  |__   |   \|  | `---|  |----`|  |  |  | |  |_)  |    |  |__   
-//      |  |     |   __|   >   <       |  |          /  /_\  \   |  |  |  |  \      /   |   __|  |  . `  |     |  |     |  |  |  | |      /     |   __|  
-//      |  |     |  |____ /  .  \      |  |         /  _____  \  |  '--'  |   \    /    |  |____ |  |\   |     |  |     |  `--'  | |  |\  \----.|  |____ 
-//      |__|     |_______/__/ \__\     |__|        /__/     \__\ |_______/     \__/     |_______||__| \__|     |__|      \______/  | _| `._____||_______|
-//                                                                                                                                                                                                                                                                                                                                     
+** Description: main function for Syrma's text adventure 
+**              game: Surviving Space! 
+********************************************************************************/
+using namespace std;                                                                                                                                    
+                                                                                                                                                                                                                                                                                            
 #include <iostream>
+#include <stdlib.h>
 #include "game.hpp"
 
 int main()
@@ -19,15 +15,11 @@ int main()
 	int playerChoice;
     game gameState; 
 
-	// create rooms
-	room exitRoom("exit", NULL);
-	room entrance("entrance", &exitRoom);
-
     // initilize gameState
-    gameState.initlize(&entrance);
+    gameState.initlizeRooms();
 
-    cout << "======================== Text Adventure ========================" << endl;
-	cout << "(1.) Start Text Adventure" << endl;
+    cout << "======================== Surviving Space! ========================" << endl;
+	cout << "(1.) Start Adventure" << endl;
 	cout << "(2.) Exit" << endl;
 	cout << "Type 1 or 2 to make your selection: ";
 	cin >> playerChoice;
@@ -49,16 +41,24 @@ int main()
 	switch (playerChoice)
 	{
 		case 1:
-			//system("clear"); // clear the screen
+			// clear the screen
+			system("clear"); 
 
-			cout << "  .___________. __________   ___ .___________.        ___       _______  ____    ____  _______ .__   __. .___________. __    __  .______       _______ " << endl;
-			cout << "  |           ||   ____\\  \\ /  / |           |       /   \\     |       \\ \\   \\  /   / |   ____||  \\ |  | |           ||  |  |  | |   _  \\     |   ____|" << endl;
-			cout << "  `---|  |----`|  |__   \\  V  /  `---|  |----`      /  ^  \\    |  .--.  | \\   \\/   /  |  |__   |   \\|  | `---|  |----`|  |  |  | |  |_)  |    |  |__   " << endl;
-			cout << "      |  |     |   __|   >   <       |  |          /  /_\\  \\   |  |  |  |  \\      /   |   __|  |  . `  |     |  |     |  |  |  | |      /     |   __|  " << endl;
-			cout << "      |  |     |  |____ /  .  \\      |  |         /  _____  \\  |  '--'  |   \\    /    |  |____ |  |\\   |     |  |     |  `--'  | |  |\\  \\----.|  |____ " << endl;
-			cout << "      |__|     |_______/__/ \\__\\     |__|        /__/     \\__\\ |_______/     \\__/     |_______||__| \\__|     |__|      \\______/  | _| `._____||_______|" << endl;
+			cout << "     _______. __    __  .______     ____    ____  __  ____    ____  __  .__   __.   _______         _______..______      ___       ______  _______  __  " << endl;
+			cout << "    /       ||  |  |  | |   _  \\    \\   \\  /   / |  | \\   \\  /   / |  | |  \\ |  |  /  _____|       /       ||   _  \\    /   \\     /      ||   ____||  | " << endl;
+			cout << "   |   (----`|  |  |  | |  |_)  |    \\   \\/   /  |  |  \\   \\/   /  |  | |   \\|  | |  |  __        |   (----`|  |_)  |  /  ^  \\   |  ,----'|  |__   |  | " << endl;
+			cout << "    \\   \\    |  |  |  | |      /      \\      /   |  |   \\      /   |  | |  . `  | |  | |_ |        \\   \\    |   ___/  /  /_\\  \\  |  |     |   __|  |  | " << endl;
+			cout << ".----)   |   |  `--'  | |  |\\  \\----.  \\    /    |  |    \\    /    |  | |  |\\   | |  |__| |    .----)   |   |  |     /  _____  \\ |  `----.|  |____ |__| " << endl;
+			cout << "|_______/     \\______/  | _| `._____|   \\__/     |__|     \\__/     |__| |__| \\__|  \\______|    |_______/    | _|    /__/     \\__\\ \\______||_______|(__) " << endl << endl;
 
-			cout << "\nPress ENTER to begin adventure";
+			cout << "You, our intrepid hero find yourself awakening upon the surface of a jungle planet." << endl << endl
+				 << "You were on an exploratory mission for [Insert Long Exploratory Foundation Name Here]," << endl
+				 << "checking this planet out for rare minerals and to see if there was any intelligent life inhabiting the planet." << endl << endl
+				 << "You aren’t exactly sure what happened, but something done on this planet shot at your ship, "
+				 << "forcing you to run to your escape pod...but..." << endl << endl
+				 << "you don’t see the pod anywhere nearby, and have no idea how you got next to this large tree..."
+				 << endl << endl;
+			cout << "Press ENTER to begin your journey...";
 			cin.get();
 			cout << endl << endl;
 

@@ -11,11 +11,12 @@
 class game
 {
 	private:  
-    	player player1;
+    	player * player1;
+    	room * rooms[];
 
 	public:
 		game();
-		void initlize(room*);
+		void initlizeRooms();
         void start();
     
 };

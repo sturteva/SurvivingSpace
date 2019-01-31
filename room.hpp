@@ -11,15 +11,20 @@ class room
 {
 	private:
     	string name;
-    	room *next;
+    	string fullDesc;
+    	string shortDesc;
+    	string interactables[];
+    	room *adjacent;
     	bool visited;
 
 	public:
+
 	    room();
-        room(string, room *);
-        string getName();
-        void setName(string);
-        void printDescription();
+      room(string, room *);
+      room(string);
+      string getName();
+      void setName(string);
+      void printDescription();
 
 };
 

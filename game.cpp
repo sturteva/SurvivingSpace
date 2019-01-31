@@ -17,7 +17,7 @@ using namespace std;
  ********************************************************/
 game::game()
 {
-	
+	player1 = new player();
 }
 
 
@@ -26,9 +26,14 @@ game::game()
  ** Description: initilizes the gamestate
  ** Parameters: None
  ********************************************************/
-void game::initlize(room * startRoom)
+void game::initlizeRooms()
 {
-	player1.setLocation(startRoom);
+	//initilize rooms with files
+	rooms[0] = new room("startLocation");
+
+
+
+	player1->setLocation(rooms[0]);
 }
 
  /********************************************************
@@ -42,11 +47,9 @@ void game::start()
     string command;
     room * currRoom;
 
-	cout << "Welcome to our Text Adventure!" << endl << endl;
-
 	do
 	{
-		currRoom = player1.getLocation();
+		currRoom = player1->getLocation();
 		currRoom->printDescription();
 
 		// ask for player input

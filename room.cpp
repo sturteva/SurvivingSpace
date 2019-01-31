@@ -17,11 +17,9 @@ room::room(){
  ** Description: constructor
  ** Parameters: None
  ********************************************************/
-room::room(string n, room *nextRoom)
+room::room(string n)
 {
 	name = n;
-	next = nextRoom;
-	visited = false;
 }
 
 /********************************************************
@@ -58,6 +56,6 @@ string room::getName()
 	else
 	{
 		cout << "I've been here before! This is the " << name << endl;
-		cout << "The next room is the " << next->name << endl;
+		//cout << "The next room is the " << next->name << endl;
 	}
  }
