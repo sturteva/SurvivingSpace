@@ -11,11 +11,14 @@ class room
 {
 	private:  
     	string name;
-    	room *next;
+    	string fullDesc;
+    	string shortDesc;
+    	string interactables[];
+    	room *adjacent;
     	bool visited;
 
 	public:
-        room(string, room *);
+        room(string);
         string getName();
         void printDescription();
        
