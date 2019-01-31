@@ -161,7 +161,15 @@ vector<room> dataIO::roomIO(char *direct_name){
         }
     }
 
-
-
     return roomVec;
+}
+
+//This function will cleanup the memory allocated to the roomVec (and possibly other places in the future)
+void dataIO::cleanUp(){
+
+    for(vector<room*>::iterator i = roomVec.begin(); i != roomVec.end(); ++i){
+        delete *i;
+    }
+
+    roomVec.clear();
 }
