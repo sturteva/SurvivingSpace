@@ -16,7 +16,6 @@
 vector<room> dataIO::roomIO(char *direct_name){
 
     vector<string> fileNames;
-    vector<room> roomVec; //empty vector of rooms
 
     //first we need to open the directory that our Room data files are in.
     dir = opendir(direct_name);
@@ -36,7 +35,9 @@ vector<room> dataIO::roomIO(char *direct_name){
     //After that, we go through all of the vector, and process any with file extension *.roomdat
     for(int i = 0; i < fileNames.size(); ++i){
         if(fileNames.at(i).find(".roomdat") != std::string::npos){
-            room newRoom;
+            bool adj = false;
+            int adjPos;
+            room* newRoom = new room();
 
             //Open the File
             ifstream roomFile(fileNames.at(i));
@@ -47,16 +48,102 @@ vector<room> dataIO::roomIO(char *direct_name){
                 //Assuming Attributes are only ever 1 line
                 while(getline(roomFile,line)){
                      size_t pos;
-                    if(line.find("<Name>")){
+
+                    //Adds Name to the room
+                    if(line.find("<Name>" == std::string::npos)){
 
                         //Removes the Tags from the line
                         pos = line.find("<Name>");
                         line.erase(pos,6);
                         pos = line.find("</Name>");
                         line.erase(pos,7);
+                        //Check to see if the name has already been added to roomVec, as an adjacent room
+                        for(int k = 0; k < roomVec.size()){
+                            if(roomVec.at(k)->getName().compare(line) == 0){
+                                adj = true;
+                                adjPos = k;
+                                free (newRoom);
+                            }
+                        }
 
                         //Gives the new room its name
-                        newRoom.setName(line);
+                        if(!adj)
+                            newRoom->setName(line);
+                    }
+
+                    //Adds Long Description to the room
+                    else if(line.find("<FD>")== std::string::npos){
+                        //Removes the Tags from the line.
+                        pos = line.find("<FD>");
+                        line.erase(pos,4);
+                        pos = line.find("</FD>");
+                        line.erase(pos,5);
+
+                        if(!adj){
+                        //Gives the new room its long description
+                        newRoom->setFD(line);}
+
+                        else
+                            roomVec.at(adjPos)->setFD(line);
+                    }
+
+                     //Adds Short Description to the room
+                    else if(line.find("<SD>")== std::string::npos){
+                        //Removes the Tags from the line.
+                        pos = line.find("<SD>");
+                        line.erase(pos,4);
+                        pos = line.find("</SD>");
+                        line.erase(pos,5);
+
+                        if(!adj){
+                        //Gives the new room its long description
+                        newRoom->setSD(line);}
+                        else
+                            roomVec.at(adjPos)->setSD(line);
+                    }
+
+                    //Adds Interactable to room
+                    else if(line.find("<I>") == std::string::npos){
+                        //Removes the Tags from the line.
+                        pos = line.find("<I>");
+                        line.erase(pos,3);
+                        pos = line.find("</I>");
+                        line.erase(pos,4);
+
+                        if(!adj){
+                        //Gives the new room its long description
+                        newRoom->addInteractable(line);}
+                        else
+                            roomVec.at(adjPos)->addInteractable(line);
+                    }
+
+                    //This is a room it is connected to
+                    else if(line.find("<C>") == std::string::npos){
+
+                            //Removes the Tags from the line.
+                        pos = line.find("<C>");
+                        line.erase(pos,3);
+                        pos = line.find("</C>");
+                        line.erase(pos,4);
+
+                        for(int k = 0; k < roomVec.size()){
+                            if(roomVec.at(k)->getName().compare(line) == 0){
+                                        if(!adj){
+                                            newRoom->addAdjacent(roomVec.at(k));
+                                        }
+                                        else
+                                            roomVec.at(adjPos)->addAdjacent(roomVec.at(k));
+                            }
+
+                            else{
+                                room* newAdjRoom = new room(line);
+                                if(!adj)
+                                    newRoom->addAdjacent(newAdjRoom);
+                                else
+                                    roomVec.at(adjPos)->addAdjacent(newAdjRoom);
+
+
+                            }
 
                     }
                 }

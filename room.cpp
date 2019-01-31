@@ -20,6 +20,7 @@ room::room(){
 room::room(string n)
 {
 	name = n;
+	visited = false;
 }
 
 /********************************************************
@@ -40,6 +41,34 @@ string room::getName()
 {
     return name;
 }
+
+/********************************************************
+ ** Function: setFD()
+ ** Description: sets the long description name
+ ** Parameters: string
+ ********************************************************/
+void room::setFD(string newFD){
+
+    fullDesc = newFD;
+
+}
+
+/********************************************************
+ ** Function: setSD()
+ ** Description: sets the short description name
+ ** Parameters: string
+ ********************************************************/
+void room::setSD(string newSD){
+
+    shortDesc = newSD;
+
+}
+
+void room::addInteractable(string newI){
+
+    interactables.push_back(newI);
+}
+
 /********************************************************
  ** Function: printDescription()
  ** Description: prints the room description

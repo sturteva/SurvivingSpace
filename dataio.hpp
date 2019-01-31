@@ -20,9 +20,11 @@ class dataIO{
     private:
             DIR *dir;
             struct dirent *entry;
+            vector<room*> roomVec;
 
     public:
-        vector<room> roomIO(char*); // Will return a vector full of newly created rooms from our data files.
+        vector<room*> roomIO(char*); // Will return a vector full of newly created rooms from our data files.
+        void cleanUp();
 
 };
 #endif

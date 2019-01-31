@@ -1,0 +1,7 @@
+<Name>Starting Room</Name>
+<FD>This is where our long descriptions will live</FD>
+<SD>For short descriptions</SD>
+<I>Any interactable in the room will be tagged like this</I>
+<I>A second example of an interactable</I>
+<C>Finally, a room will need to know all the other rooms it is attached to, or at least their names</C>
+<C>This is a second example of that</C>

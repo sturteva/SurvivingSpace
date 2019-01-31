@@ -6,15 +6,15 @@ using namespace std;
 #ifndef ROOM_HPP
 #define ROOM_HPP
 #include <string>
-
+#include <vector>
 class room
 {
 	private:
     	string name;
     	string fullDesc;
     	string shortDesc;
-    	string interactables[];
-    	room *adjacent;
+    	vector<string> interactables;
+    	vector<room*> adjacent;
     	bool visited;
 
 	public:
@@ -24,6 +24,10 @@ class room
       room(string);
       string getName();
       void setName(string);
+      void setFD(string);
+      void setSD(string);
+      void addInteractable(string);
+      void addAdjacent(room*);
       void printDescription();
 
 };
