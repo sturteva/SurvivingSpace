@@ -9,7 +9,7 @@ using namespace std;
 
 class room
 {
-	private:  
+	private:
     	string name;
     	string fullDesc;
     	string shortDesc;
@@ -18,10 +18,14 @@ class room
     	bool visited;
 
 	public:
-        room(string);
-        string getName();
-        void printDescription();
-       
+
+	    room();
+      room(string, room *);
+      room(string);
+      string getName();
+      void setName(string);
+      void printDescription();
+
 };
 
 #endif
