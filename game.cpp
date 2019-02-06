@@ -18,22 +18,32 @@ using namespace std;
 game::game()
 {
 	player1 = new player();
+	numPlayers = 1;
+
 }
 
 
 /********************************************************
- ** Function: initlize ()
- ** Description: initilizes the gamestate
+ ** Function: initialize ()
+ ** Description: initialize the gamestate
  ** Parameters: None
  ********************************************************/
-void game::initlizeRooms()
+void game::initializeRooms()
 {
-	//initilize rooms with files
-	rooms[0] = new room("startLocation");
+    const char* directory = "./RoomFiles";
+	//initialize rooms with files
+	rooms = ourData.roomIO(directory);
 
+	//Find starting room (not guaranteed to be first room in room vector
+	room* firstRoom;
 
-
-	player1->setLocation(rooms[0]);
+	for(int i = 0; i < (int)rooms.size(); ++i){
+        if(rooms.at(i)->getName().compare("Starting Room") == 0){
+            firstRoom = rooms.at(i);
+            break;
+        }
+    }
+	player1->setLocation(firstRoom);
 }
 
  /********************************************************
@@ -57,6 +67,15 @@ void game::start()
 		cin >> command;
 		cout << endl;
 	}while (command != "exit");
-	
 
+
+}
+
+vector<room*> game::getRooms(){
+
+    return rooms;
+}
+
+player* game::getPlayer1(){
+    return player1;
 }

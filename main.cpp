@@ -1,10 +1,10 @@
 /********************************************************************************
 ** Program: main.cpp
-** Description: main function for Syrma's text adventure 
-**              game: Surviving Space! 
+** Description: main function for Syrma's text adventure
+**              game: Surviving Space!
 ********************************************************************************/
-using namespace std;                                                                                                                                    
-                                                                                                                                                                                                                                                                                            
+using namespace std;
+
 #include <iostream>
 #include <stdlib.h>
 #include "game.hpp"
@@ -13,10 +13,10 @@ int main()
 {
 	// Variable Declaration
 	int playerChoice;
-    game gameState; 
+    game gameState;
 
-    // initilize gameState
-    gameState.initlizeRooms();
+    // initialize gameState
+    gameState.initializeRooms();
 
     cout << "======================== Surviving Space! ========================" << endl;
 	cout << "(1.) Start Adventure" << endl;
@@ -25,24 +25,24 @@ int main()
 	cin >> playerChoice;
 
 	// Makes sure that there is a valid input
-	while(cin.fail() || playerChoice <= 0 || playerChoice >= 3) 
+	while(cin.fail() || playerChoice <= 0 || playerChoice >= 3)
 	{
 		cout << "Error, Selection:" << endl;
 		cin.clear();
 		cin.ignore(256,'\n');
 		cin >> playerChoice;
 	}
-	
+
 	// Clear the buffer
 	cin.clear();
 	cin.ignore(256,'\n');
-	
+
 	// Process choice
 	switch (playerChoice)
 	{
 		case 1:
 			// clear the screen
-			system("clear"); 
+			system("clear");
 
 			cout << "     _______. __    __  .______     ____    ____  __  ____    ____  __  .__   __.   _______         _______..______      ___       ______  _______  __  " << endl;
 			cout << "    /       ||  |  |  | |   _  \\    \\   \\  /   / |  | \\   \\  /   / |  | |  \\ |  |  /  _____|       /       ||   _  \\    /   \\     /      ||   ____||  | " << endl;
@@ -67,7 +67,7 @@ int main()
 
 			// start game loop
 			gameState.start();
-			
+
 			break;
 		case 2:
 			cout << "Thanks for Playing!" << endl;

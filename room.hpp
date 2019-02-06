@@ -23,6 +23,10 @@ class room
       room(string, room *);
       room(string);
       string getName();
+      string getFullDesc();
+      string getShortDesc();
+      vector<string> getInteractables();
+      vector<room*> getAdjacent();
       void setName(string);
       void setFD(string);
       void setSD(string);

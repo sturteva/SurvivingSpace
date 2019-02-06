@@ -5,6 +5,7 @@
 
 #include "dataio.hpp"
 #include "room.hpp"
+#include "game.hpp"
 #include <vector>
 #include <dirent.h>
 #include <sys/stat.h>
@@ -12,8 +13,12 @@
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
+#include <sys/types.h>
+#include <bits/stdc++.h>
 
-vector<room*> dataIO::roomIO(char *direct_name){
+
+
+vector<room*> dataIO::roomIO(const char *direct_name){
 
     vector<string> fileNames;
 
@@ -126,7 +131,7 @@ vector<room*> dataIO::roomIO(char *direct_name){
                         pos = line.find("</C>");
                         line.erase(pos,4);
 
-                        for(int k = 0; k < roomVec.size(); ++k){
+                        for(int k = 0; k < (int)roomVec.size(); ++k){
                             if(roomVec.at(k)->getName().compare(line) == 0){
                                         if(!adj){
                                             newRoom->addAdjacent(roomVec.at(k));
@@ -165,6 +170,53 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i);
     }
 
     return roomVec;
+}
+
+void dataIO::saveGame(game saveGame){
+
+    string folderName;
+
+    //Ask user for SaveFile name
+    cout << "What would you like to name your save folder?" << endl;
+    getline(cin,folderName);
+
+    mkdir(folderName.c_str());
+
+    vector<room*> theRooms = saveGame.getRooms();
+
+    //Take each room in the current gameState and create a *.roomdat file
+    for(int i = 0; i < (int)theRooms.size(); ++i){
+
+        //Lets build our filePath!
+        string filePath = folderName + "\\" + theRooms.at(i)->getName() + ".roomdat";
+        ofstream roomFile(filePath);
+
+        //Now that we have a file with the right now, we need to input data in the correct format!
+        roomFile << "<Name>" << theRooms.at(i)->getName() << "</Name>" << endl;
+        roomFile << "<FD>" << theRooms.at(i)->getFullDesc() << "</FD>" << endl;
+        roomFile << "<SD>" << theRooms.at(i)->getShortDesc() << "</SD>" << endl;
+
+
+        vector<string> interactables = theRooms.at(i)->getInteractables();
+        //Grabs each interactable in the room
+        for(int k = 0; k < (int)interactables.size(); ++k){
+            roomFile << "<I>" << interactables.at(k) << "</I>" << endl;
+        }
+
+        vector<room*> adjacent = theRooms.at(i)->getAdjacent();
+        for(int k = 0; k < (int)adjacent.size(); ++k){
+            roomFile << "<A>" << adjacent.at(i)->getName() << "</A>" << endl;
+        }
+
+
+
+
+
+
+    }
+
+
+
 }
 
 //This function will cleanup the memory allocated to the roomVec (and possibly other places in the future)

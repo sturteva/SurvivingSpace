@@ -7,18 +7,25 @@
 
 #include "room.hpp"
 #include "player.hpp"
+#include "dataio.hpp"
+
+class dataIO; //forward declaring
 
 class game
 {
-	private:  
+	private:
     	player * player1;
-    	room * rooms[];
+    	vector<room*> rooms;
+    	dataIO ourData;
+    	int numPlayers;
 
 	public:
 		game();
-		void initlizeRooms();
+		void initializeRooms();
         void start();
-    
+        vector<room*>getRooms();
+        player* getPlayer1();
+
 };
 
 #endif

@@ -74,6 +74,25 @@ void room::addAdjacent(room* newAdj){
     adjacent.push_back(newAdj);
 }
 
+//mostly used to save Gamestate
+string room::getFullDesc(){
+    return fullDesc;
+}
+
+string room::getShortDesc(){
+    return shortDesc;
+}
+
+vector<string> room::getInteractables(){
+
+    return interactables;
+}
+
+vector<room*> room::getAdjacent(){
+
+    return adjacent;
+}
+
 /********************************************************
  ** Function: printDescription()
  ** Description: prints the room description

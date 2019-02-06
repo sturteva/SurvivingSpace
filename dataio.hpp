@@ -6,6 +6,7 @@
 #define DATAIO_HPP
 
 #include "room.hpp"
+
 #include <vector>
 #include <dirent.h>
 #include <sys/stat.h>
@@ -15,6 +16,8 @@
 
 using namespace std;
 
+class game; //Forward declaring game
+
 class dataIO{
 
     private:
@@ -23,7 +26,8 @@ class dataIO{
             vector<room*> roomVec;
 
     public:
-        vector<room*> roomIO(char*); // Will return a vector full of newly created rooms from our data files.
+        vector<room*> roomIO(const char*); // Will return a vector full of newly created rooms from our data files.
+        void saveGame(game);
         void cleanUp();
 
 };
