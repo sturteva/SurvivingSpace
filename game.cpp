@@ -79,3 +79,13 @@ vector<room*> game::getRooms(){
 player* game::getPlayer1(){
     return player1;
 }
+
+int game::getNumPlayers(){
+
+    return numPlayers;
+}
+
+void game::setRooms(vector<room*> newRooms){
+
+    rooms = newRooms;
+}

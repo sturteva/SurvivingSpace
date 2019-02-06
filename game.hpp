@@ -25,6 +25,8 @@ class game
         void start();
         vector<room*>getRooms();
         player* getPlayer1();
+        int getNumPlayers();
+        void setRooms(vector<room*>);
 
 };
 

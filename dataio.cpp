@@ -162,7 +162,6 @@ vector<room*> dataIO::roomIO(const char *direct_name){
 
 else cout << "Unable to open Room Data File:" << fileNames.at(i);
 
-
             //add new room to roomVec
             roomVec.push_back(newRoom);
 
@@ -174,8 +173,12 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i);
 
 void dataIO::saveGame(game saveGame){
 
-    string folderName;
+    if(saveGame.getNumPlayers() > 1){
+        cout << "You are only allowed to save games in a Single Player Adventure" << endl;
+        return;
+    }
 
+    string folderName;
     //Ask user for SaveFile name
     cout << "What would you like to name your save folder?" << endl;
     getline(cin,folderName);
@@ -208,14 +211,28 @@ void dataIO::saveGame(game saveGame){
             roomFile << "<A>" << adjacent.at(i)->getName() << "</A>" << endl;
         }
 
-
-
-
-
+        roomFile.close();
 
     }
 
+    //After that is saved, we will save player information
 
+
+
+
+}
+
+//PARAM: Needs the folder name that the save folder is
+game dataIO::loadGame(string folderName){
+
+    //Here is where we will create a new Gamesate, first pulling the room data
+    game newGame();
+
+    newGame.setRooms(roomIO(folderName.c_str()));
+
+    //Need to set the player stuff
+
+    return newGame;
 
 }
 
