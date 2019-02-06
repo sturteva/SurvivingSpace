@@ -13,7 +13,7 @@
 #include <fstream>
 #include <stdio.h>
 
-vector<room> dataIO::roomIO(char *direct_name){
+vector<room*> dataIO::roomIO(char *direct_name){
 
     vector<string> fileNames;
 
@@ -21,7 +21,7 @@ vector<room> dataIO::roomIO(char *direct_name){
     dir = opendir(direct_name);
     if(!dir){
         cout << "Room Directory Not Found, Error\n" << endl;
-        return NULL;
+        return roomVec;
     }
 
     //read all file names in the given directory
@@ -33,8 +33,8 @@ vector<room> dataIO::roomIO(char *direct_name){
     }
 
     //After that, we go through all of the vector, and process any with file extension *.roomdat
-    for(int i = 0; i < fileNames.size(); ++i){
-        if(fileNames.at(i).find(".roomdat") != std::string::npos){
+    for(int i = 0; i < (int)fileNames.size(); ++i){
+        if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
             bool adj = false;
             int adjPos;
             room* newRoom = new room();
@@ -50,7 +50,7 @@ vector<room> dataIO::roomIO(char *direct_name){
                      size_t pos;
 
                     //Adds Name to the room
-                    if(line.find("<Name>" == std::string::npos)){
+                    if((size_t)line.find("<Name>") == std::string::npos){
 
                         //Removes the Tags from the line
                         pos = line.find("<Name>");
@@ -58,11 +58,11 @@ vector<room> dataIO::roomIO(char *direct_name){
                         pos = line.find("</Name>");
                         line.erase(pos,7);
                         //Check to see if the name has already been added to roomVec, as an adjacent room
-                        for(int k = 0; k < roomVec.size()){
+                        for(int k = 0; k < (int)roomVec.size(); ++k){
                             if(roomVec.at(k)->getName().compare(line) == 0){
                                 adj = true;
                                 adjPos = k;
-                                free (newRoom);
+                                delete newRoom;
                             }
                         }
 
@@ -126,7 +126,7 @@ vector<room> dataIO::roomIO(char *direct_name){
                         pos = line.find("</C>");
                         line.erase(pos,4);
 
-                        for(int k = 0; k < roomVec.size()){
+                        for(int k = 0; k < roomVec.size(); ++k){
                             if(roomVec.at(k)->getName().compare(line) == 0){
                                         if(!adj){
                                             newRoom->addAdjacent(roomVec.at(k));
@@ -150,9 +150,12 @@ vector<room> dataIO::roomIO(char *direct_name){
 
                 //close file at EOF
                 roomFile.close();
-            }
-            else cout << "Unable to open Room Data File:" << fileNames.at(i);
 
+
+            }
+            }
+
+else cout << "Unable to open Room Data File:" << fileNames.at(i);
 
 
             //add new room to roomVec

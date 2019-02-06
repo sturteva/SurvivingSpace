@@ -69,6 +69,11 @@ void room::addInteractable(string newI){
     interactables.push_back(newI);
 }
 
+void room::addAdjacent(room* newAdj){
+
+    adjacent.push_back(newAdj);
+}
+
 /********************************************************
  ** Function: printDescription()
  ** Description: prints the room description
