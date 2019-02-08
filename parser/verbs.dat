@@ -1,0 +1,20 @@
+go|go
+climb|go
+run|go
+walk|go
+take|take
+collect|take
+grab|take
+interact|take
+pick up|take
+put|put
+set|put
+use|put
+place|put
+drop|drop
+remove|drop
+look|look
+look at|look at
+help|help
+inventory|inventory
+bag|inventory
