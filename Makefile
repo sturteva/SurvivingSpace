@@ -1,4 +1,4 @@
-CFLAGS= -Wall -g 
+CFLAGS= -Wall -g -std=c++11 
 
 survivingSpace: main.cpp game.cpp player.cpp room.cpp dataio.cpp inventory.cpp parser.cpp
 	g++ -o survivingSpace main.cpp game.cpp dataio.cpp player.cpp room.cpp inventory.cpp parser.cpp $(CFLAGS)
