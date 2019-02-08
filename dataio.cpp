@@ -17,7 +17,11 @@
 #include <bits/stdc++.h>
 
 
-
+/******************************************************************************
+** Function: roomIO()
+** Description: Loads room vector using roomdat files
+** Parameters: string
+*******************************************************************************/
 vector<room*> dataIO::roomIO(const char *direct_name){
 
     vector<string> fileNames;
@@ -171,6 +175,11 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i);
     return roomVec;
 }
 
+/******************************************************************************
+** Function: saveGame()
+** Description: Saves game state and all rooms to a new save folder 
+** Parameters: game object to be saved
+*******************************************************************************/
 void dataIO::saveGame(game saveGame){
 
     if(saveGame.getNumPlayers() > 1){
@@ -222,6 +231,11 @@ void dataIO::saveGame(game saveGame){
 
 }
 
+/******************************************************************************
+** Function: roomIO()
+** Description: Loads game state from existing save folder
+** Parameters: name of save folder
+*******************************************************************************/
 //PARAM: Needs the folder name that the save folder is
 game dataIO::loadGame(string folderName){
 
@@ -236,6 +250,11 @@ game dataIO::loadGame(string folderName){
 
 }
 
+/******************************************************************************
+** Function: roomIO()
+** Description: Loads game state from existing save folder
+** Parameters: name of save folder
+*******************************************************************************/
 //This function will cleanup the memory allocated to the roomVec (and possibly other places in the future)
 void dataIO::cleanUp(){
 
