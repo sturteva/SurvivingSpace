@@ -1,7 +1,7 @@
-/********************************************************
+/*******************************************************************************
 ** Program: game.cpp
 ** Description: Implemenation file for game class.
-********************************************************/
+*******************************************************************************/
 using namespace std;
 #include "game.hpp"
 #include "room.hpp"
@@ -10,11 +10,11 @@ using namespace std;
 #include <iostream>
 
 
-/********************************************************
+/*******************************************************************************
  ** Function: game ()
  ** Description: constructor
  ** Parameters: None
- ********************************************************/
+*******************************************************************************/
 game::game()
 {
 	player1 = new player();
@@ -23,11 +23,11 @@ game::game()
 }
 
 
-/********************************************************
+/*******************************************************************************
  ** Function: initialize ()
- ** Description: initialize the gamestate
+ ** Description: initialize the rooms in gamestate
  ** Parameters: None
- ********************************************************/
+*******************************************************************************/
 void game::initializeRooms()
 {
     const char* directory = "./RoomFiles";
@@ -46,11 +46,11 @@ void game::initializeRooms()
 	player1->setLocation(firstRoom);
 }
 
- /********************************************************
+ /******************************************************************************
  ** Function: start()
- ** Description: constructor
+ ** Description: Starts the game loop
  ** Parameters: None
- ********************************************************/
+*******************************************************************************/
 void game::start()
 {
     //GameStatus status;
@@ -71,21 +71,45 @@ void game::start()
 
 }
 
-vector<room*> game::getRooms(){
+ /******************************************************************************
+ ** Function: getRooms()
+ ** Description: returns room vector
+ ** Parameters: None
+*******************************************************************************/
+vector<room*> game::getRooms()
+{
 
     return rooms;
 }
 
-player* game::getPlayer1(){
+ /******************************************************************************
+ ** Function: getRooms()
+ ** Description: returns room vector
+ ** Parameters: None
+*******************************************************************************/
+player* game::getPlayer1()
+{
     return player1;
 }
 
-int game::getNumPlayers(){
+ /******************************************************************************
+ ** Function: getRooms()
+ ** Description: returns room vector
+ ** Parameters: None
+*******************************************************************************/
+int game::getNumPlayers()
+{
 
     return numPlayers;
 }
 
-void game::setRooms(vector<room*> newRooms){
+ /******************************************************************************
+ ** Function: setRooms()
+ ** Description: sets new room vector
+ ** Parameters: vector of rooms
+*******************************************************************************/
+void game::setRooms(vector<room*> newRooms)
+{
 
     rooms = newRooms;
 }

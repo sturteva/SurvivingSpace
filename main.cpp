@@ -1,8 +1,9 @@
-/********************************************************************************
+/*******************************************************************************
 ** Program: main.cpp
 ** Description: main function for Syrma's text adventure
 **              game: Surviving Space!
-********************************************************************************/
+*******************************************************************************/
+
 using namespace std;
 
 #include <iostream>
@@ -25,7 +26,7 @@ int main()
 	cin >> playerChoice;
 
 	// Makes sure that there is a valid input
-	while(cin.fail() || playerChoice <= 0 || playerChoice >= 3)
+	while(cin.fail() || playerChoice <= 0 || playerChoice > 3)
 	{
 		cout << "Error, Selection:" << endl;
 		cin.clear();
@@ -62,8 +63,6 @@ int main()
 			cin.get();
 			cout << endl << endl;
 
-			// initlize game
-			//gameState.initlize();
 
 			// start game loop
 			gameState.start();
