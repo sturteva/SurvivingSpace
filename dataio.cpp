@@ -9,6 +9,7 @@
 #include <vector>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <cstring>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -49,7 +50,7 @@ vector<room*> dataIO::roomIO(const char *direct_name){
             room* newRoom = new room();
 
             //Open the File
-            ifstream roomFile(fileNames.at(i));
+            ifstream roomFile(fileNames.at(i).c_str());
 
             if(roomFile.is_open()){
                 string line;
@@ -201,7 +202,7 @@ void dataIO::saveGame(game saveGame){
 
         //Lets build our filePath!
         string filePath = folderName + "\\" + theRooms.at(i)->getName() + ".roomdat";
-        ofstream roomFile(filePath);
+        ofstream roomFile(filePath.c_str());
 
         //Now that we have a file with the right now, we need to input data in the correct format!
         roomFile << "<Name>" << theRooms.at(i)->getName() << "</Name>" << endl;
@@ -239,9 +240,9 @@ void dataIO::saveGame(game saveGame){
 game dataIO::loadGame(string folderName){
 
     //Here is where we will create a new Gamesate, first pulling the room data
-    game newGame();
-
-    newGame.setRooms(roomIO(folderName.c_str()));
+    game newGame;
+    vector<room*> loadedRooms = roomIO(folderName.c_str());
+    newGame.setRooms(loadedRooms);
 
     //Need to set the player stuff
 
