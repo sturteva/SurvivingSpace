@@ -6,6 +6,7 @@ using namespace std;
 #include "game.hpp"
 #include "room.hpp"
 #include "player.hpp"
+#include "parser.hpp"
 #include <string>
 #include <iostream>
 
@@ -67,9 +68,16 @@ void game::start()
 		cin >> command;
 		cout << endl;
 
-		//parse command
-		
+		// Check command contains no symbols
+		while (checkAlpha(command) == false)
+		{
+			cout << "Only alpha numeric characters are allowed..." << endl; 
+			cout << "What would you like to do? (Type \"exit\" to stop adventure) ";
+			cin >> command;
+			cout << endl;
+		}
 
+		// Parse command 
 
 
 	}while (command != "exit");
