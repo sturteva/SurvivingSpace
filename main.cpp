@@ -20,13 +20,14 @@ int main()
     gameState.initializeRooms();
 
     cout << "======================== Surviving Space! ========================" << endl;
-	cout << "(1.) Start Adventure" << endl;
-	cout << "(2.) Exit" << endl;
-	cout << "Type 1 or 2 to make your selection: ";
+	cout << "(1.) Start New Adventure" << endl;
+	cout << "(2.) Load Existing Adventure" << endl;
+	cout << "(3.) Exit" << endl;
+	cout << "Type 1, 2 or 3 to make your selection: ";
 	cin >> playerChoice;
 
 	// Makes sure that there is a valid input
-	while(cin.fail() || playerChoice <= 0 || playerChoice > 3)
+	while(cin.fail() || playerChoice <= 0 || playerChoice >= 3)
 	{
 		cout << "Error, Selection:" << endl;
 		cin.clear();
@@ -68,7 +69,13 @@ int main()
 			gameState.start();
 
 			break;
+		
 		case 2:
+			//load game
+			cout << "Loading exisiting game state..." << endl;
+
+
+		case 3:
 			cout << "Thanks for Playing!" << endl;
 			return 0;
 	}

@@ -66,6 +66,12 @@ void game::start()
 		cout << "What would you like to do? (Type \"exit\" to stop adventure) ";
 		cin >> command;
 		cout << endl;
+
+		//parse command
+		
+
+
+
 	}while (command != "exit");
 
 

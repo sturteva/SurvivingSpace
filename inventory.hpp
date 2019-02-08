@@ -2,7 +2,9 @@
 ** Program: inventory.hpp
 ** Description: Header file for inventory class.
 ********************************************************/
+using namespace std;
 #include <string>
+#include <vector>
 
 #ifndef INVENTORY_HPP
 #define INVENTORY_HPP

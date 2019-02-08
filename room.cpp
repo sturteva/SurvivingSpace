@@ -92,7 +92,7 @@ void room::addAdjacent(room* newAdj)
 
 /*******************************************************************************
  ** Function: addInteractable()
- ** Description: sets the short description name
+ ** Description: sets the full description name
  ** Parameters: string
 *******************************************************************************/
 //mostly used to save Gamestate
@@ -142,13 +142,11 @@ vector<room*> room::getAdjacent()
  {
  	if(visited == false)
 	{
-		cout << "This room looks new!" << endl;
-		cout << "Name of room: " << name << endl;
+		cout << getFullDesc() << endl;
 		visited = true;
 	}
 	else
 	{
-		cout << "I've been here before! This is the " << name << endl;
-		//cout << "The next room is the " << next->name << endl;
+		cout << getShortDesc() << endl;
 	}
  }

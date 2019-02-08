@@ -1,7 +1,7 @@
-/********************************************************
+/*******************************************************************************
 ** Program: dataio.cpp
 ** Description: Implementation file for Data Input/Output
-********************************************************/
+*******************************************************************************/
 
 #include "dataio.hpp"
 #include "room.hpp"
@@ -192,7 +192,7 @@ void dataIO::saveGame(game saveGame){
     cout << "What would you like to name your save folder?" << endl;
     getline(cin,folderName);
 
-    mkdir(folderName.c_str());
+    mkdir(folderName.c_str(), 0666);
 
     vector<room*> theRooms = saveGame.getRooms();
 
@@ -232,11 +232,10 @@ void dataIO::saveGame(game saveGame){
 }
 
 /******************************************************************************
-** Function: roomIO()
+** Function: loadGame()
 ** Description: Loads game state from existing save folder
 ** Parameters: name of save folder
 *******************************************************************************/
-//PARAM: Needs the folder name that the save folder is
 game dataIO::loadGame(string folderName){
 
     //Here is where we will create a new Gamesate, first pulling the room data
@@ -251,11 +250,10 @@ game dataIO::loadGame(string folderName){
 }
 
 /******************************************************************************
-** Function: roomIO()
-** Description: Loads game state from existing save folder
-** Parameters: name of save folder
+** Function: cleanUp()
+** Description: Frees all memory allocated for dataIO
+** Parameters: None
 *******************************************************************************/
-//This function will cleanup the memory allocated to the roomVec (and possibly other places in the future)
 void dataIO::cleanUp(){
 
     for(vector<room*>::iterator i = roomVec.begin(); i != roomVec.end(); ++i){

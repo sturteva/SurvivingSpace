@@ -2,10 +2,13 @@
 ** Program: inventory.cpp
 ** Description: Implemenation file for player inventory
 ********************************************************/
+using namespace std;
+
 #include "inventory.hpp"
 #include "player.hpp"
 #include <string>
 #include <iostream>
+#include <vector>
 
 
 /********************************************************
