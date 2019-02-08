@@ -2,7 +2,6 @@
 ** Program: player.cpp
 ** Description: Implemenation file for player class.
 ********************************************************/
-using namespace std;
 #include "player.hpp"
 #include "room.hpp"
 #include <string>

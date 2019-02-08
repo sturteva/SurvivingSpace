@@ -7,7 +7,8 @@ using namespace std;
 #include <string>
 #include <iostream>
 
-room::room(){
+room::room()
+{
 
     visited = false;
 }
@@ -28,7 +29,8 @@ room::room(string n)
  ** Description: sets the room name
  ** Parameters: string
 *******************************************************************************/
- void room::setName(string newName){
+ void room::setName(string newName)
+ {
     name = newName;
  }
 
@@ -47,7 +49,8 @@ string room::getName()
  ** Description: sets the long description name
  ** Parameters: string
 *******************************************************************************/
-void room::setFD(string newFD){
+void room::setFD(string newFD)
+{
 
     fullDesc = newFD;
 
@@ -58,7 +61,8 @@ void room::setFD(string newFD){
  ** Description: sets the short description name
  ** Parameters: string
 *******************************************************************************/
-void room::setSD(string newSD){
+void room::setSD(string newSD)
+{
 
     shortDesc = newSD;
 
@@ -69,7 +73,8 @@ void room::setSD(string newSD){
  ** Description: sets the short description name
  ** Parameters: string
 *******************************************************************************/
-void room::addInteractable(string newI){
+void room::addInteractable(string newI)
+{
 
     interactables.push_back(newI);
 }
@@ -79,7 +84,8 @@ void room::addInteractable(string newI){
  ** Description: sets the short description name
  ** Parameters: string
 *******************************************************************************/
-void room::addAdjacent(room* newAdj){
+void room::addAdjacent(room* newAdj)
+{
 
     adjacent.push_back(newAdj);
 }
@@ -90,7 +96,8 @@ void room::addAdjacent(room* newAdj){
  ** Parameters: string
 *******************************************************************************/
 //mostly used to save Gamestate
-string room::getFullDesc(){
+string room::getFullDesc()
+{
     return fullDesc;
 }
 
@@ -99,7 +106,8 @@ string room::getFullDesc(){
  ** Description: sets the short description name
  ** Parameters: string
 *******************************************************************************/
-string room::getShortDesc(){
+string room::getShortDesc()
+{
     return shortDesc;
 }
 
@@ -108,7 +116,8 @@ string room::getShortDesc(){
  ** Description: sets the short description name
  ** Parameters: string
 *******************************************************************************/
-vector<string> room::getInteractables(){
+vector<string> room::getInteractables()
+{
 
     return interactables;
 }
@@ -118,7 +127,8 @@ vector<string> room::getInteractables(){
  ** Description: sets the short description name
  ** Parameters: string
 *******************************************************************************/
-vector<room*> room::getAdjacent(){
+vector<room*> room::getAdjacent()
+{
 
     return adjacent;
 }
