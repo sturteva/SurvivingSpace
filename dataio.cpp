@@ -29,7 +29,7 @@ vector<room*> dataIO::roomIO(string direct_name){
     vector<string> fileNames;
 
     //DEBUG
-    cout << "Directory Name: " << direct_name << endl;
+    //cout << "Directory Name: " << direct_name << endl;
 
     //first we need to open the directory that our Room data files are in.
     dir = opendir(direct_name.c_str());
@@ -58,7 +58,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 		string theFile =  direct_name + "/" + fileNames.at(i);
 
 		//DEBUG LINE
-		cout << "full file name: " << theFile << endl;
+		//cout << "full file name: " << theFile << endl;
             //Open the File
             ifstream roomFile(theFile.c_str());
 
@@ -72,14 +72,14 @@ vector<room*> dataIO::roomIO(string direct_name){
 
 
 
-			cout << "Line:" << line << endl;
+			
                      size_t pos;
 
                     //Adds Name to the room
                     if(line.find("<Name>") != std::string::npos){
 
 			//Debug
-			cout << "inside <NAME>" << endl;
+			//cout << "inside <NAME>" << endl;
 
                         //Removes the Tags from the line
                         pos = line.find("<Name>");
@@ -97,7 +97,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                             }
                         }
 			//Debug
-			cout << "After erasing:" << line << endl;
+			//cout << "After erasing:" << line << endl;
                         //Gives the new room its name
                         if(!adj)
                             newRoom->setName(line);
@@ -107,7 +107,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                     else if(line.find("<FD>")!= std::string::npos){
 
 			//Debug
-			cout << "Inside <FD>" << endl;
+			//cout << "Inside <FD>" << endl;
                         //Removes the Tags from the line.
                         pos = line.find("<FD>");
                         line.erase(pos,4);
@@ -126,7 +126,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                     else if(line.find("<SD>")!= std::string::npos){
 
 			//Debug
-			cout << "Inside <SD>" << endl;
+			//cout << "Inside <SD>" << endl;
                         //Removes the Tags from the line.
                         pos = line.find("<SD>");
                         line.erase(pos,4);
@@ -144,7 +144,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                     else if(line.find("<I>") != std::string::npos){
 
 			//debug
-			cout << "Inside <I>" << endl;
+			//cout << "Inside <I>" << endl;
 
                         //Removes the Tags from the line.
                         pos = line.find("<I>");
@@ -163,7 +163,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                     else if(line.find("<C>") != std::string::npos){
 
 			//Debug
-			cout << "Inside <C>" << endl;
+			//cout << "Inside <C>" << endl;
 		        //Removes the Tags from the line.
                         pos = line.find("<C>");
                         line.erase(pos,3);
