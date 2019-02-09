@@ -80,8 +80,8 @@ void game::start()
 	do
 	{
 		// get current player location
-		//currRoom = player1->getLocation();
-		//currRoom->printDescription();
+		currRoom = player1->getLocation();
+		currRoom->printDescription();
 
 		// ask for player input
 		cout << "What would you like to do? (Type \"exit\" to stop adventure) ";
