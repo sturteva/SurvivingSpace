@@ -68,7 +68,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 		string line;
                 //For each attribute, add it to new room
                 //Assuming Attributes are only ever 1 line
-                while(!getline(roomFile,line).eof()){
+                while(getline(roomFile,line)){
 
 
 
@@ -192,11 +192,13 @@ vector<room*> dataIO::roomIO(string direct_name){
                     }
                 }
 
-                //close file at EOF
-                roomFile.close();
+                
+                
 
 
             }//END of WHILE loop
+
+		roomFile.close();
             }//END checking if file is open
 
 else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
