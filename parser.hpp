@@ -1,9 +1,7 @@
-/***********************
- * 
- * Last Modified: 07 Feb 2019
- * Description: 
- * 
- **********************/
+/*******************************************************************************
+** Program: parser.hpp
+** Description: header file for natural language parser
+*******************************************************************************/
 
 #include <vector>
 #include <string>

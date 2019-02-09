@@ -2,7 +2,6 @@
 ** Program: game.cpp
 ** Description: Implemenation file for game class.
 *******************************************************************************/
-using namespace std;
 #include "game.hpp"
 #include "room.hpp"
 #include "player.hpp"
@@ -10,11 +9,15 @@ using namespace std;
 #include <string>
 #include <iostream>
 
+using std::string;
+using std::cout;
+using std::cin;
+using std::endl;
 
 /*******************************************************************************
- ** Function: game ()
- ** Description: constructor
- ** Parameters: None
+** Function: game ()
+** Description: constructor
+** Parameters: None
 *******************************************************************************/
 game::game()
 {
@@ -25,9 +28,11 @@ game::game()
 
 
 /*******************************************************************************
- ** Function: initialize ()
- ** Description: initialize the rooms in gamestate
- ** Parameters: None
+** Function: initializeRooms()
+** Description: initializes the rooms in gamestate. Loads them from roomdat 
+**              files.
+** Parameters: None
+** Returns: None
 *******************************************************************************/
 void game::initializeRooms()
 {
@@ -47,10 +52,24 @@ void game::initializeRooms()
 	player1->setLocation(firstRoom);
 }
 
- /******************************************************************************
- ** Function: start()
- ** Description: Starts the game loop
- ** Parameters: None
+/*******************************************************************************
+** Function: initializeDict ()
+** Description: initializes the dictionary for parser
+** Parameters: None
+** Returns: None
+*******************************************************************************/
+void game::initializeDict()
+{
+	dictMapInit();
+	cout << "Initilizing parser dictionary..." << endl;
+}
+
+
+/******************************************************************************
+** Function: start()
+** Description: Starts the game loop
+** Parameters: None
+** Returns: None
 *******************************************************************************/
 void game::start()
 {
@@ -60,8 +79,9 @@ void game::start()
 
 	do
 	{
-		currRoom = player1->getLocation();
-		currRoom->printDescription();
+		// get current player location
+		//currRoom = player1->getLocation();
+		//currRoom->printDescription();
 
 		// ask for player input
 		cout << "What would you like to do? (Type \"exit\" to stop adventure) ";
@@ -85,10 +105,11 @@ void game::start()
 
 }
 
- /******************************************************************************
- ** Function: getRooms()
- ** Description: returns room vector
- ** Parameters: None
+/******************************************************************************
+** Function: getRooms()
+** Description: returns room vector
+** Parameters: None
+** Returns: Vector of rooms
 *******************************************************************************/
 vector<room*> game::getRooms()
 {
@@ -100,6 +121,7 @@ vector<room*> game::getRooms()
  ** Function: getRooms()
  ** Description: returns room vector
  ** Parameters: None
+ ** Returns: pointer player object
 *******************************************************************************/
 player* game::getPlayer1()
 {
@@ -110,6 +132,7 @@ player* game::getPlayer1()
  ** Function: getRooms()
  ** Description: returns room vector
  ** Parameters: None
+ ** Returns: Int of number of players
 *******************************************************************************/
 int game::getNumPlayers()
 {
@@ -121,6 +144,7 @@ int game::getNumPlayers()
  ** Function: setRooms()
  ** Description: sets new room vector
  ** Parameters: vector of rooms
+ ** Returns: None
 *******************************************************************************/
 void game::setRooms(vector<room*> newRooms)
 {

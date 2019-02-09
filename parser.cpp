@@ -1,10 +1,8 @@
-/***********************
- * 
- * Last Modified: 07 Feb 2019
- * Description: 
- * 
- **********************/
- 
+/*******************************************************************************
+** Program: parser.cpp
+** Description: Implementation file for natural language parser
+*******************************************************************************/
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -36,23 +34,24 @@ using std::ifstream;
 auto npos = std::string::npos;
 
 
-/*********************
-*	Globals
-* Naughty declaration of dictionary terms as global variables
-*********************/
+/*******************************************************************************
+** Globals
+** Naughty declaration of dictionary terms as global variables
+*******************************************************************************/
 
 map<string, string> verbDict;
 map<string, string> nounDict;
 map<string, string> roomDict;
 
 
-/*********************
-* 	dictMapInit
-* Read files in from the "dictionary" of terms that the game
-* understands and store them in a map for easy lookup and
-* conversion into terms the game can use.
-*********************/
-
+/******************************************************************************
+** Function: dictMapInit()
+** Description: Read files in from the "dictionary" of terms that the game
+**				understands and store them in a map for easy lookup and
+**				conversion into terms the game can use.
+** Parameters: None
+** Returns: None
+*******************************************************************************/
 void dictMapInit()
 {
 	//declare variables
@@ -103,13 +102,13 @@ void dictMapInit()
 }
 
 
-
-/*********************
-* 	checkAlpha
-* Checks to make sure that a user's string input contains only
-* letters and spaces.
-*********************/
-
+/******************************************************************************
+** Function: checkAlpha()
+** Description: Checks to make sure that a user's string input contains only
+** 				letters and spaces.
+** Parameters: String to be checked
+** Returns: bool if string contains only letters and numbers
+*******************************************************************************/
 bool checkAlpha(string input)
 {
 	int strLength = input.length();
@@ -127,13 +126,14 @@ bool checkAlpha(string input)
 	return true;
 }
 
-/*********************
-*	checkTerm
-* Checks to see if a word provided by the user is in the
-* dictionary of known terms. Returns the type of word (noun,
-* verb, other)and its accepted format to the calling function.
-*********************/
-
+/******************************************************************************
+** Function: checkTerm()
+** Description: Checks to see if a word provided by the user is in the
+** 				dictionary of known terms. Returns the type of word (noun,
+**				verb, other)and its accepted format to the calling function.
+** Parameters: String to be checked
+** Returns: bool if the term is in dictionary
+*******************************************************************************/
 bool checkTerm(string str)
 {
 	
@@ -141,11 +141,11 @@ bool checkTerm(string str)
 }
 
 
-/*********************
-* 	parseString
-* Parse the string into a command the game will recognize.
-*********************/
-
+/******************************************************************************
+** Function: parseString()
+** Description: Parse the string into a command the game will recognize.
+** Parameters: Vector of strings containing commands
+*******************************************************************************/
 vector<string> parseString()
 {
 	//declare variables

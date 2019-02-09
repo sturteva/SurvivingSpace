@@ -2,11 +2,20 @@
 ** Program: room.cpp
 ** Description: Implemenation file for room class.
 *******************************************************************************/
-using namespace std;
 #include "room.hpp"
 #include <string>
 #include <iostream>
 
+using std::string;
+using std::cout;
+using std::endl;
+using std::vector;
+
+/*******************************************************************************
+** Function: room ()
+** Description: constructor
+** Parameters: None
+*******************************************************************************/
 room::room()
 {
 
@@ -14,9 +23,9 @@ room::room()
 }
 
 /*******************************************************************************
- ** Function: room ()
- ** Description: constructor
- ** Parameters: None
+** Function: room ()
+** Description: constructor when string passed
+** Parameters: None
 *******************************************************************************/
 room::room(string n)
 {
@@ -28,6 +37,7 @@ room::room(string n)
  ** Function: setName()
  ** Description: sets the room name
  ** Parameters: string
+ ** Returns: None
 *******************************************************************************/
  void room::setName(string newName)
  {
@@ -35,9 +45,10 @@ room::room(string n)
  }
 
 /*******************************************************************************
- ** Function: getName()
- ** Description: gets the room name
- ** Parameters: None
+** Function: getName()
+** Description: gets the room name
+** Parameters: None
+** Returns: room name
 *******************************************************************************/
 string room::getName()
 {
@@ -45,9 +56,10 @@ string room::getName()
 }
 
 /*******************************************************************************
- ** Function: setFD()
- ** Description: sets the long description name
- ** Parameters: string
+** Function: setFD()
+** Description: sets the long description name
+** Parameters: string
+** Returns: None
 *******************************************************************************/
 void room::setFD(string newFD)
 {
@@ -57,9 +69,10 @@ void room::setFD(string newFD)
 }
 
 /*******************************************************************************
- ** Function: setSD()
- ** Description: sets the short description name
- ** Parameters: string
+** Function: setSD()
+** Description: sets the short description name
+** Parameters: string
+** Returns: None
 *******************************************************************************/
 void room::setSD(string newSD)
 {
@@ -69,9 +82,10 @@ void room::setSD(string newSD)
 }
 
 /*******************************************************************************
- ** Function: addInteractable()
- ** Description: sets the short description name
- ** Parameters: string
+** Function: addInteractable()
+** Description: sets the short description name
+** Parameters: string
+** Returns: None
 *******************************************************************************/
 void room::addInteractable(string newI)
 {
@@ -80,9 +94,10 @@ void room::addInteractable(string newI)
 }
 
 /*******************************************************************************
- ** Function: addInteractable()
- ** Description: sets the short description name
- ** Parameters: string
+** Function: addInteractable()
+** Description: sets the short description name
+** Parameters: string
+** Returns: None
 *******************************************************************************/
 void room::addAdjacent(room* newAdj)
 {
@@ -91,9 +106,10 @@ void room::addAdjacent(room* newAdj)
 }
 
 /*******************************************************************************
- ** Function: addInteractable()
- ** Description: sets the full description name
- ** Parameters: string
+** Function: addInteractable()
+** Description: sets the full description name
+** Parameters: string
+** Returns: full room description
 *******************************************************************************/
 //mostly used to save Gamestate
 string room::getFullDesc()
@@ -102,9 +118,10 @@ string room::getFullDesc()
 }
 
 /*******************************************************************************
- ** Function: addInteractable()
- ** Description: sets the short description name
- ** Parameters: string
+** Function: addInteractable()
+** Description: sets the short description name
+** Parameters: string
+** Returns: short room description
 *******************************************************************************/
 string room::getShortDesc()
 {
@@ -112,9 +129,10 @@ string room::getShortDesc()
 }
 
 /*******************************************************************************
- ** Function: addInteractable()
- ** Description: sets the short description name
- ** Parameters: string
+** Function: addInteractable()
+** Description: sets the short description name
+** Parameters: string
+** Returns: Vector of interactables in room
 *******************************************************************************/
 vector<string> room::getInteractables()
 {
@@ -123,9 +141,10 @@ vector<string> room::getInteractables()
 }
 
 /*******************************************************************************
- ** Function: addInteractable()
- ** Description: sets the short description name
- ** Parameters: string
+** Function: addInteractable()
+** Description: sets the short description name
+** Parameters: string
+** Returns: Vector of adjacent rooms
 *******************************************************************************/
 vector<room*> room::getAdjacent()
 {
@@ -134,9 +153,10 @@ vector<room*> room::getAdjacent()
 }
 
 /*******************************************************************************
- ** Function: printDescription()
- ** Description: prints the room description
- ** Parameters: None
+** Function: printDescription()
+** Description: prints the room description
+** Parameters: None
+** Returns: None
 *******************************************************************************/
  void room::printDescription()
  {

@@ -2,11 +2,14 @@
 ** Program: room.hpp
 ** Description: Header file for room class.
 ********************************************************/
-using namespace std;
 #ifndef ROOM_HPP
 #define ROOM_HPP
 #include <string>
 #include <vector>
+
+using std::string;
+using std::vector;
+
 class room
 {
 	private:

@@ -8,20 +8,21 @@
 #include <iostream>
 
 
-/********************************************************
- ** Function: player()
- ** Description: constructor
- ** Parameters: None
- ********************************************************/
+/*********************************************************
+** Function: player()
+** Description: constructor
+** Parameters: None
+*********************************************************/
 player::player()
 {
 
 }
 
 /********************************************************
- ** Function: getLocation ()
+ ** Function: getLocation()
  ** Description: returns the room location of the player
  ** Parameters: None
+ ** Returns: Pointer to room player is currently in.
  ********************************************************/
 room* player::getLocation()
 {
@@ -32,6 +33,7 @@ room* player::getLocation()
  ** Function: setLocation ()
  ** Description: sets the player location
  ** Parameters: Room address
+ ** Returns: None
  ********************************************************/
 void player::setLocation(room *r)
 {

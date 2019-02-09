@@ -2,14 +2,14 @@
 ** Program: inventory.cpp
 ** Description: Implemenation file for player inventory
 ********************************************************/
-using namespace std;
-
 #include "inventory.hpp"
 #include "player.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
 
+using std::string;
+using std::vector;
 
 /********************************************************
  ** Function: inventory()
@@ -22,9 +22,10 @@ inventory::inventory()
 }
 
 /********************************************************
- ** Function: 
- ** Description: 
- ** Parameters: 
+ ** Function: getInventory()
+ ** Description: Returns the players inventory
+ ** Parameters: None
+ ** Returns: Vector of sting containing player inventory
 *********************************************************/
 vector<string> inventory::getInventory()
 {
@@ -32,7 +33,12 @@ vector<string> inventory::getInventory()
 }
 
 
-
+/********************************************************
+ ** Function: addToInventory()
+ ** Description: Adds an item to the palyers inventory
+ ** Parameters: String to be added to inventory
+ ** Returns: None
+*********************************************************/
 void inventory::addToInventory(string item)
 {
 	bag.push_back(item);

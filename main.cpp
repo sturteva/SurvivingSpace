@@ -1,14 +1,15 @@
 /*******************************************************************************
 ** Program: main.cpp
-** Description: main function for Syrma's text adventure
-**              game: Surviving Space!
+** Description: main function for Syrma's text adventure game: Surviving Space!
 *******************************************************************************/
-
-using namespace std;
-
 #include <iostream>
 #include <stdlib.h>
 #include "game.hpp"
+
+using std::string;
+using std::cin;
+using std::cout;
+using std::endl;
 
 int main()
 {
@@ -19,6 +20,9 @@ int main()
     // initialize gameState
     gameState.initializeRooms();
 
+    // initilize dictionary for parser
+    gameState.initializeDict();
+
     cout << "======================== Surviving Space! ========================" << endl;
 	cout << "(1.) Start New Adventure" << endl;
 	cout << "(2.) Load Existing Adventure" << endl;
@@ -27,9 +31,9 @@ int main()
 	cin >> playerChoice;
 
 	// Makes sure that there is a valid input
-	while(cin.fail() || playerChoice <= 0 || playerChoice >= 3)
+	while(cin.fail() || playerChoice <= 0 || playerChoice > 3)
 	{
-		cout << "Error, Selection:" << endl;
+		cout << "Error, Selection:";
 		cin.clear();
 		cin.ignore(256,'\n');
 		cin >> playerChoice;
@@ -74,10 +78,12 @@ int main()
 			//load game
 			cout << "Loading exisiting game state..." << endl;
 
+			break;
+
 
 		case 3:
 			cout << "Thanks for Playing!" << endl;
-			return 0;
+
 	}
 
 
