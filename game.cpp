@@ -36,7 +36,7 @@ game::game()
 *******************************************************************************/
 void game::initializeRooms()
 {
-    const char* directory = "./RoomFiles";
+    string directory = "./RoomFiles";
 	//initialize rooms with files
 	rooms = ourData.roomIO(directory);
 

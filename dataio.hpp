@@ -26,7 +26,7 @@ class dataIO{
             vector<room*> roomVec;
 
     public:
-        vector<room*> roomIO(const char*); // Will return a vector full of newly created rooms from our data files.
+        vector<room*> roomIO(string); // Will return a vector full of newly created rooms from our data files.
         void saveGame(game);
         game loadGame(string);
         void cleanUp();
