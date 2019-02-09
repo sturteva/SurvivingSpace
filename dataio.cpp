@@ -65,30 +65,28 @@ vector<room*> dataIO::roomIO(string direct_name){
             //Open the File
             ifstream roomFile(theFile.c_str());
 
-		//debug
-		cout << "Test 1" << endl;
+		
             if(roomFile.is_open()){
                 string line;
                 //For each attribute, add it to new room
                 //Assuming Attributes are only ever 1 line
                 while(getline(roomFile,line)){
-			cout << "Test 2" << endl;
+			
+			cout << "Line:" << line << endl;
                      size_t pos;
-
+			
                     //Adds Name to the room
-                    if((size_t)line.find("<Name>") == std::string::npos){
+                    if(line.find("<Name>") != std::string::npos){
 
-	
+			//Debug
+			cout << "inside <NAME>" << endl;
 			
                         //Removes the Tags from the line
                         pos = line.find("<Name>");
-			//Debug
-			cout << "Position: " << pos << endl;
-                        line.erase(pos-1,6);
+			
+			line.erase(pos,6);
 
-			//DEBUG
-			cout << "After first erase" << endl;
-                        pos = line.find("</Name>");
+			pos = line.find("</Name>");
                         line.erase(pos,7);
                         //Check to see if the name has already been added to roomVec, as an adjacent room
                         for(int k = 0; k < (int)roomVec.size(); ++k){
@@ -105,7 +103,10 @@ vector<room*> dataIO::roomIO(string direct_name){
                     }
 
                     //Adds Long Description to the room
-                    else if(line.find("<FD>")== std::string::npos){
+                    else if(line.find("<FD>")!= std::string::npos){
+
+			//Debug
+			cout << "Inside <FD>" << endl;
                         //Removes the Tags from the line.
                         pos = line.find("<FD>");
                         line.erase(pos,4);
@@ -121,7 +122,10 @@ vector<room*> dataIO::roomIO(string direct_name){
                     }
 
                      //Adds Short Description to the room
-                    else if(line.find("<SD>")== std::string::npos){
+                    else if(line.find("<SD>")!= std::string::npos){
+
+			//Debug
+			cout << "Inside <SD>" << endl;
                         //Removes the Tags from the line.
                         pos = line.find("<SD>");
                         line.erase(pos,4);
@@ -136,7 +140,11 @@ vector<room*> dataIO::roomIO(string direct_name){
                     }
 
                     //Adds Interactable to room
-                    else if(line.find("<I>") == std::string::npos){
+                    else if(line.find("<I>") != std::string::npos){
+
+			//debug
+			cout << "Inside <I>" << endl;
+
                         //Removes the Tags from the line.
                         pos = line.find("<I>");
                         line.erase(pos,3);
@@ -151,9 +159,11 @@ vector<room*> dataIO::roomIO(string direct_name){
                     }
 
                     //This is a room it is connected to
-                    else if(line.find("<C>") == std::string::npos){
+                    else if(line.find("<C>") != std::string::npos){
 
-                            //Removes the Tags from the line.
+			//Debug
+			cout << "Inside <C>" << endl;
+		        //Removes the Tags from the line.
                         pos = line.find("<C>");
                         line.erase(pos,3);
                         pos = line.find("</C>");
