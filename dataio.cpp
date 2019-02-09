@@ -49,45 +49,41 @@ vector<room*> dataIO::roomIO(string direct_name){
     //After that, we go through all of the vector, and process any with file extension *.roomdat
     for(int i = 0; i < (int)fileNames.size(); ++i){
 
-        // ********debug file names ****
-        //cout << "File name is: " << direct_name + fileNames[i] << endl;
-
-	
-        if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
+      if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
             bool adj = false;
             int adjPos;
             room* newRoom = new room();
-	
+
 		//build full filename
 		string theFile =  direct_name + "/" + fileNames.at(i);
 
 		//DEBUG LINE
-		cout << "updated file name: " << theFile << endl;
+		cout << "full file name: " << theFile << endl;
             //Open the File
             ifstream roomFile(theFile.c_str());
 
-		
+
             if(roomFile.is_open()){
-                
+
 		string line;
                 //For each attribute, add it to new room
                 //Assuming Attributes are only ever 1 line
                 while(!getline(roomFile,line).eof()){
-			
-				
-			
+
+
+
 			cout << "Line:" << line << endl;
                      size_t pos;
-			
+
                     //Adds Name to the room
                     if(line.find("<Name>") != std::string::npos){
 
 			//Debug
 			cout << "inside <NAME>" << endl;
-			
+
                         //Removes the Tags from the line
                         pos = line.find("<Name>");
-			
+
 			line.erase(pos,6);
 
 			pos = line.find("</Name>");
@@ -200,8 +196,8 @@ vector<room*> dataIO::roomIO(string direct_name){
                 roomFile.close();
 
 
-            }
-            }
+            }//END of WHILE loop
+            }//END checking if file is open
 
 else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
 
@@ -210,14 +206,13 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
 
         }
     }
-	//Debug
-	cout << "Out of WHILE loop" << endl;
+
     return roomVec;
 }
 
 /******************************************************************************
 ** Function: saveGame()
-** Description: Saves game state and all rooms to a new save folder 
+** Description: Saves game state and all rooms to a new save folder
 ** Parameters: game object to be saved
 *******************************************************************************/
 void dataIO::saveGame(game saveGame){
