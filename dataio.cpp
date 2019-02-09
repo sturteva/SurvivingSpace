@@ -23,12 +23,15 @@
 ** Description: Loads room vector using roomdat files
 ** Parameters: string
 *******************************************************************************/
-vector<room*> dataIO::roomIO(const char *direct_name){
+vector<room*> dataIO::roomIO(string direct_name){
 
     vector<string> fileNames;
 
+    //DEBUG
+    cout << "Directory Name: " << direct_name << endl;
+
     //first we need to open the directory that our Room data files are in.
-    dir = opendir(direct_name);
+    dir = opendir(direct_name.c_str());
     if(!dir){
         cout << "Room Directory Not Found, Error\n" << endl;
         return roomVec;
@@ -46,30 +49,45 @@ vector<room*> dataIO::roomIO(const char *direct_name){
     for(int i = 0; i < (int)fileNames.size(); ++i){
 
         // ********debug file names ****
-        cout << "File name is: " << fileNames[i] << endl;
+        //cout << "File name is: " << direct_name + fileNames[i] << endl;
 
-
+	
         if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
             bool adj = false;
             int adjPos;
             room* newRoom = new room();
+	
+		//build full filename
+		string theFile =  direct_name + "/" + fileNames.at(i);
 
+		//DEBUG LINE
+		cout << "updated file name: " << theFile << endl;
             //Open the File
-            ifstream roomFile(fileNames.at(i).c_str());
+            ifstream roomFile(theFile.c_str());
 
+		//debug
+		cout << "Test 1" << endl;
             if(roomFile.is_open()){
                 string line;
                 //For each attribute, add it to new room
                 //Assuming Attributes are only ever 1 line
                 while(getline(roomFile,line)){
+			cout << "Test 2" << endl;
                      size_t pos;
 
                     //Adds Name to the room
                     if((size_t)line.find("<Name>") == std::string::npos){
 
+	
+			
                         //Removes the Tags from the line
                         pos = line.find("<Name>");
-                        line.erase(pos,6);
+			//Debug
+			cout << "Position: " << pos << endl;
+                        line.erase(pos-1,6);
+
+			//DEBUG
+			cout << "After first erase" << endl;
                         pos = line.find("</Name>");
                         line.erase(pos,7);
                         //Check to see if the name has already been added to roomVec, as an adjacent room
