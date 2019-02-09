@@ -54,7 +54,7 @@ int main()
 			cout << "|_______/     \\______/  | _| `._____|   \\__/     |__|     \\__/     |__| |__| \\__|  \\______|    |_______/    | _|    /__/     \\__\\ \\______||_______|(__) " << endl << endl;
 
 			cout << "You, our intrepid hero find yourself awakening upon the surface of a jungle planet." << endl << endl
-				 << "You were on an exploratory mission for [Insert Long Exploratory Foundation Name Here]," << endl
+				 << "You were on an exploratory mission for the International Space Federation," << endl
 				 << "checking this planet out for rare minerals and to see if there was any intelligent life inhabiting the planet." << endl << endl
 				 << "You aren’t exactly sure what happened, but something done on this planet shot at your ship, "
 				 << "forcing you to run to your escape pod...but..." << endl << endl

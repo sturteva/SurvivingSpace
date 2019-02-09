@@ -112,7 +112,8 @@ void dictMapInit()
 
 bool checkAlpha(string input)
 {
-	for (int pos = 0; pos < input.length(); pos++)
+	int strLength = input.length();
+	for (int pos = 0; pos < strLength; pos++)
 	{
 		if (!isalpha(input[pos]) && !isspace(input[pos]))
 		{
@@ -136,7 +137,7 @@ bool checkAlpha(string input)
 bool checkTerm(string str)
 {
 	
-	
+	return false;
 }
 
 
@@ -177,7 +178,8 @@ vector<string> parseString()
 		if (checkAlpha(input))
 		{
 			//change the command to all lowercase
-			for (int pos = 0; pos < input.length(); pos++)
+			int strLength = input.length();
+			for (int pos = 0; pos < strLength; pos++)
 			{
 				if (!isspace(input[pos]))
 				{

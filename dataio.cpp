@@ -44,6 +44,11 @@ vector<room*> dataIO::roomIO(const char *direct_name){
 
     //After that, we go through all of the vector, and process any with file extension *.roomdat
     for(int i = 0; i < (int)fileNames.size(); ++i){
+
+        // ********debug file names ****
+        cout << "File name is: " << fileNames[i] << endl;
+
+
         if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
             bool adj = false;
             int adjPos;
@@ -165,7 +170,7 @@ vector<room*> dataIO::roomIO(const char *direct_name){
             }
             }
 
-else cout << "Unable to open Room Data File:" << fileNames.at(i);
+else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
 
             //add new room to roomVec
             roomVec.push_back(newRoom);

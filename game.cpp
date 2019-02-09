@@ -71,7 +71,7 @@ void game::start()
 		// Check command contains no symbols
 		while (checkAlpha(command) == false)
 		{
-			cout << "Only alpha numeric characters are allowed..." << endl; 
+			cout << endl; 
 			cout << "What would you like to do? (Type \"exit\" to stop adventure) ";
 			cin >> command;
 			cout << endl;
