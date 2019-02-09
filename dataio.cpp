@@ -12,6 +12,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <stdio.h>
 #include <sys/types.h>
@@ -67,10 +68,13 @@ vector<room*> dataIO::roomIO(string direct_name){
 
 		
             if(roomFile.is_open()){
-                string line;
+                
+		string line;
                 //For each attribute, add it to new room
                 //Assuming Attributes are only ever 1 line
-                while(getline(roomFile,line)){
+                while(!getline(roomFile,line).eof()){
+			
+				
 			
 			cout << "Line:" << line << endl;
                      size_t pos;
@@ -96,7 +100,8 @@ vector<room*> dataIO::roomIO(string direct_name){
                                 delete newRoom;
                             }
                         }
-
+			//Debug
+			cout << "After erasing:" << line << endl;
                         //Gives the new room its name
                         if(!adj)
                             newRoom->setName(line);
@@ -205,7 +210,8 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
 
         }
     }
-
+	//Debug
+	cout << "Out of WHILE loop" << endl;
     return roomVec;
 }
 
