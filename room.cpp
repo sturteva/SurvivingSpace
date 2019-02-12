@@ -172,6 +172,36 @@ vector<room*> room::getAdjacent()
  }
 
 /*******************************************************************************
+** Function: printRoomInfo()
+** Description: prints room info. Used for debugging purposes. 
+** Parameters: None
+** Returns: None
+*******************************************************************************/
+ void room::printRoomInfo()
+ {
+    // Long Desc
+    cout << "Full Desc: " << fullDesc << endl;
+    // short desc
+    cout << "Short Desc: " << shortDesc << endl;
+
+    // interactables
+    cout << "********** Interactables **********" << endl;
+    for (int i = 0; i < interactables.size(); i++)
+    {
+        cout << interactables[i] << endl;
+    }
+    // adjacent
+    cout << "********** Adjacent **********" << endl;
+    for (int i = 0; i < adjacent.size(); i++)
+    {
+        cout << adjacent[i]->getName() << endl;
+    }
+
+    
+ }
+
+
+/*******************************************************************************
 ** Function: visitRoom()
 ** Description: changes the bool indicating the room has been visited
 ** Parameters: None

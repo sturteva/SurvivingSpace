@@ -170,7 +170,7 @@ vector<string> parseString(string input)
 		/***************
 		 *Debug Command
 		 ***************/
-		cout << "DEBUG: " << input << endl;
+		//cout << "DEBUG: " << input << endl;
 	
 		if (input != "" && input.at(input.length() - 1) == '.')
 		{

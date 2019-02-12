@@ -83,8 +83,11 @@ void game::start()
 		currRoom = player1->getLocation();
 		currRoom->printDescription();
 
+		// DEBUG
+		//currRoom->printRoomInfo();
+
 		// ask for player input
-		cout << "What would you like to do? (Type \"exit\" to stop adventure) ";
+		cout << ">> ";
 		cin >> command;
 		cout << endl;
 
@@ -92,7 +95,7 @@ void game::start()
 		while (checkAlpha(command) == false)
 		{
 			cout << endl; 
-			cout << "What would you like to do? (Type \"exit\" to stop adventure) ";
+			cout << ">> ";
 			cin >> command;
 			cout << endl;
 		}

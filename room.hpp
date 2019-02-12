@@ -36,6 +36,7 @@ class room
       void addInteractable(string);
       void addAdjacent(room*);
       void printDescription();
+      void printRoomInfo();
       void visitRoom();
 
 };
