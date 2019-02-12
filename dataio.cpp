@@ -2,7 +2,6 @@
 ** Program: dataio.cpp
 ** Description: Implementation file for Data Input/Output
 *******************************************************************************/
-
 #include "dataio.hpp"
 #include "room.hpp"
 #include "game.hpp"
@@ -18,6 +17,13 @@
 #include <sys/types.h>
 #include <bits/stdc++.h>
 
+using std::cout;
+using std::cin;
+using std::endl;
+using std::ifstream;
+using std::ofstream;
+using std::vector;
+using std::string;
 
 /******************************************************************************
 ** Function: roomIO()
