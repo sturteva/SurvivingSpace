@@ -14,7 +14,8 @@
 #include <iostream>
 #include <stdio.h>
 
-using namespace std;
+using std::vector;
+using std::string;
 
 class game; //Forward declaring game
 
