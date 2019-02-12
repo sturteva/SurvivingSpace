@@ -52,3 +52,5 @@ NONE
 
 Stuck Mid-Command: 
 go west
+
+Untested: 

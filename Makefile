@@ -20,8 +20,11 @@ inventory.o: inventory.cpp player.hpp
 
 parser.o: parser.cpp
 	g++ -c parser.cpp $(CFLAGS)
+	dos2unix nouns.dat
+	dos2unix rooms.dat
+	dos2unix verbs.dat
 
 all: game.o player.o room.o dataio.o inventory.o parser.o survivingSpace
 
 clean:
-	rm -f *.o survivingSpace
+	rm -f *.o *gch survivingSpace

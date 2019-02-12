@@ -147,11 +147,11 @@ bool checkTerm(string str)
 ** Parameters: command to parse
 ** Returns: Vector of strings containing commands
 *******************************************************************************/
-vector<string> parseString(string input)
+vector<string> parseString()
 {
 	//declare variables
 	vector<string> command;
-	//string input;
+	string input;
 	bool foundFlag = false;
 	
 	
@@ -162,15 +162,16 @@ vector<string> parseString(string input)
 	}
 	
 	//run a while loop while foundFlag is false
-	//do
-	//{
-		//cin.clear();
-		//getline(cin, input);
+	do
+	{
+		cin.clear();
+		cout << endl << ">> ";
+		getline(cin, input);
 		
 		/***************
 		 *Debug Command
 		 ***************/
-		//cout << "DEBUG: " << input << endl;
+		cout << "DEBUG (raw input): " << input << endl;
 	
 		if (input != "" && input.at(input.length() - 1) == '.')
 		{
@@ -192,7 +193,7 @@ vector<string> parseString(string input)
 		/***************
 		 *Debug Command
 		 ***************/
-		//cout << "DEBUG: " << input << endl;
+		cout << "DEBUG (adjusted input): " << input << endl;
 	
 		//check to see if dictionary terms are in the string, starting with verbs
 		for (std::map<string,string>::iterator itr = verbDict.begin(); itr != verbDict.end(); ++itr)
@@ -202,8 +203,7 @@ vector<string> parseString(string input)
 			/***************
 			*Debug Command
 			***************/
-			//cout << "DEBUG: " << itr->first << endl;
-			//cout << "DEBUG: " << itr->second << endl;
+			//cout << "DEBUG (verb): " << itr->first << " | " << itr->second << endl;
 			
 			size_t found = input.find(tempString);
 			
@@ -227,8 +227,7 @@ vector<string> parseString(string input)
 				/***************
 				*Debug Command
 				***************/
-				//cout << "DEBUG: " << itr->first << endl;
-				//cout << "DEBUG: " << itr->second << endl;
+				//cout << "DEBUG (moving): " << itr->first << " | " << itr->second << endl;
 				
 				size_t found = input.find(tempString);
 			
@@ -250,40 +249,42 @@ vector<string> parseString(string input)
 				}
 			}
 		}		
-			
+		
 		//if foundFlag is true at this point, check for dictionary terms
 	
 		if (foundFlag && command[0] != "go")
 		{
-			for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end(); ++itr)
+			if (command[0] != "look" && command[0] != "exit" && command[0] != "help")
 			{
-				string tempString = itr->first;
-				
-				/***************
-				*Debug Command
-				***************/
-				//cout << "DEBUG: " << itr->first << endl;
-				//cout << "DEBUG: " << itr->second << endl;
-				
-				size_t found = input.find(tempString);
-			
-				if (found != npos)
+				for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end(); ++itr)
 				{
-					//push back the value for the found key
-					command.push_back(itr->second);
-					//set the itr to the end of the dict so that it will end the for loop
-					itr = nounDict.end();
-					foundFlag = true;
+					string tempString = itr->first;
+				
+					/***************
+					*Debug Command
+					***************/
+					//cout << "DEBUG (not moving): " << itr->first << " | " << itr->second << endl;
+				
+					size_t found = input.find(tempString);
+			
+					if (found != npos)
+					{
+						//push back the value for the found key
+						command.push_back(itr->second);
+						//set the itr to the end of the dict so that it will end the for loop
+						itr = nounDict.end();
+						foundFlag = true;
+					}
 				}
 			}
 		}
-	//} while (!foundFlag);
+		
+	} while (!foundFlag);
 	
 	/***************
 	*Debug Command
 	***************/
-	//cout << "DEBUG: " << command[0] << endl;
-	//cout << "DEBUG: " << command[1] << endl;
+	cout << "DEBUG (pre-send): " << command[0] << " " << command[1] << endl;
 	
 	
 	//culling the for loops into one callable function using the parameters would be better and more efficient code

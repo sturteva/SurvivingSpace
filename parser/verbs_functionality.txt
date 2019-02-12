@@ -26,3 +26,16 @@ bag -> inventory bag
 Endless Loop: 
 walk LOCATION
 use knife
+
+
+Untested: 
+sneak|sneak
+hide|sneak
+crush|crush
+smash|crush
+break|crush
+mix|mix
+stir|mix
+cut|cut
+slash|cut
+slice|cut

@@ -74,38 +74,45 @@ void game::initializeDict()
 void game::start()
 {
     //GameStatus status;
-    string command;
+	vector<string> command;
+    //string input;
     room * currRoom;
-
+	
 	do
-	{
+	{	
 		// get current player location
-		currRoom = player1->getLocation();
-		currRoom->printDescription();
+		//currRoom = player1->getLocation();
+		//currRoom->printDescription();
 
 		// DEBUG
 		//currRoom->printRoomInfo();
 
-		// ask for player input
+		/*// ask for player input
 		cout << ">> ";
-		cin >> command;
+		cin >> input;
 		cout << endl;
 
-		// Check command contains no symbols
-		while (checkAlpha(command) == false)
+		// Check user input contains no symbols
+		while (checkAlpha(input) == false)
 		{
 			cout << endl; 
 			cout << ">> ";
-			cin >> command;
+			cin >> input;
 			cout << endl;
+		}*/
+		
+		// ask for player input and parse command
+		command = parseString();
+		
+		//DEBUG
+		cout << "Parsed Command: ";
+		for (int count = 0; count < command.size(); count++)
+		{
+			cout << command[count] << " ";
 		}
+		cout << endl;
 
-		// Parse command 
-		parseString(command);
-
-	}while (command != "exit");
-
-
+	}while (command[0] != "exit");
 }
 
 /******************************************************************************
