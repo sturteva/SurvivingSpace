@@ -61,7 +61,7 @@ void game::initializeRooms()
 void game::initializeDict()
 {
 	dictMapInit();
-	cout << "Initilizing parser dictionary..." << endl;
+	//cout << "Initilizing parser dictionary..." << endl;
 }
 
 
@@ -98,7 +98,7 @@ void game::start()
 		}
 
 		// Parse command 
-
+		parseString(command);
 
 	}while (command != "exit");
 

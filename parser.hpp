@@ -15,6 +15,6 @@ using std::vector;
 	void dictMapInit();
 	bool checkAlpha(string input);
 	bool checkTerm(string str);
-	vector<string> parseString();
+	vector<string> parseString(string input);
 	
 #endif

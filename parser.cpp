@@ -144,13 +144,14 @@ bool checkTerm(string str)
 /******************************************************************************
 ** Function: parseString()
 ** Description: Parse the string into a command the game will recognize.
-** Parameters: Vector of strings containing commands
+** Parameters: command to parse
+** Returns: Vector of strings containing commands
 *******************************************************************************/
-vector<string> parseString()
+vector<string> parseString(string input)
 {
 	//declare variables
 	vector<string> command;
-	string input;
+	//string input;
 	bool foundFlag = false;
 	
 	
@@ -161,15 +162,15 @@ vector<string> parseString()
 	}
 	
 	//run a while loop while foundFlag is false
-	do
-	{
-		cin.clear();
-		getline(cin, input);
+	//do
+	//{
+		//cin.clear();
+		//getline(cin, input);
 		
 		/***************
 		 *Debug Command
 		 ***************/
-		//cout << "DEBUG: " << input << endl;
+		cout << "DEBUG: " << input << endl;
 	
 		if (input != "" && input.at(input.length() - 1) == '.')
 		{
@@ -201,8 +202,8 @@ vector<string> parseString()
 			/***************
 			*Debug Command
 			***************/
-			cout << "DEBUG: " << itr->first << endl;
-			cout << "DEBUG: " << itr->second << endl;
+			//cout << "DEBUG: " << itr->first << endl;
+			//cout << "DEBUG: " << itr->second << endl;
 			
 			size_t found = input.find(tempString);
 			
@@ -276,7 +277,7 @@ vector<string> parseString()
 				}
 			}
 		}
-	} while (!foundFlag);
+	//} while (!foundFlag);
 	
 	/***************
 	*Debug Command

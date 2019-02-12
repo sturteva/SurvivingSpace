@@ -163,10 +163,21 @@ vector<room*> room::getAdjacent()
  	if(visited == false)
 	{
 		cout << getFullDesc() << endl;
-		visited = true;
+		//visited = true;
 	}
 	else
 	{
 		cout << getShortDesc() << endl;
 	}
  }
+
+/*******************************************************************************
+** Function: visitRoom()
+** Description: changes the bool indicating the room has been visited
+** Parameters: None
+** Returns: None
+*******************************************************************************/
+void room::visitRoom()
+{
+    visited = true;
+}
