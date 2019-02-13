@@ -7,6 +7,7 @@
 #include <string>
 #include <iostream>
 
+using std::vector;
 
 /*********************************************************
 ** Function: player()
@@ -38,4 +39,9 @@ room* player::getLocation()
 void player::setLocation(room *r)
 {
     location = r;
+}
+
+vector<room*> player::getAdjacentRooms()
+{
+	return location->getAdjacent();
 }

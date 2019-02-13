@@ -13,6 +13,7 @@ using std::string;
 using std::cout;
 using std::cin;
 using std::endl;
+using std::vector;
 
 /*******************************************************************************
 ** Function: game ()
@@ -81,13 +82,14 @@ void game::start()
 	do
 	{	
 		// get current player location
-		//currRoom = player1->getLocation();
-		//currRoom->printDescription();
+		currRoom = player1->getLocation();
+		currRoom->printDescription();
 
 		// DEBUG
 		//currRoom->printRoomInfo();
 
-		/*// ask for player input
+		/*
+		// ask for player input
 		cout << ">> ";
 		cin >> input;
 		cout << endl;
@@ -99,8 +101,9 @@ void game::start()
 			cout << ">> ";
 			cin >> input;
 			cout << endl;
-		}*/
-		
+		}
+		*/
+
 		// ask for player input and parse command
 		command = parseString();
 		
@@ -112,7 +115,43 @@ void game::start()
 		}
 		cout << endl;
 
+		// do command
+		// only go is immplemented right now
+		doCommand(command);
+
+		cout << endl;
+
 	}while (command[0] != "exit");
+}
+
+/******************************************************************************
+** Function: doCommand()
+** Description: carries out user command
+** Parameters: Parsed command
+** Returns: None
+*******************************************************************************/
+void game::doCommand(vector<string> command)
+{
+	// go command
+	if (command[0] == "go")
+	{
+		vector<room*> adjacent;
+		adjacent = player1->getAdjacentRooms();
+		
+		//debug
+		cout << "Adjacent rooms: " << endl;
+		
+		for (int i = 0; i < adjacent.size(); i++)
+		{
+			cout << adjacent[i]->getName() << " ";
+			if (adjacent[i]->getName() == command[1])
+			{
+				//cout << "Going to new location" << endl;
+				player1->setLocation(adjacent[i]);
+			}
+			cout << endl;
+		}
+	}
 }
 
 /******************************************************************************

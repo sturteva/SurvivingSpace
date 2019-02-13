@@ -163,7 +163,7 @@ vector<room*> room::getAdjacent()
  	if(visited == false)
 	{
 		cout << getFullDesc() << endl;
-		//visited = true;
+		visited = true;
 	}
 	else
 	{

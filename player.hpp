@@ -4,6 +4,8 @@
 ********************************************************/
 #include "inventory.hpp"
 
+using std::vector;
+
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -21,6 +23,7 @@ class player
         player();
         room* getLocation();
         void setLocation(room *room);
+        vector<room*> getAdjacentRooms();
     
 };
 

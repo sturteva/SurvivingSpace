@@ -284,7 +284,7 @@ vector<string> parseString()
 	/***************
 	*Debug Command
 	***************/
-	cout << "DEBUG (pre-send): " << command[0] << " " << command[1] << endl;
+	//cout << "DEBUG (pre-send): " << command[0] << " " << command[1] << endl;
 	
 	
 	//culling the for loops into one callable function using the parameters would be better and more efficient code

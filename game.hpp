@@ -24,6 +24,7 @@ class game
 		void initializeRooms();
 		void initializeDict();
 	    void start();
+	    void doCommand(vector<string>);
 	    vector<room*>getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();
