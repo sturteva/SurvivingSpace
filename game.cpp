@@ -142,6 +142,20 @@ void game::doCommand(vector<string> command)
 	items = player1->getRoomItems();
 
 
+	// help command
+	if (command[0] == "help")
+	{
+		if (currRoom->getName() == "Starting Room")
+		{
+			cout << "'climb tree' will take you to the Top of Tree" << endl
+				 << "'look' will describe the items that can be interacted with" << endl
+				 << "'take knfe' attempt to put knife in player inventory" << endl;
+		}
+
+
+	}
+
+
 	// go command
 	if (command[0] == "go")
 	{	
@@ -172,17 +186,21 @@ void game::doCommand(vector<string> command)
 		{
 			cout << "The bushes blocking the animal path are large and filled with thistles. I wonder whats on the other side?" << endl;
 		}
-
-		//cout << "Interactables... " << endl;
-
-		
-		//for (int i = 0; i < (int)items.size(); i++)
-		//{
-			//cout << items[i] << endl;
-		//}
+		if (currRoom->getName() == "Top of Tree" && items[0] == "Bag with Strange Runes")
+		{
+			"There is a strange bag with runes sewn on it hanging from one of the tree branches." << endl;
+		}
 	}
 
-
+	// take command
+	if (command[0] == "take")
+	{
+		if (currRoom->getName() == "Starting Room" && command[1] == "knife")
+		{
+			cout << "take knife from Starting Room" << endl;
+			if (player1->)
+		}
+	}
 
 
 }

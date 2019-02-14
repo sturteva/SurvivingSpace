@@ -50,3 +50,13 @@ vector<string> player::getRoomItems()
 {
 	return location->getInteractables();
 }
+void player::addToInventory(string item)
+{
+	playerInventory.push_back(item);
+}
+
+
+vector<string> player::getInventory()
+{
+	return playerInventory; 
+}
