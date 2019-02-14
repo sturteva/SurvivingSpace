@@ -17,7 +17,7 @@ class player
 {
 	private:  
     	room* location;
-    	inventory playerInventory;
+    	vector<string> playerInventory;
 
 	public:
         player();
@@ -25,6 +25,10 @@ class player
         void setLocation(room *room);
         vector<room*> getAdjacentRooms();
         vector<string> getRoomItems();
+        void addToInventory(string);
+        vector<string> getInventory();
+
+
     
 };
 

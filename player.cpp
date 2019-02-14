@@ -41,12 +41,46 @@ void player::setLocation(room *r)
     location = r;
 }
 
+/********************************************************
+ ** Function: getAdjacentRooms()
+ ** Description: gets adjacent rooms to current room
+ ** Parameters: None
+ ** Returns: Vector of adjacent rooms
+ ********************************************************/
 vector<room*> player::getAdjacentRooms()
 {
 	return location->getAdjacent();
 }
 
+/********************************************************
+ ** Function: getRoomItems()
+ ** Description: gets adjacent rooms to current room
+ ** Parameters: None
+ ** Returns: Vector of adjacent rooms
+ ********************************************************/
 vector<string> player::getRoomItems()
 {
 	return location->getInteractables();
+}
+
+/********************************************************
+ ** Function: addInventory()
+ ** Description: adds item to player inventory
+ ** Parameters: Item to be added
+ ** Returns: None
+ ********************************************************/
+void player::addToInventory(string item)
+{
+	playerInventory.push_back(item);
+}
+
+/********************************************************
+ ** Function: getInvnetory()
+ ** Description: gets player inventory
+ ** Parameters: None
+ ** Returns: player inventory
+ ********************************************************/
+vector<string> player::getInventory()
+{
+	return playerInventory; 
 }

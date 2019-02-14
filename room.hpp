@@ -34,6 +34,7 @@ class room
       void setFD(string);
       void setSD(string);
       void addInteractable(string);
+      void removeInteractable(string);
       void addAdjacent(room*);
       void printDescription();
       void printRoomInfo();
