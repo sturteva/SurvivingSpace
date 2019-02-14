@@ -58,7 +58,7 @@ vector<room*> dataIO::roomIO(string direct_name){
       if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
             bool adj = false;
             int adjPos;
-            room* newRoom = new room();
+            room* newRoom;
 
 		//build full filename
 		string theFile =  direct_name + "/" + fileNames.at(i);
@@ -99,13 +99,14 @@ vector<room*> dataIO::roomIO(string direct_name){
                             if(roomVec.at(k)->getName().compare(line) == 0){
                                 adj = true;
                                 adjPos = k;
-                                delete newRoom;
+                                newRoom = roomVec.at(k);
                             }
                         }
 			//Debug
 			//cout << "After erasing:" << line << endl;
                         //Gives the new room its name
                         if(!adj)
+			    newRoom = new room();
                             newRoom->setName(line);
                     }
 
@@ -214,6 +215,11 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
 
         }
     }
+
+//Debug
+/*for(int j = 0; j < (int)roomVec.size(); ++j){
+cout << "Room Name: " << roomVec.at(j)->getName() << endl;
+}*/
 
     return roomVec;
 }
