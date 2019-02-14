@@ -5,11 +5,13 @@
 #include "room.hpp"
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 using std::string;
 using std::cout;
 using std::endl;
 using std::vector;
+using std::iterator; 
 
 /*******************************************************************************
 ** Function: room ()
@@ -91,6 +93,21 @@ void room::addInteractable(string newI)
 {
 
     interactables.push_back(newI);
+}
+
+/*******************************************************************************
+** Function: removeInteractable()
+** Description: removes the item from the room object
+** Parameters: Interactable item to be removed 
+** Returns: None
+*******************************************************************************/
+void room::removeInteractable(string item)
+{
+    vector<string>::iterator i = find(interactables.begin(), interactables.end(), item);
+    
+    // Found the item
+    interactables.erase(i);
+    
 }
 
 /*******************************************************************************
