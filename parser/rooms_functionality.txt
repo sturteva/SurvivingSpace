@@ -1,16 +1,16 @@
 Working as Intended:
-base of tree|base of tree
-tree base|base of tree
-treebase|base of tree
-bottom of tree|base of tree
-tree bottom|base of tree
-top of tree|top of tree
-tree top|top of tree
-treetop|top of tree
-treetops|top of tree
-pool of water|pool of water
-pool|pool of water
-water pool|pool of water
+base of tree|Starting Room
+tree base|Starting Room
+treebase|Starting Room
+bottom of tree|Starting Room
+tree bottom|Starting Room
+top of tree|Top of Tree
+tree top|Top of Tree
+treetop|Top of Tree
+treetops|Top of Tree
+pool of water|Pool of Water
+pool|Pool of Water
+water pool|Pool of Water
 tech ruins|tech ruins
 field of grazing animals|field of grazing animals
 field|field of grazing animals

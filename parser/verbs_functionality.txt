@@ -13,29 +13,38 @@ place knife -> put knife
 drop knife -> drop knife
 remove knife -> drop knife
 help -> help
+exit -> exit
+sneak -> sneak
+hide -> sneak
+crush -> crush
+smash -> crush
+break -> crush
+mix -> mix
+stir -> mix
+cut -> cut
+slash -> cut
+slice -> cut
+look at knife -> look at knife
+look at -> look at
+take bag with strange ruins -> take bag
+take bag -> take bag
+quit -> exit
 
 
 Incorrect Results: 
-look at knife -> look knife
-look at -> look
 inventory -> inventory bag
 bag -> inventory bag
 
 
-
 Endless Loop: 
-walk LOCATION
-use knife
-
+	With "umbrella" dud verb added: 
+		walk LOCATION -> hung on walk | go
+	Without "umbrella" dud verb added: 
+		walk LOCATION -> hung on walk | go, use | put
+	
+	With "umbrella" dud verb added: 
+		use knife -> put knife
+	Without "umbrella" dud verb added: 
+		use knife -> hung on use | put
 
 Untested: 
-sneak|sneak
-hide|sneak
-crush|crush
-smash|crush
-break|crush
-mix|mix
-stir|mix
-cut|cut
-slash|cut
-slice|cut

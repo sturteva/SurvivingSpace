@@ -153,6 +153,8 @@ vector<string> parseString()
 	vector<string> command;
 	string input;
 	bool foundFlag = false;
+	bool bagFlag = false;
+	bool lookFlag = false;
 	
 	
 	//make sure the command vector is empty
@@ -171,7 +173,7 @@ vector<string> parseString()
 		/***************
 		 *Debug Command
 		 ***************/
-		cout << "DEBUG (raw input): " << input << endl;
+		//cout << "DEBUG (raw input): " << input << endl;
 	
 		if (input != "" && input.at(input.length() - 1) == '.')
 		{
@@ -193,7 +195,7 @@ vector<string> parseString()
 		/***************
 		 *Debug Command
 		 ***************/
-		cout << "DEBUG (adjusted input): " << input << endl;
+		//cout << "DEBUG (adjusted input): " << input << endl;
 	
 		//check to see if dictionary terms are in the string, starting with verbs
 		for (std::map<string,string>::iterator itr = verbDict.begin(); itr != verbDict.end(); ++itr)
@@ -207,7 +209,19 @@ vector<string> parseString()
 			
 			size_t found = input.find(tempString);
 			
-			if (found != npos)
+			//check for special commands that function differently
+			if (found != npos && (tempString == "inventory" || tempString == "bag"))
+			{
+				bagFlag = true;
+				//cout << "DEBUG (bagFlag): set to true." << endl;
+			}
+			else if (found != npos && (tempString == "look"))
+			{
+				lookFlag = true;
+				//cout << "DEBUG (lookFlag): set to true." << endl;
+			}
+			//if we didn't find either of those, push it back
+			else if (found != npos)
 			{
 				//push back the value for the found key
 				command.push_back(itr->second);
@@ -216,8 +230,24 @@ vector<string> parseString()
 				foundFlag = true;
 			}
 		}
+		
+		if (!foundFlag && bagFlag)
+		{
+			//if we have this combination of flags, then the verb is "inventory", so push it back
+			command.push_back("inventory");
+			foundFlag = true;
+			bagFlag = false;
+		}
+		
+		if (!foundFlag && lookFlag)
+		{
+			//if we have this combination of flags, then the verb is "look", so push it back
+			command.push_back("look");
+			foundFlag = true;
+			lookFlag = false;
+		}
 	
-		//if foundFlag is still false at this point, check for a direction or a room; return an error if not found
+		//if foundFlag is still false at this point or if the command is "go", check for a direction or a room; return an error if not found
 		if (!foundFlag || (foundFlag && command[0] == "go"))
 		{
 			for (std::map<string,string>::iterator itr = roomDict.begin(); itr != roomDict.end(); ++itr)
@@ -248,13 +278,13 @@ vector<string> parseString()
 					cout << "No recognized verb, direction or room name was provided." << endl;
 				}
 			}
-		}		
+		}
 		
 		//if foundFlag is true at this point, check for dictionary terms
 	
 		if (foundFlag && command[0] != "go")
 		{
-			if (command[0] != "look" && command[0] != "exit" && command[0] != "help")
+			if (command[0] != "look" && command[0] != "exit" && command[0] != "help" && command[0] != "bag")
 			{
 				for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end(); ++itr)
 				{

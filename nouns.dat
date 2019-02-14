@@ -3,6 +3,7 @@ fish|fish
 water|water
 bag|bag
 bag with strange ruins|bag
+inventory|bag
 grazing animal with a strange rock on its back|grazing animal
 grazing animal with a strange rock|grazing animal
 grazing animal with strange rock on back|grazing animal
@@ -11,7 +12,6 @@ grazing animal|grazing animal
 red ochre rock|red ochre rock
 red rock|red ochre rock
 rock with symbol 1|rock symbol 1
-inventory|bag
 base of tree|base of tree
 tree base|base of tree
 treebase|base of tree
