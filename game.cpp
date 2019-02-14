@@ -77,16 +77,16 @@ void game::start()
     //GameStatus status;
 	vector<string> command;
     //string input;
-    room * currRoom;
+    //room * currRoom;
 	
 	do
 	{	
 		// get current player location
-		currRoom = player1->getLocation();
+		//currRoom = player1->getLocation();
 		//currRoom->printDescription();
 
 		// DEBUG
-		currRoom->printRoomInfo();
+		//currRoom->printRoomInfo();
 
 		/*
 		// ask for player input
@@ -132,12 +132,19 @@ void game::start()
 *******************************************************************************/
 void game::doCommand(vector<string> command)
 {
+	room * currRoom;
+	vector<room*> adjacentRooms;
+	vector<string> items;
+
+	// get current room information
+	currRoom = player1->getLocation();
+	adjacentRooms = player1->getAdjacentRooms();
+	items = player1->getRoomItems();
+
+
 	// go command
 	if (command[0] == "go")
-	{
-		vector<room*> adjacentRooms;
-		adjacentRooms = player1->getAdjacentRooms();
-		
+	{	
 		//debug
 		//cout << "Adjacent rooms: " << endl;
 		
@@ -157,7 +164,22 @@ void game::doCommand(vector<string> command)
 	// look command
 	if (command[0] == "look")
 	{
-		cout << "Looking around..." << endl << endl;
+		if (currRoom->getName() == "Starting Room" && items[0] == "Knife with Runes")
+		{
+			cout << "There is a large knife with strange runes all over it lying on the ground." << endl;
+		}
+		if (currRoom->getName() == "Starting Room")
+		{
+			cout << "The bushes blocking the animal path are large and filled with thistles. I wonder whats on the other side?" << endl;
+		}
+
+		//cout << "Interactables... " << endl;
+
+		
+		//for (int i = 0; i < (int)items.size(); i++)
+		//{
+			//cout << items[i] << endl;
+		//}
 	}
 
 

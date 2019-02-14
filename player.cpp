@@ -45,3 +45,8 @@ vector<room*> player::getAdjacentRooms()
 {
 	return location->getAdjacent();
 }
+
+vector<string> player::getRoomItems()
+{
+	return location->getInteractables();
+}
