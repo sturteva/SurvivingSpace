@@ -135,19 +135,19 @@ void game::doCommand(vector<string> command)
 	// go command
 	if (command[0] == "go")
 	{
-		vector<room*> adjacent;
-		adjacent = player1->getAdjacentRooms();
+		vector<room*> adjacentRooms;
+		adjacentRooms = player1->getAdjacentRooms();
 		
 		//debug
 		//cout << "Adjacent rooms: " << endl;
 		
-		for (int i = 0; i < (int)adjacent.size(); i++)
+		for (int i = 0; i < (int)adjacentRooms.size(); i++)
 		{
 			//cout << adjacent[i]->getName() << " ";
-			if (adjacent[i]->getName() == command[1])
+			if (adjacentRooms[i]->getName() == command[1])
 			{
 				cout << "Going to new location" << endl;
-				player1->setLocation(adjacent[i]);
+				player1->setLocation(adjacentRooms[i]);
 				break;
 			}
 			//cout << endl;
