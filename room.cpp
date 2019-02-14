@@ -179,20 +179,24 @@ vector<room*> room::getAdjacent()
 *******************************************************************************/
  void room::printRoomInfo()
  {
+    //name
+    cout << "Room Name: " << name << endl;
+
     // Long Desc
     cout << "Full Desc: " << fullDesc << endl;
+    
     // short desc
     cout << "Short Desc: " << shortDesc << endl;
 
     // interactables
     cout << "********** Interactables **********" << endl;
-    for (int i = 0; i < interactables.size(); i++)
+    for (int i = 0; i < (int)interactables.size(); i++)
     {
         cout << interactables[i] << endl;
     }
     // adjacent
     cout << "********** Adjacent **********" << endl;
-    for (int i = 0; i < adjacent.size(); i++)
+    for (int i = 0; i < (int)adjacent.size(); i++)
     {
         cout << adjacent[i]->getName() << endl;
     }

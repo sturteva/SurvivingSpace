@@ -57,16 +57,17 @@ int main()
 			cout << ".----)   |   |  `--'  | |  |\\  \\----.  \\    /    |  |    \\    /    |  | |  |\\   | |  |__| |    .----)   |   |  |     /  _____  \\ |  `----.|  |____ |__| " << endl;
 			cout << "|_______/     \\______/  | _| `._____|   \\__/     |__|     \\__/     |__| |__| \\__|  \\______|    |_______/    | _|    /__/     \\__\\ \\______||_______|(__) " << endl << endl;
 
-			cout << "You, our intrepid hero, find yourself awakening upon the surface of a jungle planet." << endl << endl
+			cout << "You, our intrepid hero, find yourself awakened upon the surface of a jungle planet." << endl << endl
 				 << "You were on an exploratory mission for the International Space Federation," << endl
 				 << "checking this planet out for rare minerals and to see if there was any intelligent life inhabiting the planet." << endl << endl
-				 << "You aren’t exactly sure what happened, but something down on this planet shot at your ship, "
-				 << "forcing you to run to your escape pod...but..." << endl << endl
-				 << "you don’t see the pod anywhere nearby, and have no idea how you got next to this large tree..."
+				 << "You aren’t exactly sure what happened, but something down on this planet shot at your ship, " << endl
+				 << "forcing you to run to your escape pod..." << endl
+				 << "You find yourself at the base of a large tree, no esacpe pod in sight. " << endl
+				 << "There is an animal path leading in two different directions, but the paths are completly blocked by a large thicket of bushes...."
 				 << endl << endl;
-			cout << "Press ENTER to begin your journey...";
-			cin.get();
-			cout << endl << endl;
+			//cout << "Press ENTER to begin your journey...";
+			//cin.get();
+			//cout << endl << endl;
 
 
 			// start game loop
