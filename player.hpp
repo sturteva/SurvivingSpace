@@ -24,6 +24,7 @@ class player
         room* getLocation();
         void setLocation(room *room);
         vector<room*> getAdjacentRooms();
+        vector<string> getRoomItems();
     
 };
 
