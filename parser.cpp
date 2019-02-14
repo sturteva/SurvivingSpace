@@ -309,6 +309,11 @@ vector<string> parseString()
 			}
 		}
 		
+	if (!foundFlag)
+	{
+		cout << "Command not recognized." << endl;
+	}
+		
 	} while (!foundFlag);
 	
 	/***************
