@@ -2,12 +2,15 @@
 ** Program: game.hpp
 ** Description: Header file for game class.
 ********************************************************/
-#ifndef GAME_HPP
-#define GAME_HPP
-
 #include "room.hpp"
 #include "player.hpp"
 #include "dataio.hpp"
+
+
+using std::vector;
+
+#ifndef GAME_HPP
+#define GAME_HPP
 
 class dataIO; //forward declaring
 
@@ -25,7 +28,7 @@ class game
 		void initializeDict();
 	    void start();
 	    void doCommand(vector<string>);
-	    vector<room*>getRooms();
+	    vector<room*> getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();
 	    void setRooms(vector<room*>);

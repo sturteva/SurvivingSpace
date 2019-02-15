@@ -5,11 +5,14 @@
 #include <iostream>
 #include <stdlib.h>
 #include "game.hpp"
+#include "room.hpp"
+
 
 using std::string;
 using std::cin;
 using std::cout;
 using std::endl;
+using std::vector;
 
 int main()
 {
@@ -23,6 +26,17 @@ int main()
     // initilize dictionary for parser
     gameState.initializeDict();
 
+
+    // DEBUG Room Vector
+   /*
+    vector<room*> newRooms = gameState.getRooms();
+    for (int count = 0; count < (int)newRooms.size(); count++)
+	{
+		newRooms[count]->printRoomInfo();
+	}
+	*/
+	
+    system("clear");
     cout << "======================== Surviving Space! ========================" << endl;
 	cout << "(1.) Start New Adventure" << endl;
 	cout << "(2.) Load Existing Adventure" << endl;
@@ -65,6 +79,8 @@ int main()
 				 << "You find yourself at the base of a large tree, no esacpe pod in sight. " << endl
 				 << "There is an animal path leading in two different directions, but the paths are completly blocked by a large thicket of bushes...."
 				 << endl << endl;
+
+
 			//cout << "Press ENTER to begin your journey...";
 			//cin.get();
 			//cout << endl << endl;
