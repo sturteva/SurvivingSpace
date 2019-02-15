@@ -5,5 +5,6 @@ NOTE: This is build assuming you are using a Linux/Unix system that uses G++ for
 
 Step 1: make clean
 Step 2: make all
-Step 3: ./survivingSpace
-Step 4: Play and enjoy the game!
+Step 3: Ensure console window size is at least 153 columns wide
+Step 4: ./survivingSpace
+Step 5: Play and enjoy the game!
