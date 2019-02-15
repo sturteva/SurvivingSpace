@@ -80,7 +80,7 @@ void game::start()
 	vector<string> command;
     //string input;
     //room * currRoom;
-	
+
 	do
 	{	
 		// get current player location
@@ -110,7 +110,6 @@ void game::start()
 		command = parseString();
 		
 
-
 		//DEBUG
 		cout << "\nParsed Command: ";
 		for (int count = 0; count < (int)command.size(); count++)
@@ -120,7 +119,6 @@ void game::start()
 		cout << endl << endl;
 
 		// do command
-		// only go is immplemented right now
 		doCommand(command);
 
 		cout << endl;
@@ -138,25 +136,37 @@ void game::doCommand(vector<string> command)
 {
 	room * currRoom;
 	vector<room*> adjacentRooms;
-	vector<string> items;
+	vector<string> roomItems;
 	vector<string> currInventory;
 
 	// get current room information
 	currRoom = player1->getLocation();
 	adjacentRooms = player1->getAdjacentRooms();
-	items = player1->getRoomItems();
+	roomItems = player1->getRoomItems();
 
 	// get current inventory
 	currInventory = player1->getInventory();
 
+
+
 	// help command
 	if (command[0] == "help")
 	{
+		//get room info
+		currRoom->printRoomInfo();
+		cout << endl;
+
 		if (currRoom->getName() == "Starting Room")
 		{
 			cout << "'climb treetop' will take you to the Top of Tree" << endl
 				 << "'look' will describe the items that can be interacted with" << endl
 				 << "'take knfe' attempt to put knife in player inventory" << endl;
+		}
+		else if (currRoom->getName() == "Top of Tree")
+		{
+			cout << "'climb treebase' will take back down the base of the tree" << endl
+				 << "'look' will describe the items that can be interacted with" << endl
+				 << "'take bag' puts bag in player inventory" << endl;
 		}
 
 
@@ -166,44 +176,76 @@ void game::doCommand(vector<string> command)
 	// go command
 	if (command[0] == "go")
 	{	
-		//debug
-		//cout << "Adjacent rooms: " << endl;
-		
-		for (int i = 0; i < (int)adjacentRooms.size(); i++)
-		{
-			//cout << adjacent[i]->getName() << " ";
-			if (adjacentRooms[i]->getName() == command[1])
-			{
-				cout << "Going to new location" << endl << endl;
-				currRoom->visitRoom();
-				player1->setLocation(adjacentRooms[i]);
 
-				// get new room
-				currRoom = player1->getLocation();
-				currRoom->printDescription();
-				break;
+		// bushes blocked
+		if (command[1] == "Pool of Water" || command [1] == "Field with Grazing Animals")
+		{
+			if ( std::find(currInventory.begin(), currInventory.end(), "Knife with Runes") != currInventory.end() )
+			{
+   				cout << "You use the knife to chop down the bushes..." << endl;
+
 			}
-			//cout << endl;
+
+			else
+			{
+   				cout << "Those thistles will tear me up.. I bet that knife could chop down the bushes..." << endl;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < (int)adjacentRooms.size(); i++)
+			{
+				if (adjacentRooms[i]->getName() == command[1])
+				{
+					cout << "Going to new location" << endl << endl;
+
+					currRoom->visitRoom();
+					player1->setLocation(adjacentRooms[i]);
+
+					// get new room
+					currRoom = player1->getLocation();
+					currRoom->printDescription();
+					break;
+				}
+				//cout << endl;
+			}
 		}
 	}
 
 	// look command
 	if (command[0] == "look")
 	{
-		//knife
-		if (currRoom->getName() == "Starting Room" && items[0] == "Knife with Runes")
+		if (command [1] = "inventory")
 		{
-			cout << "There is a large knife with strange runes all over it lying on the ground." << endl;
+			cout << "Player inventory: " << endl;
+			for (int i = 0; i < (int)currInventory.size(); i++)
+			{
+				cout << currInventory[i] << endl;
+			}
 		}
-		// bushes
+
+
 		if (currRoom->getName() == "Starting Room")
 		{
 			cout << "The bushes blocking the animal path are large and filled with thistles. I wonder whats on the other side?" << endl;
+			//knife in room
+			if (roomItems[0] == "Knife with Runes")
+			{
+				cout << "There is a large knife with strange runes all over it lying on the ground." << endl;
+
+			}
 		}
-		if (currRoom->getName() == "Top of Tree" && items[0] == "Bag with Strange Runes")
+
+		// Top of Tree
+		if (currRoom->getName() == "Top of Tree" && roomItems[0] == "Bag with Strange Runes")
 		{
+			cout << "To the west, you see some large grazing animals in a field, with some buildings in the distance." << endl
+				 << "To the east, you see a small lake with fish in it." << endl;
+			if (roomItems[0] == "Bag with Strange Runes")
+			{
 			cout << "There is a strange bag with runes sewn on it hanging from one of the tree branches." << endl
 				 << "The runes look just like the ones on the knife down below." << endl; 
+			}
 		}
 	}
 
@@ -231,7 +273,8 @@ void game::doCommand(vector<string> command)
 		if (currRoom->getName() == "Top of Tree" && command[1] == "bag")
 		{
 			cout << "adding bag to inventory..." << endl;
-
+			player1->addToInventory("Bag with Strange Runes");
+    		currRoom->removeInteractable("Bag with Strange Runes");
 		}
 
 
@@ -288,3 +331,4 @@ void game::setRooms(vector<room*> newRooms)
 
     rooms = newRooms;
 }
+
