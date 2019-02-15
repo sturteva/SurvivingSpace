@@ -57,7 +57,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 
       if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
             bool adj = false;
-            int adjPos;
+            
             room* newRoom;
 
 		//build full filename
@@ -98,7 +98,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                         for(int k = 0; k < (int)roomVec.size(); ++k){
                             if(roomVec.at(k)->getName().compare(line) == 0){
                                 adj = true;
-                                adjPos = k;
+                                
                                 newRoom = roomVec.at(k);
                             }
                         }
@@ -121,13 +121,13 @@ vector<room*> dataIO::roomIO(string direct_name){
                         pos = line.find("</FD>");
                         line.erase(pos,5);
 
-                        if(!adj){
+                        
                         //Gives the new room its long description
-                        newRoom->setFD(line);}
+                        newRoom->setFD(line);
 
-                        else
-                            roomVec.at(adjPos)->setFD(line);
-                    }
+			}
+                      
+                    
 
                      //Adds Short Description to the room
                     else if(line.find("<SD>")!= std::string::npos){
@@ -140,11 +140,9 @@ vector<room*> dataIO::roomIO(string direct_name){
                         pos = line.find("</SD>");
                         line.erase(pos,5);
 
-                        if(!adj){
                         //Gives the new room its long description
-                        newRoom->setSD(line);}
-                        else
-                            roomVec.at(adjPos)->setSD(line);
+                        newRoom->setSD(line);
+                        
                     }
 
                     //Adds Interactable to room
@@ -159,11 +157,9 @@ vector<room*> dataIO::roomIO(string direct_name){
                         pos = line.find("</I>");
                         line.erase(pos,4);
 
-                        if(!adj){
+                        
                         //Gives the new room its long description
-                        newRoom->addInteractable(line);}
-                        else
-                            roomVec.at(adjPos)->addInteractable(line);
+                        newRoom->addInteractable(line);
                     }
 
                     //This is a room it is connected to
@@ -176,28 +172,33 @@ vector<room*> dataIO::roomIO(string direct_name){
                         line.erase(pos,3);
                         pos = line.find("</C>");
                         line.erase(pos,4);
-
+			
+			//Debug
+			cout << "Current Room: " << newRoom->getName() << endl;;
+			cout << "C: " << line << endl;
+			bool foundAdj = false;
                         for(int k = 0; k < (int)roomVec.size(); ++k){
+
+				
+				
                             if(roomVec.at(k)->getName().compare(line) == 0){
-                                        if(!adj){
+                                 //Debug 
+                                 cout << "Inside IF" << endl;
                                             newRoom->addAdjacent(roomVec.at(k));
-                                        }
-                                        else
-                                            roomVec.at(adjPos)->addAdjacent(roomVec.at(k));
+					    foundAdj = true;
+					break;
+                                        
                             }
+                       }
 
-                            else{
-                                room* newAdjRoom = new room(line);
-                                if(!adj)
-                                    newRoom->addAdjacent(newAdjRoom);
-                                else
-                                    roomVec.at(adjPos)->addAdjacent(newAdjRoom);
+			if(!foundAdj){
+				room* newAdj = new room(line);
+				newRoom->addAdjacent(newAdj);			
 
-
-                            }
+			}
 
                     }
-                }
+                
 
                 
                 
@@ -217,9 +218,14 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
     }
 
 //Debug
-/*for(int j = 0; j < (int)roomVec.size(); ++j){
-cout << "Room Name: " << roomVec.at(j)->getName() << endl;
-}*/
+for(int j = 0; j < (int)roomVec.size(); ++j){
+
+	cout << "ROOM NAME: " << roomVec.at(j)->getName() << endl;
+	vector<room*> adjRooms = roomVec.at(j)->getAdjacent();
+	for(int m = 0; m < (int)adjRooms.size(); ++m){
+		cout << "Ajacent:  " <<adjRooms.at(m)->getName() << endl;
+	}
+}
 
     return roomVec;
 }
