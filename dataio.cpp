@@ -178,19 +178,26 @@ vector<room*> dataIO::roomIO(string direct_name){
 
 				
 				
-                            if(roomVec.at(k)->getName().compare(line) == 0){
-                                  
+                            if(roomVec.at(k)->getName() == line){
                                  
-                                            newRoom->addAdjacent(roomVec.at(k));
-					    foundAdj = true;
-					break;
+                                
+                                newRoom->addAdjacent(roomVec.at(k));
+				foundAdj = true;
+				break;
                                         
                             }
                        }
 
 			if(!foundAdj){
+
+				 
 				room* newAdj = new room(line);
-				newRoom->addAdjacent(newAdj);			
+				newRoom->addAdjacent(newAdj);
+				newAdj->addAdjacent(newRoom);
+				roomVec.push_back(newAdj);
+
+				//Debug
+				cout << "New Adj Name: " << newAdj->getName() << endl;
 
 			}
 
@@ -215,7 +222,8 @@ vector<room*> dataIO::roomIO(string direct_name){
 else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
 
             //add new room to roomVec
-            roomVec.push_back(newRoom);
+            if(!adj)
+            	roomVec.push_back(newRoom);
 
         }
     }
