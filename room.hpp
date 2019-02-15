@@ -30,6 +30,7 @@ class room
       string getShortDesc();
       vector<string> getInteractables();
       vector<room*> getAdjacent();
+      bool getVisited();
       void setName(string);
       void setFD(string);
       void setSD(string);

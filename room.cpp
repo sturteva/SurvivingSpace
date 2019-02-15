@@ -158,6 +158,18 @@ vector<string> room::getInteractables()
 }
 
 /*******************************************************************************
+** Function: getVisted()
+** Description: returnes the vistited status
+** Parameters: none 
+** Returns: boolean
+*******************************************************************************/
+bool room::getVisited(){
+
+	return visited; 
+}
+
+
+/*******************************************************************************
 ** Function: addInteractable()
 ** Description: sets the short description name
 ** Parameters: string

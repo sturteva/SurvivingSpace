@@ -195,6 +195,12 @@ vector<room*> dataIO::roomIO(string direct_name){
 			}
 
                     }
+
+		//Mostly for Saved Games...if the room has been visited before
+		else if(line.find("<V>") != std::string::npos){
+			newRoom->visitRoom();
+			
+		}
                 
 
                 
@@ -271,6 +277,11 @@ void dataIO::saveGame(game saveGame){
         for(int k = 0; k < (int)adjacent.size(); ++k){
             roomFile << "<A>" << adjacent.at(i)->getName() << "</A>" << endl;
         }
+
+	//Check if room has been visited
+	if(theRooms.at(i)->getVisited()){
+	    roomFile << "<V>" << endl;
+	}
 
         roomFile.close();
 
