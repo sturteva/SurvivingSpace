@@ -173,17 +173,14 @@ vector<room*> dataIO::roomIO(string direct_name){
                         pos = line.find("</C>");
                         line.erase(pos,4);
 			
-			//Debug
-			cout << "Current Room: " << newRoom->getName() << endl;;
-			cout << "C: " << line << endl;
 			bool foundAdj = false;
                         for(int k = 0; k < (int)roomVec.size(); ++k){
 
 				
 				
                             if(roomVec.at(k)->getName().compare(line) == 0){
-                                 //Debug 
-                                 cout << "Inside IF" << endl;
+                                  
+                                 
                                             newRoom->addAdjacent(roomVec.at(k));
 					    foundAdj = true;
 					break;
@@ -218,14 +215,14 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
     }
 
 //Debug
-for(int j = 0; j < (int)roomVec.size(); ++j){
+/*for(int j = 0; j < (int)roomVec.size(); ++j){
 
 	cout << "ROOM NAME: " << roomVec.at(j)->getName() << endl;
 	vector<room*> adjRooms = roomVec.at(j)->getAdjacent();
 	for(int m = 0; m < (int)adjRooms.size(); ++m){
 		cout << "Ajacent:  " <<adjRooms.at(m)->getName() << endl;
 	}
-}
+}*/
 
     return roomVec;
 }
