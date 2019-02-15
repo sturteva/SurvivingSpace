@@ -197,7 +197,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 				roomVec.push_back(newAdj);
 
 				//Debug
-				cout << "New Adj Name: " << newAdj->getName() << endl;
+				//cout << "New Adj Name: " << newAdj->getName() << endl;
 
 			}
 
