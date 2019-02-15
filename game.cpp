@@ -176,6 +176,7 @@ void game::doCommand(vector<string> command)
 	// go command
 	if (command[0] == "go")
 	{	
+<<<<<<< HEAD
 		//debug
 		//cout << "Adjacent rooms: " << endl;
 
@@ -195,15 +196,61 @@ void game::doCommand(vector<string> command)
 				currRoom = player1->getLocation();
 				currRoom->printDescription();
 				break;
+=======
+
+		// bushes blocked
+		if (command[1] == "Pool of Water" || command [1] == "Field with Grazing Animals")
+		{
+			if ( std::find(currInventory.begin(), currInventory.end(), "Knife with Runes") != currInventory.end() )
+			{
+   				cout << "You use the knife to chop down the bushes..." << endl;
+
 			}
-			//cout << endl;
+
+			else
+			{
+   				cout << "Those thistles will tear me up.. I bet that knife could chop down the bushes..." << endl;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < (int)adjacentRooms.size(); i++)
+			{
+				if (adjacentRooms[i]->getName() == command[1])
+				{
+					cout << "Going to new location" << endl << endl;
+
+					currRoom->visitRoom();
+					player1->setLocation(adjacentRooms[i]);
+
+					// get new room
+					currRoom = player1->getLocation();
+					currRoom->printDescription();
+					break;
+				}
+				//cout << endl;
+>>>>>>> gameChanges
+			}
 		}
 	}
 
 	// look command
 	if (command[0] == "look")
 	{
+<<<<<<< HEAD
 		
+=======
+		if (command [1] = "inventory")
+		{
+			cout << "Player inventory: " << endl;
+			for (int i = 0; i < (int)currInventory.size(); i++)
+			{
+				cout << currInventory[i] << endl;
+			}
+		}
+
+
+>>>>>>> gameChanges
 		if (currRoom->getName() == "Starting Room")
 		{
 			cout << "The bushes blocking the animal path are large and filled with thistles. I wonder whats on the other side?" << endl;
