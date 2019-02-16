@@ -82,41 +82,21 @@ void game::start()
     //room * currRoom;
 
 	do
-	{	
-		// get current player location
-		//currRoom = player1->getLocation();
-		//currRoom->printDescription();
-
-		// DEBUG
-		//currRoom->printRoomInfo();
-
-		/*
-		// ask for player input
-		cout << ">> ";
-		cin >> input;
-		cout << endl;
-
-		// Check user input contains no symbols
-		while (checkAlpha(input) == false)
-		{
-			cout << endl; 
-			cout << ">> ";
-			cin >> input;
-			cout << endl;
-		}
-		*/
-
+	{
 		// ask for player input and parse command
 		command = parseString();
 		
-
 		//DEBUG
+		/*
 		cout << "\nParsed Command: ";
 		for (int count = 0; count < (int)command.size(); count++)
 		{
 			cout << command[count] << " ";
 		}
 		cout << endl << endl;
+		*/
+
+		cout << endl;
 
 		// do command
 		doCommand(command);
@@ -153,8 +133,8 @@ void game::doCommand(vector<string> command)
 	if (command[0] == "help")
 	{
 		//get room info
-		currRoom->printRoomInfo();
-		cout << endl;
+		//currRoom->printRoomInfo();
+		//cout << endl;
 
 		if (currRoom->getName() == "Starting Room")
 		{
@@ -178,27 +158,42 @@ void game::doCommand(vector<string> command)
 	{	
 		//debug
 		//cout << "Adjacent rooms: " << endl;
-
-		
 		for (int i = 0; i < (int)adjacentRooms.size(); i++)
 		{
-			//adjacentRooms[i]->printRoomInfo();
-			
 			if (adjacentRooms[i]->getName() == command[1])
 			{
-				cout << "Going to new location" << endl << endl;
+				if (adjacentRooms[i]->getName() == "Pool of Water" || adjacentRooms[i]->getName() == "Field with Grazing Animals")
+				{
+					if (find(currInventory.begin(), currInventory.end(), "Knife with Runes") != currInventory.end() )
+					{
+							cout << "You use the knife to chop down the bushes..." << endl << endl;
+							currRoom->visitRoom();
+						player1->setLocation(adjacentRooms[i]);
 
-				currRoom->visitRoom();
-				player1->setLocation(adjacentRooms[i]);
+						// get new room
+						currRoom = player1->getLocation();
+						currRoom->printDescription();
+					}
+					else
+					{
+							cout << "Those thistles will tear me up.. I bet that knife could chop down the bushes..." << endl;
+					}
+				}
+				else
+				{
+					cout << "Going to new location" << endl << endl;
 
-				// get new room
-				currRoom = player1->getLocation();
-				currRoom->printDescription();
-				break;
+					currRoom->visitRoom();
+					player1->setLocation(adjacentRooms[i]);
+
+					// get new room
+					currRoom = player1->getLocation();
+					currRoom->printDescription();
+				}
 			}
-			//cout << endl;
 		}
 	}
+		
 
 	// look command
 	if (command[0] == "look")
