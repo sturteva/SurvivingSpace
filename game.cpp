@@ -203,7 +203,6 @@ void game::doCommand(vector<string> command)
 	// look command
 	if (command[0] == "look")
 	{
-		
 		if (currRoom->getName() == "Starting Room")
 		{
 			cout << "The bushes blocking the animal path are large and filled with thistles. I wonder whats on the other side?" << endl;
@@ -228,13 +227,30 @@ void game::doCommand(vector<string> command)
 		}
 	}
 
+	if (command [0] == "inventory")
+		{
+			if (currInventory.empty())
+			{
+				cout << "Player inventory is empty" << endl;
+			}
+			else
+			{
+				cout << "Player inventory: " << endl;
+
+				for (int i = 0; i < (int)currInventory.size(); i++)
+				{
+					cout << currInventory[i] << endl;
+				}
+			}
+		}
+
 	// take command
 	if (command[0] == "take")
 	{
 		// take knife
 		if (currRoom->getName() == "Starting Room" && command[1] == "knife")
 		{
-			if(find(currInventory.begin(), currInventory.end(), "Bag With Strange Runes") != currInventory.end()) 
+			if(!currInventory.empty())  
 			{
     			/* The bag is in inventory */
     			cout << "adding knife to inventory..." << endl;
