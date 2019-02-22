@@ -2,16 +2,16 @@ Working as Intended:
 go up -> go up
 climb up -> go up
 run up -> go up
-take knife -> take knife
 collect knife -> take knife
 grab knife -> take knife
 interact knife -> take knife
 pick up knife -> take knife
+take knife -> take knife
 put knife -> put knife
 set knife -> put knife
 place knife -> put knife
-drop knife -> drop knife
 remove knife -> drop knife
+drop knife -> drop knife
 help -> help
 exit -> exit
 sneak -> sneak
@@ -26,25 +26,17 @@ slash -> cut
 slice -> cut
 look at knife -> look at knife
 look at -> look at
-take bag with strange ruins -> take bag
+inventory -> inventory
+bag -> inventory
 take bag -> take bag
+take bag with strange ruins -> take bag
 quit -> exit
 
 
 Incorrect Results: 
-inventory -> inventory bag
-bag -> inventory bag
 
 
 Endless Loop: 
-	With "umbrella" dud verb added: 
-		walk LOCATION -> hung on walk | go
-	Without "umbrella" dud verb added: 
-		walk LOCATION -> hung on walk | go, use | put
-	
-	With "umbrella" dud verb added: 
-		use knife -> put knife
-	Without "umbrella" dud verb added: 
-		use knife -> hung on use | put
+
 
 Untested: 

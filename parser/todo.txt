@@ -1,9 +1,5 @@
 To Do:
 
-Probably remove rooms from noun list.
-	If rooms stay in noun list, make them unaccessible by non-go commands other than possibly look/look at.
 Add more nouns.
 Check in regards to what player should do with "ruins" as a target word (go to whichever is accessible from position? What if both accessible?).
 Add non-cardinal directions.
-Find out why west doesn't want to exist.
-Work on endless loop bugged commands.

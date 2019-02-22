@@ -65,8 +65,6 @@ void dictMapInit()
 	//add terms from the file with while loop
 	while (getline(inputFile, key, '|') && getline(inputFile, data))
 	{
-		//can't remember if need this or not; thinking not, but here just in case for now
-		//myfile.ignore(numeric_limits<streamsize>::max(), '\n');
 		verbDict.insert(pair<string, string>(key, data));
 	}
 	
@@ -98,7 +96,7 @@ void dictMapInit()
 	
 	//close the noun file here
 	inputFile.close();
-	
+
 }
 
 
@@ -155,18 +153,20 @@ vector<string> parseString()
 	bool foundFlag = false;
 	bool bagFlag = false;
 	bool lookFlag = false;
-	
-	
-	//make sure the command vector is empty
-	while (!command.empty())
-	{
-		command.pop_back();
-	}
+
 	
 	//run a while loop while foundFlag is false
 	do
 	{
+		//empty everything out
 		cin.clear();
+		input = "";
+		//make sure the command vector is empty
+		while (!command.empty())
+		{
+			command.pop_back();
+		}
+		
 		cout << endl << ">> ";
 		getline(cin, input);
 		
@@ -198,7 +198,7 @@ vector<string> parseString()
 		//cout << "DEBUG (adjusted input): " << input << endl;
 	
 		//check to see if dictionary terms are in the string, starting with verbs
-		for (std::map<string,string>::iterator itr = verbDict.begin(); itr != verbDict.end(); ++itr)
+		for (std::map<string,string>::iterator itr = verbDict.begin(); itr != verbDict.end();)
 		{
 			string tempString = itr->first;
 			
@@ -210,24 +210,31 @@ vector<string> parseString()
 			size_t found = input.find(tempString);
 			
 			//check for special commands that function differently
-			if (found != npos && (tempString == "inventory" || tempString == "bag"))
+			if (found != npos && (tempString == "inventory" || tempString == "bag") && !bagFlag)
 			{
 				bagFlag = true;
+				++itr;
 				//cout << "DEBUG (bagFlag): set to true." << endl;
 			}
 			else if (found != npos && (tempString == "look"))
 			{
 				lookFlag = true;
+				++itr;
 				//cout << "DEBUG (lookFlag): set to true." << endl;
 			}
 			//if we didn't find either of those, push it back
 			else if (found != npos)
 			{
 				//push back the value for the found key
+				//cout << "DEBUG (Found Verb): " << itr->second << endl;
 				command.push_back(itr->second);
-				//set the itr to the end of the dict so that it will end the for loop
+				//set iterator to the end
 				itr = verbDict.end();
 				foundFlag = true;
+			}
+			else
+			{
+				++itr;
 			}
 		}
 		
@@ -250,7 +257,7 @@ vector<string> parseString()
 		//if foundFlag is still false at this point or if the command is "go", check for a direction or a room; return an error if not found
 		if (!foundFlag || (foundFlag && command[0] == "go"))
 		{
-			for (std::map<string,string>::iterator itr = roomDict.begin(); itr != roomDict.end(); ++itr)
+			for (std::map<string,string>::iterator itr = roomDict.begin(); itr != roomDict.end();)
 			{
 				string tempString = itr->first;
 				
@@ -263,19 +270,19 @@ vector<string> parseString()
 			
 				if (found != npos)
 				{
-					//push back "go" and the value for the found key
+					//push back "go" if not already done and the value for the found key
 					if (command.size() == 0)
 					{
 						command.push_back("go");
 					}
 					command.push_back(itr->second);
-					//set the itr to the end of the dict so that it will end the for loop
+					//set iterator to the end
 					itr = roomDict.end();
 					foundFlag = true;
 				}
-				else if (itr == roomDict.end() && !foundFlag)
+				else
 				{
-					cout << "No recognized verb, direction or room name was provided." << endl;
+					 ++itr;
 				}
 			}
 		}
@@ -284,9 +291,9 @@ vector<string> parseString()
 	
 		if (foundFlag && command[0] != "go")
 		{
-			if (command[0] != "look" && command[0] != "exit" && command[0] != "help" && command[0] != "bag")
+			if (command[0] != "look" && command[0] != "exit" && command[0] != "help" && command[0] != "inventory")
 			{
-				for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end(); ++itr)
+				for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
 				{
 					string tempString = itr->first;
 				
@@ -301,25 +308,34 @@ vector<string> parseString()
 					{
 						//push back the value for the found key
 						command.push_back(itr->second);
-						//set the itr to the end of the dict so that it will end the for loop
+						//set iterator to the end
 						itr = nounDict.end();
 						foundFlag = true;
+					}
+					else
+					{
+						++itr;
 					}
 				}
 			}
 		}
 		
-	if (!foundFlag)
-	{
-		cout << "Command not recognized." << endl;
-	}
+		if (!foundFlag)
+		{
+			cout << "Invalid request." << endl;
+		}
 		
 	} while (!foundFlag);
 	
 	/***************
 	*Debug Command
 	***************/
-	//cout << "DEBUG (pre-send): " << command[0] << " " << command[1] << endl;
+	/*cout << "DEBUG (pre-send): " << command[0];
+	if (command.size() > 1)
+	{
+		cout << " " << command[1];
+	}
+	cout << endl;*/
 	
 	
 	//culling the for loops into one callable function using the parameters would be better and more efficient code
