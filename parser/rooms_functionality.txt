@@ -43,14 +43,15 @@ east|east
 right|right
 south|south
 down|down
+west|west
 
 Incorrect Results: 
-NONE
+
 
 Endless Loop: 
-NONE
+
 
 Stuck Mid-Command: 
-go west
+
 
 Untested: 

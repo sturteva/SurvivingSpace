@@ -21,6 +21,7 @@ int main()
 	vector<string> command;
 	
 	//initiate the dictionaries
+	cout << "Initiating dictionaries..." << endl;
 	dictMapInit();
 	
 	cout << "Input command here:" << endl;
