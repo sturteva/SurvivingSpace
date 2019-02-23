@@ -88,13 +88,13 @@ void game::start()
 		
 		//DEBUG
 		
-		cout << "\nParsed Command: ";
+		/*cout << "\nParsed Command: ";
 		for (int count = 0; count < (int)command.size(); count++)
 		{
 			cout << command[count] << " ";
 		}
 		cout << endl << endl;
-		
+		*/
 
 		cout << endl;
 
@@ -133,7 +133,7 @@ void game::doCommand(vector<string> command)
 	if (command[0] == "help")
 	{
 		//get room info
-		currRoom->printRoomInfo();
+		//currRoom->printRoomInfo();
 		cout << endl;
 
 		if (currRoom->getName() == "Starting Room")
