@@ -317,6 +317,9 @@ void game::lookCommand(vector<string> command)
 	// Field with Grazing Animals
 	if (currRoom->getName() == "Field with Grazing Animals" )
 	{
+	
+	}
+
 }
 
 /******************************************************************************
