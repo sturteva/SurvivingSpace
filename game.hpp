@@ -28,6 +28,12 @@ class game
 		void initializeDict();
 	    void start();
 	    void doCommand(vector<string>);
+	    void helpCommand(vector<string>);
+	    void goCommand(vector<string>);
+	    void lookCommand(vector<string>);
+	    void inventoryCommand(vector<string>);
+	    void takeCommand(vector<string>);
+	    void cutCommand(vector<string>);
 	    vector<room*> getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();

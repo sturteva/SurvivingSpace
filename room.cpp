@@ -191,6 +191,21 @@ vector<room*> room::getAdjacent()
  {
  	if(visited == false)
 	{
+        string desc = getFullDesc();
+
+        /*
+        // add endlines after each sentence
+        string::size_type dotpos;
+        do
+        {
+            dotpos = desc.find(".");
+            if(dotpos != string::npos)
+                desc.insert(dotpos + 1, "\n");
+
+        } while(dotpos != string::npos);
+        */
+
+
 		cout << getFullDesc() << endl;
 		//visited = true;
 	}
@@ -199,6 +214,7 @@ vector<room*> room::getAdjacent()
 		cout << getShortDesc() << endl;
 	}
  }
+
 
 /*******************************************************************************
 ** Function: printRoomInfo()
