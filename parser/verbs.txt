@@ -1,0 +1,68 @@
+Action Verbs: 
+	- put
+		Aliases: place, put, use, set
+		Function: 
+	- drop
+		Aliases: drop, remove
+		Function: 
+	- sneak
+		Aliases: crouch, hide, sneak
+		Function: 
+	- crush
+		Aliases: break, crush, smash
+		Function: 
+	- mix
+		Aliases: mix, stir
+		Function: 
+	- cut
+		Aliases: cut, slash, slice
+		Function: 
+	- ???
+		Aliases: 
+		Function: 
+	- ???
+		Aliases: 
+		Function: 
+	- ???
+		Aliases: 
+		Function: 
+	- ???
+		Aliases: 
+		Function: 
+
+Command Verbs: 
+	- warp (MIGHT COUNT FOR ACTION)
+		Aliases: warp, teleport
+		Function: 
+	- hint (MIGHT COUNT FOR ACTION)
+		Aliases: clue, hint
+		Function: Provides a hint for the current room.
+	- savegame (required)
+		Aliases: save, save game, savegame
+		Function: Save the state of the game to a file.
+	- loadgame (required)
+		Aliases: load, load game, loadgame
+		Function: First confirm that this is desired, then load the game state from the file.
+	- exit
+		Aliases: exit, quit
+		Function: 
+
+Required Verbs: 
+	- look
+		Aliases: look, observe, view
+		Function: Repeats the long form explanation of a room
+	- look at <feature/object>
+		Aliases: examine, look at
+		Function: Gives an explanation of the feature or object. Should be able to "look at" objects in inventory.
+	- go (GO NORTH, NORTH, GO STAIRCASE, STAIRCASE)
+		Aliases: climb, go, run, walk
+		Function: Allows traversal to another adjoining room.
+	- take
+		Aliases: collect, grab, interact, pick up, take
+		Function: Acquire an object, storing it in the inventory.
+	- help
+		Aliases: help
+		Function: Lists a set of verbs that the game understands. Does not have to list all verbs.
+	- inventory
+		Aliases: bag, inventory
+		Function: Lists the contents of the inventory.

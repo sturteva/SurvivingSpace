@@ -14,12 +14,16 @@ place|put
 drop|drop
 remove|drop
 look|look
+view|look
+observe|look
+examine|look at
 look at|look at
 help|help
 inventory|inventory
 bag|inventory
 sneak|sneak
 hide|sneak
+crouch|sneak
 crush|crush
 smash|crush
 break|crush
@@ -30,3 +34,13 @@ slash|cut
 slice|cut
 exit|exit
 quit|exit
+hint|hint
+clue|hint
+savegame|savegame
+save|savegame
+save game|savegame
+loadgame|loadgame
+load|loadgame
+load game|loadgame
+warp|warp
+teleport|warp

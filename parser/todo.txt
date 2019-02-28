@@ -1,5 +1,0 @@
-To Do:
-
-Add more nouns.
-Check in regards to what player should do with "ruins" as a target word (go to whichever is accessible from position? What if both accessible?).
-Add non-cardinal directions.
