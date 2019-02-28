@@ -191,7 +191,7 @@ vector<room*> room::getAdjacent()
  {
  	if(visited == false)
 	{
-        string desc = getFullDesc();
+        //string desc = getFullDesc();
 
         /*
         // add endlines after each sentence
@@ -206,12 +206,12 @@ vector<room*> room::getAdjacent()
         */
 
 
-		cout << getFullDesc() << endl;
+		cout << fullDesc << endl;
 		//visited = true;
 	}
 	else
 	{
-		cout << getShortDesc() << endl;
+		cout << shortDesc << endl;
 	}
  }
 

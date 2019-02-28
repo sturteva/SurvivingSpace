@@ -144,6 +144,10 @@ void game::doCommand(vector<string> command)
 	{
 		cutCommand(command);
 	}
+	else
+	{
+		cout << "That command is not recognized... Please try again." << endl;
+	}
 
 }
 
@@ -166,7 +170,9 @@ void game::helpCommand(vector<string> command)
 	{
 		cout << "'climb treetop' will take you to the Top of Tree" << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
-			 << "'take knfe' attempt to put knife in player inventory" << endl;
+			 << "'take knfe' attempt to put knife in player inventory" << endl
+			 << "'go pool of water' will go to thr large pool of water once thistle bushes have been cut" << endl
+			 << "'go field' will go to the field with grazing animals once thistle bushes have been cut" << endl;
 	}
 	else if (currRoom->getName() == "Top of Tree")
 	{
@@ -177,7 +183,8 @@ void game::helpCommand(vector<string> command)
 	else if (currRoom->getName() == "Field with Grazing Animals")
 	{
 		cout << "'go ruins' will take you to the ruins in the distance" << endl
-			 << "'go caves' will take you to the ruins in the distance" << endl
+			 << "'go cave' will take you to the cave further down the trail" << endl
+			 << "'go start' will take you back to the tree you woke up under." << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
 			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
 			 << "'take rock' will take the Red Ochre rock found on the ground" << endl;
@@ -185,26 +192,37 @@ void game::helpCommand(vector<string> command)
 	else if (currRoom->getName() == "Pool of Water")
 	{
 		cout << "'go rock outcropping' will take you to the rock outcropping overlooking the water " << endl
-			 << "'go caves' will take you to the cave in the distance" << endl
+			 << "'go cave' will take you to the cave in the distance" << endl
+			 << "'go start' will take you back to the tree you woke up under." << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
 			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
 			 << "'take rock' will take the Red Ochre rock found on the ground" << endl;
 	}
 	else if (currRoom->getName() == "Predator Den")
 	{
-
+		cout << "'go pool of water' will take you to the large pool of water" << endl
+			 << "'go cave' will take you to the cave in the distance" << endl
+			 << "'go start' will take you back to the tree you woke up under" << endl;
 	}
 	else if (currRoom->getName() == "Tech Ruin")
 	{
-
+		cout << "'go field' will go to the field with grazing animals" << endl
+			 << "'take rock with lightning symbol' will take the rock with strange symbol found in the rubble" << endl
+			 << "'take hook' will take the aluminium hook found in the rubble" << endl
+			 << "'look at old datapad' will examine the old datapad found in the street" << endl;
 	}
 	else if (currRoom->getName() == "Caves")
 	{
-
+		cout << "'go field' will go to the field with grazing animals" << endl
+			 << "'go pool of water' will take you to the large pool of water" << endl
+			 << "'go predator den' will take you to the predator den overlooking the water " << endl
+			 << "'go field' will go to the field with grazing animals" << endl
+			 << "'take string like vines' will take some of the vines covering the cave entrance." << endl;
 	}
 	else if (currRoom->getName() == "Magic Dome")
 	{
-
+		cout << "'go field' will go to the field with grazing animals" << endl
+			 << "'place <item> in <slot>' will place item from inventory in the specified altar slot" << endl;
 	}
 }
 
@@ -242,7 +260,7 @@ void game::goCommand(vector<string> command)
 			{
 				if (command[1] == "Pool of Water" || command[1] == "Field with Grazing Animals")
 				{
-					if (find(roomItems.begin(), roomItems.end(), "Pile of Bushes") != roomItems.end() || roomItems.empty())
+					if (find(roomItems.begin(), roomItems.end(), "Pile of cut bushes") != roomItems.end() || roomItems.empty())
 					{
 						cout << "Going to new location" << endl << endl;
 						currRoom->visitRoom();
@@ -327,7 +345,7 @@ void game::lookCommand(vector<string> command)
 	}
 
 	// Top of Tree
-	if (currRoom->getName() == "Top of Tree")
+	else if (currRoom->getName() == "Top of Tree")
 	{
 		cout << "To the west, you see some large grazing animals in a field, with some buildings in the distance." << endl
 			 << "To the east, you see a small lake with fish in it." << endl;
@@ -339,19 +357,23 @@ void game::lookCommand(vector<string> command)
 	}
 
 	// Field with Grazing Animals
-	if (currRoom->getName() == "Field with Grazing Animals" )
+	else if (currRoom->getName() == "Field with Grazing Animals" )
 	{
+		cout << "In the distance you can see what looks like buildings." << endl
+			 << "In the forest to the west you see a cave entrance." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange rock on its back") != roomItems.end())
 		{
 			cout << "You notice one of the grazing animals has a rock with strange symbols on its back." << endl; 
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Red Ochre rock") != roomItems.end())
 		{
-			cout << "There is a pile of soft red rocks you identify as red ochre." << endl; 
+			cout << "There is a pile of soft red rocks you identify as Red Ochre." << endl
+				 << "It is often crushed up and mixed with water to form a paint."; 
 		}	
 	}
+
 	// Pool of Water
-	if (currRoom->getName() == "Pool of Water")
+	else if (currRoom->getName() == "Pool of Water")
 	{
 		cout << "A trail runs to the south toward what looks like a cave carved into one of the hills." << endl
 			 << "Another trail runs to the east that leads ot a rock outcropping overlooking the water.." << endl
@@ -365,6 +387,53 @@ void game::lookCommand(vector<string> command)
 			cout << "The water looks crystal clear." << endl; 
 		}
 	}
+
+	// predator den
+	else if (currRoom->getName() == "Predator Den")
+	{
+		if (find(roomItems.begin(), roomItems.end(), "Rock with Spiral Symbol") != roomItems.end())
+		{
+			cout << "You see a small rock with a spiral symbol on it behind the predator." << endl
+				 << "I wonder if I could distract him with something to grab the strange stone." << endl;
+		}
+	}
+
+	// tech ruin
+	else if (currRoom->getName() == "Tech Ruin")
+	{
+		cout << "What used to be large buildings long ago, appear half crumbling and falling apart." << endl
+			 << "Some of these buildings appear to have once been a school, hospital, warehouse, and even some sort of civic center." << endl
+			 << "The architecture is foreign to you, but some of the galaxy-wide accepted symbols are present." << endl
+			 << "There is rubble and trash left from whoever built these buildings." << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Aluminum Hook") != roomItems.end())
+		{
+			cout << "Among the rubble you see an aluminum hook similar to a fishing hook." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Rock with Lightning Symbol") != roomItems.end())
+		{
+			cout << "You also spot a small rock with a lightning symbol on it." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Old datapad") != roomItems.end())
+		{
+			cout << "There is an old datapad lying in the middle of the street." << endl;
+		}
+
+	}
+
+	else if (currRoom->getName() == "Caves")
+	{
+		cout << "The entrance to the cave is covered by small string like vines." << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Door with strange writing") != roomItems.end())
+		{
+			cout << "You see a door deeper within the cave with strange writing above it." << endl;
+		}
+	}
+
+	else if (currRoom->getName() == "Magic Dome")
+	{
+		cout << "You see an altar with some strange writing on it. Tht altar has 3 slots on the top about the size of those strange rocks ive been seeing." << endl;
+	}
+
 }
 
 /******************************************************************************
@@ -379,7 +448,8 @@ void game::inventoryCommand(vector<string> command)
 
 	if (currInventory.empty())
 	{
-		cout << "Player inventory is empty" << endl;
+		cout << "You currently have nothing in your inventory." << endl
+			 << "Perhaps a bag would help carry items..." << endl;
 	}
 	else
 	{
@@ -442,16 +512,16 @@ void game::cutCommand(vector<string> command)
 
 	//cout << "cut command sent..." << endl;
 	// cut bushes
-	if (command[1] == "bushes")
+	if (command[1] == "Thistle filled bushes")
 	{
 		//check knife is in inventory
 		if (find(currInventory.begin(), currInventory.end(), "Knife with Runes") != currInventory.end() )
 		{
-			cout << "You cut the bushes using the knife with the strange runes to reveal the field to the west and the small lake to the east. \nOnly a large branch remains on the ground next to you." << endl;
+			cout << "You cut the bushes using the knife with the strange runes to reveal the field to the west and the small lake to the east. \nOnly a pile of cut bushes remains." << endl;
 			//remove bushes from interactables
 			currRoom->removeInteractable("Thistle filled bushes");
 			// add pile of bushes to interactables
-			currRoom->addInteractable("Large Branch");
+			currRoom->addInteractable("Pile of cut bushes");
 		}
 		else
 		{
