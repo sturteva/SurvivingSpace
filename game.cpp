@@ -165,22 +165,46 @@ void game::helpCommand(vector<string> command)
 	if (currRoom->getName() == "Starting Room")
 	{
 		cout << "'climb treetop' will take you to the Top of Tree" << endl
-			 << "'look' will describe the items that can be interacted with" << endl
+			 << "'look around' will describe the items that can be interacted with" << endl
 			 << "'take knfe' attempt to put knife in player inventory" << endl;
 	}
 	else if (currRoom->getName() == "Top of Tree")
 	{
 		cout << "'climb treebase' will take back down the base of the tree" << endl
-			 << "'look' will describe the items that can be interacted with" << endl
+			 << "'look around' will describe the items that can be interacted with" << endl
 			 << "'take bag' puts bag in player inventory" << endl;
 	}
 	else if (currRoom->getName() == "Field with Grazing Animals")
 	{
-		cout << "help for 'Field with Grazing Animals'..." << endl;
+		cout << "'go ruins' will take you to the ruins in the distance" << endl
+			 << "'go caves' will take you to the ruins in the distance" << endl
+			 << "'look around' will describe the items that can be interacted with" << endl
+			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
+			 << "'take rock' will take the Red Ochre rock found on the ground" << endl;
 	}
 	else if (currRoom->getName() == "Pool of Water")
 	{
-		cout << "help for 'Pool of Water'..." << endl;
+		cout << "'go rock outcropping' will take you to the rock outcropping overlooking the water " << endl
+			 << "'go caves' will take you to the cave in the distance" << endl
+			 << "'look around' will describe the items that can be interacted with" << endl
+			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
+			 << "'take rock' will take the Red Ochre rock found on the ground" << endl;
+	}
+	else if (currRoom->getName() == "Predator Den")
+	{
+
+	}
+	else if (currRoom->getName() == "Tech Ruin")
+	{
+
+	}
+	else if (currRoom->getName() == "Caves")
+	{
+
+	}
+	else if (currRoom->getName() == "Magic Dome")
+	{
+
 	}
 }
 
@@ -380,7 +404,7 @@ void game::takeCommand(vector<string> command)
 	vector<string> currInventory = player1->getInventory();
 
 	// take knife
-	if (currRoom->getName() == "Starting Room" && command[1] == "knife")
+	if (currRoom->getName() == "Starting Room" && command[1] == "Knife with Runes")
 	{
 		if(!currInventory.empty())  
 		{
@@ -397,7 +421,7 @@ void game::takeCommand(vector<string> command)
 	}
 
 	// take bag
-	if (currRoom->getName() == "Top of Tree" && command[1] == "bag")
+	if (currRoom->getName() == "Top of Tree" && command[1] == "Bag with Strange Runes")
 	{
 		cout << "You take the bag and clip it to your belt..." << endl;
 		player1->addToInventory("Bag with Strange Runes");
