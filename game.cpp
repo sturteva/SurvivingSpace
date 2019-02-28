@@ -165,21 +165,18 @@ void game::helpCommand(vector<string> command)
 	if (currRoom->getName() == "Starting Room")
 	{
 		cout << "'climb treetop' will take you to the Top of Tree" << endl
-			 << "'look around' will describe the items that can be interacted with" << endl
+			 << "'look' will describe the items that can be interacted with" << endl
 			 << "'take knfe' attempt to put knife in player inventory" << endl;
 	}
 	else if (currRoom->getName() == "Top of Tree")
 	{
-		cout << "'climb treebase' will take you back down the base of the tree" << endl
-			 << "'look around' will describe the items that can be interacted with" << endl
+		cout << "'climb treebase' will take back down the base of the tree" << endl
+			 << "'look' will describe the items that can be interacted with" << endl
 			 << "'take bag' puts bag in player inventory" << endl;
 	}
 	else if (currRoom->getName() == "Field with Grazing Animals")
 	{
-		cout << "'go ruins' will take you to the ruins in the distance" << endl
-			 << "'look around' will describe the items that can be interacted with" << endl
-			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
-			 << "'take rock' will take the Red Ochre rock found on the ground";
+		cout << "help for 'Field with Grazing Animals'..." << endl;
 	}
 	else if (currRoom->getName() == "Pool of Water")
 	{
@@ -320,31 +317,7 @@ void game::lookCommand(vector<string> command)
 	// Field with Grazing Animals
 	if (currRoom->getName() == "Field with Grazing Animals" )
 	{
-		if (find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange rock on its back") != roomItems.end())
-		{
-			cout << "You notice one of the grazing animals has a rock with strange symbols on its back." << endl; 
-		}
-		if (find(roomItems.begin(), roomItems.end(), "Red Ochre rock") != roomItems.end())
-		{
-			cout << "There is a pile of soft red rocks you identify as red ochre." << endl; 
-		}
-
-	}
-
-	// Pool of Water
-	if (currRoom->getName() == "Pool of Water" )
-	{
-		cout << "A trail runs to the south toward what looks like a cave carved into one of the hills." << endl
-			 << "Another trail runs to the east that leads ot a rock outcropping overlooking the water.." << endl
-			 << "You can see through the crystal clear water and see the fish swimming.";
-		if (find(roomItems.begin(), roomItems.end(), "Fish") != roomItems.end())
-		{
-			cout << "There are a lot of fish swimming in the water. Maybe I could find something to fish one out" << endl; 
-		}
-		if (find(roomItems.begin(), roomItems.end(), "Water") != roomItems.end())
-		{
-			cout << "The water looks crystal clear." << endl; 
-		}
+	
 	}
 
 }
