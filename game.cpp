@@ -317,9 +317,30 @@ void game::lookCommand(vector<string> command)
 	// Field with Grazing Animals
 	if (currRoom->getName() == "Field with Grazing Animals" )
 	{
-	
+		if (find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange rock on its back") != roomItems.end())
+		{
+			cout << "You notice one of the grazing animals has a rock with strange symbols on its back." << endl; 
+		}
+		if (find(roomItems.begin(), roomItems.end(), "Red Ochre rock") != roomItems.end())
+		{
+			cout << "There is a pile of soft red rocks you identify as red ochre." << endl; 
+		}	
 	}
-
+	// Pool of Water
+	if (currRoom->getName() == "Pool of Water")
+	{
+		cout << "A trail runs to the south toward what looks like a cave carved into one of the hills." << endl
+			 << "Another trail runs to the east that leads ot a rock outcropping overlooking the water.." << endl
+			 << "You can see through the crystal clear water and see the fish swimming." << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Fish") != roomItems.end())
+		{
+			cout << "There are a lot of fish swimming in the water. Maybe I could find something to fish one out" << endl; 
+		}
+		if (find(roomItems.begin(), roomItems.end(), "Water") != roomItems.end())
+		{
+			cout << "The water looks crystal clear." << endl; 
+		}
+	}
 }
 
 /******************************************************************************
