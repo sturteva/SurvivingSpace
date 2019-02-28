@@ -11,28 +11,38 @@ treetops|Top of Tree
 pool of water|Pool of Water
 pool|Pool of Water
 water pool|Pool of Water
-tech ruins|tech ruins
 field of grazing animals|Field with Grazing Animals
+field with grazing animals|Field with Grazing Animals
 field|Field with Grazing Animals
-predator den|predator den
-den|predator den
-magic ruins|magic ruins
-ruins of magic|magic ruins
-strange teleportation circle|magic ruins
-personal cabin|personal cabin
-cabin|personal cabin
-mess hall|mess hall
-kitchen|mess hall
-dining|mess hall
-cafeteria|mess hall
-canteen|mess hall
-engine|engine room
-latrine|latrine
-bathroom|latrine
-med bay|med bay
-medical bay|med bay
-armory|armory
-helm|helm
+animal field|Field with Grazing Animals
+predator den|Predator Den
+den|Predator Den
+caves|Caves
+cave|Caves
+tech ruins|Tech Ruin
+tech ruin|Tech Ruin
+magic ruins|Magic Dome
+ruins of magic|Magic Dome
+magic dome|Magic Dome
+strange teleportation circle|Magic Dome
+teleporter|Magic Dome
+teleportation circle|Magic Dome
+transporter|Magic Dome
+personal cabin|Personal Cabin
+cabin|Personal Cabin
+mess hall|Mess Hall
+kitchen|Mess Hall
+dining|Mess Hall
+cafeteria|Mess Hall
+canteen|Mess Hall
+engine|Engine Room
+latrine|Latrine
+bathroom|Latrine
+med bay|Med Bay
+medical bay|Med Bay
+armory|Armory
+helm|Helm
+bridge|Helm
 north|north
 up|up
 left|left

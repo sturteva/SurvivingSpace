@@ -1,49 +1,56 @@
-knife|knife
-fish|fish
-water|water
-bag|bag
-bag with strange ruins|bag
-grazing animal with a strange rock on its back|grazing animal
-grazing animal with a strange rock|grazing animal
-grazing animal with strange rock on back|grazing animal
-grazing animal with strange rock|grazing animal
-grazing animal|grazing animal
-red ochre rock|red ochre rock
-red rock|red ochre rock
-rock with symbol 1|rock symbol 1
-base of tree|Starting Room
-tree base|Starting Room
-treebase|Starting Room
-bottom of tree|Starting Room
-tree bottom|Starting Room
-start|Starting Room
-top of tree|Top of Tree
-tree top|Top of Tree
-treetop|Top of Tree
-treetops|Top of Tree
-pool of water|Pool of Water
-pool|Pool of Water
-water pool|Pool of Water
-tech ruins|tech ruins
-field of grazing animals|Field with Grazing Animals
-field|Field with Grazing Animals
-predator den|predator den
-den|predator den
-magic ruins|magic ruins
-ruins of magic|magic ruins
-strange teleportation circle|magic ruins
-personal cabin|personal cabin
-cabin|personal cabin
-mess hall|mess hall
-kitchen|mess hall
-dining|mess hall
-cafeteria|mess hall
-canteen|mess hall
-engine|engine room
-latrine|latrine
-bathroom|latrine
-med bay|med bay
-medical bay|med bay
-armory|armory
-helm|helm
-bushes|bushes
+knife|Knife with Runes
+knife with runes|Knife with Runes
+thistle filled bushes|Thistle filled bushes
+thistle|Thistle filled bushes
+bushes|Thistle filled bushes
+bag|Bag with Strange Runes
+bag with strange runes|Bag with Strange Runes
+leafs filled branch|leafs filled branch
+leaf filled branch|leafs filled branch
+leafs|leafs filled branch
+branch|leafs filled branch
+fish|Fish
+water|Water
+grazing animal with a strange rock on its back|Grazing Animal with a strange rock on its back
+grazing animal with a strange rock|Grazing Animal with a strange rock on its back
+grazing animal with strange rock on back|Grazing Animal with a strange rock on its back
+grazing animal with strange rock|Grazing Animal with a strange rock on its back
+grazing animal|Grazing Animal with a strange rock on its back
+red ochre rock|Red Ochre rock
+red rock|Red Ochre rock
+predator|Predator
+rock with spiral symbol|Rock with Spiral Symbol
+rock with spiral|Rock with Spiral Symbol
+spiral rock|Rock with Spiral Symbol
+spiral symbol|Rock with Spiral Symbol
+rock with lightning symbol|Rock with Lightning Symbol
+rock with lightning|Rock with Lightning Symbol
+lightning rock|Rock with Lightning Symbol
+lightning symbol|Rock with Lightning Symbol
+rock with lightening symbol|Rock with Lightning Symbol
+rock with lightening|Rock with Lightning Symbol
+lightening rock|Rock with Lightning Symbol
+lightening symbol|Rock with Lightning Symbol
+aluminum hook|Aluminum Hook
+hook|Aluminum Hook
+old datapad|Old datapad
+datapad|Old datapad
+old data pad|Old datapad
+data pad|Old datapad
+altar|Altar
+slot1|Slot1
+slot 1|Slot1
+slot one|Slot1
+slot2|Slot2
+slot 2|Slot2
+slot two|Slot2
+slot3|Slot3
+slot 3|Slot3
+slot three|Slot3
+stringlike vines|string-like vines
+string like vines|string-like vines
+string vines|string-like vines
+door with strange writing|Door with strange writing
+door|Door with strange writing
+strange door|Door with strange writing
+door with writing|Door with strange writing
