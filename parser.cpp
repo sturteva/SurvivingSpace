@@ -300,7 +300,7 @@ vector<string> parseString()
 	
 			if (foundFlag && command[0] != "go")
 			{
-				if (command[0] != "look" && command[0] != "exit" && command[0] != "help" && command[0] != "inventory")
+				if (command[0] != "look" && command[0] != "exit" && command[0] != "help" && command[0] != "inventory" && command[0] != "hint" && command[0] != "savegame" && command[0] != "loadgame")
 				{
 					for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
 					{
