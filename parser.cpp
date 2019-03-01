@@ -138,6 +138,7 @@ vector<string> parseString()
 	bool lookFlag = false;
 	bool formatFlag = false;
 	bool doneFlag = false;
+	int nounCount = 0;
 
 	
 	//run a while loop while foundFlag is false
@@ -151,6 +152,9 @@ vector<string> parseString()
 		{
 			command.pop_back();
 		}
+		
+		//make sure doneFlag is set to false
+		doneFlag = false;
 		
 		cout << endl << ">> ";
 		getline(cin, input);
@@ -300,16 +304,348 @@ vector<string> parseString()
 			}
 			
 			
-			//code for "use" goes here
-			if (foundFlag && !doneFlag && (command[0] == "use" || command[0] == "put" || command[0] == "crush" || command[0] == "combine" || command[0] == "cut"))
+			//code for object interaction goes here
+			if (foundFlag && !doneFlag && (command[0] == "use" || command[0] == "put" || command[0] == "combine" || command[0] == "cut"))
 			{
-				/***************
-				*Debug Command
-				***************/
-				//cout << "DEBUG (multiple objects): " << itr->first << " | " << itr->second << endl;
-				cout << "Hello! You made it inside the function to interact with multiple objects, which is not currently implemented." << endl;
+				nounCount = 0;
 				
-				doneFlag = true;
+				if (command[0] == "combine")
+				{
+					/***************
+					*Debug Command
+					***************/
+					//cout << "DEBUG (multiple objects): Inside \"combine\" function" << endl;
+					
+					nounCount = 4; //one higher than the 3 the command allows so that we can trap errors
+					do
+					{
+						for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+						{
+							string tempString = itr->first;
+							
+							/***************
+							*Debug Command
+							***************/
+							//cout << "DEBUG (combine): " << itr->first << " | " << itr->second << endl;
+					
+							size_t found = input.find(tempString);
+							
+							if (found != npos)
+							{
+								if (command.size() == 1)
+								{
+									/***************
+									*Debug Command
+									***************/
+									//cout << "Pushing back " << itr->second << endl;
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+								}
+								else if (command.size() == 2)
+								{
+									if (itr->second != command[1])
+									{
+										/***************
+										*Debug Command
+										***************/
+										//cout << "Pushing back " << itr->second << endl;
+										command.push_back(itr->second);
+										//set iterator to the end
+										itr = nounDict.end();
+									}
+									else
+									{
+										++itr;
+									}
+								}
+								else if (command.size() == 3)
+								{
+									if (itr->second != command[1] && itr->second != command[2])
+									{
+										/***************
+										*Debug Command
+										***************/
+										//cout << "Pushing back " << itr->second << endl;
+										command.push_back(itr->second);
+										//set iterator to the end
+										itr = nounDict.end();
+									}
+									else
+									{
+										++itr;
+									}
+								}
+								else
+								{
+									//If we reach this point, it's because the user put in more than three items. Since we want the program to let them know they can only use three, and we don't know which three of the four items they want to try combining, we will go ahead and push back this item, and this way we can make sure an error is returned.
+									if (itr->second != command[1] && itr->second != command[2] && itr->second != command[3])
+									{
+										/***************
+										*Debug Command
+										***************/
+										//cout << "Pushing back " << itr->second << endl;
+										command.push_back(itr->second);
+										//set iterator to the end
+										itr = nounDict.end();
+									}
+									else
+									{
+										++itr;
+									}
+								}
+							}
+							else
+							{
+								++itr;
+							}
+							
+						}
+						nounCount--;
+						
+					} while(nounCount > 0);
+					
+					if (!(command.size() == 3) && !(command.size() == 4))
+					{
+						cout << "Something went wrong. Returning to prompt." << endl;
+						cout << "The 'combine' command only works on up to 3 items." << endl;
+						foundFlag = false;
+						doneFlag = true;
+					}
+					else
+					{
+						foundFlag = true;
+						doneFlag = true;
+					}
+					
+				}
+				else
+				{
+					nounCount = 2;
+					if (command[0] == "use")
+					{
+						//cout << "DEBUG (use): Inside \"use\" function"
+						//prepositions: with, on
+						string prep = "";
+						if (input.find("with") != npos)
+						{
+							prep = "with";
+						}
+						else if (input.find("on") != npos)
+						{
+							prep = "on";
+						}
+						else
+						{
+							cout << "A valid preposition was not found. Try including 'with' or 'on'." << endl;
+							foundFlag = false;
+							doneFlag = true;
+						}
+						
+						if (prep != "")
+						{
+							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+							{
+								string tempString = itr->first;
+				
+								/***************
+								*Debug Command
+								***************/
+								//cout << "DEBUG (use pt1): " << itr->first << " | " << itr->second << endl;
+								string subinput = input.substr(0, input.find(prep));
+								size_t found = subinput.find(tempString);
+			
+								if (found != npos)
+								{
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+								}
+								else
+								{
+									++itr;
+								}
+							}
+							
+							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+							{
+								string tempString = itr->first;
+								//cout << "DEBUG (use pt2): " << itr->first << " | " << itr->second << endl;
+								string subinput = input.substr(input.find(prep));
+								size_t found = subinput.find(tempString);
+							
+								if (found != npos)
+								{
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+								}
+								else
+								{
+									++itr;
+								}
+							}
+							foundFlag = true;
+							doneFlag = true;
+						}
+						else
+						{
+							cout << "Something went wrong. Returning to prompt." << endl;
+							cout << "Correct format for this command is 'Use' <object> <preposition> <object>." << endl;
+							foundFlag = false;
+							doneFlag = true;
+						}
+					}
+					else if (command[0] == "put")
+					{
+						//cout << "DEBUG (put): Inside \"put\" function"
+						//prepositions: above, by, in, into, on, over, under, with
+						vector<string> prepVect = {"above", "by", "in", "into", "on", "over", "under", "with"};
+						string prep = "";
+						int vectSize = prepVect.size();
+						
+						for (int count = 0; count < vectSize; count++)
+						{
+							prep = prepVect[count];
+							if (input.find(prep) != npos)
+							{
+								count = vectSize - 1;
+							}
+							else
+							{
+								prep = "";
+							}
+						}
+						if (prep != "")
+						{
+							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+							{
+								string tempString = itr->first;
+				
+								/***************
+								*Debug Command
+								***************/
+								//cout << "DEBUG (cut pt1): " << itr->first << " | " << itr->second << endl;
+								string subinput = input.substr(0, input.find(prep));
+								size_t found = subinput.find(tempString);
+			
+								if (found != npos)
+								{
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+								}
+								else
+								{
+									++itr;
+								}
+							}
+							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+							{
+								string tempString = itr->first;
+								//cout << "DEBUG (cut pt2): " << itr->first << " | " << itr->second << endl;
+								string subinput = input.substr(input.find(prep));
+								size_t found = subinput.find(tempString);
+						
+								if (found != npos)
+								{
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+								}
+								else
+								{
+									++itr;
+								}
+							}
+						}
+						else
+						{
+							cout << "A valid preposition was not found." << endl;
+							foundFlag = false;
+							doneFlag = true;
+						}
+						
+						if (command.size() == 3)
+						{
+							foundFlag = true;
+							doneFlag = true;
+						}
+						else
+						{
+							cout << "One of the items given was not understood." << endl;
+							doneFlag = true;
+							foundFlag = false;
+						}
+						
+					}
+					else if (command[0] == "cut")
+					{
+						//cout << "DEBUG (cut): Inside \"cut\" function"
+						//prepositions: with
+						if (input.find("with") != npos)
+						{
+							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+							{
+								string tempString = itr->first;
+				
+								/***************
+								*Debug Command
+								***************/
+								//cout << "DEBUG (cut pt1): " << itr->first << " | " << itr->second << endl;
+								string subinput = input.substr(0, input.find("with"));
+								size_t found = subinput.find(tempString);
+			
+								if (found != npos)
+								{
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+								}
+								else
+								{
+									++itr;
+								}
+							}
+							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+							{
+								string tempString = itr->first;
+								//cout << "DEBUG (cut pt2): " << itr->first << " | " << itr->second << endl;
+								string subinput = input.substr(input.find("with "));
+								size_t found = subinput.find(tempString);
+							
+								if (found != npos)
+								{
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+								}
+								else
+								{
+									++itr;
+								}
+							}
+							if (command.size() == 3)
+							{
+								foundFlag = true;
+								doneFlag = true;
+							}
+							else
+							{
+								cout << "One of the items given was not understood." << endl;
+								doneFlag = true;
+								foundFlag = false;
+							}
+						}
+						else
+						{
+							cout << "Something went wrong. Returning to prompt." << endl;
+							cout << "Correct format for this command is 'Cut' <target> 'with' <object>." << endl;
+							foundFlag = false;
+							doneFlag = true;
+						}
+					}
+				}
 				
 			}
 			
