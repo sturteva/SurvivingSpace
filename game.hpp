@@ -32,6 +32,7 @@ class game
 	    void saveCommand(vector<string>);
 	    void goCommand(vector<string>);
 	    void lookCommand(vector<string>);
+	    void lookAtCommand(vector<string>);
 	    void inventoryCommand(vector<string>);
 	    void takeCommand(vector<string>);
 	    void cutCommand(vector<string>);
