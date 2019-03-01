@@ -6,6 +6,7 @@
 #include "room.hpp"
 #include "player.hpp"
 #include "parser.hpp"
+#include "dataio.hpp"
 #include <string>
 #include <iostream>
 #include <algorithm>
@@ -88,13 +89,13 @@ void game::start()
 		
 		//DEBUG
 		
-		/*cout << "\nParsed Command: ";
+		cout << "\nParsed Command: ";
 		for (int count = 0; count < (int)command.size(); count++)
 		{
 			cout << command[count] << " ";
 		}
 		cout << endl << endl;
-		*/
+		
 
 		cout << endl;
 
@@ -119,6 +120,11 @@ void game::doCommand(vector<string> command)
 	{
 		helpCommand(command);
 	}
+	// save command
+	else if (command[0] == "savegame")
+	{	
+		saveCommand(command);
+	}	
 	// go command
 	else if (command[0] == "go")
 	{	
@@ -143,6 +149,18 @@ void game::doCommand(vector<string> command)
 	else if (command[0] == "cut")
 	{
 		cutCommand(command);
+	}
+	else if (command[0] == "move toward")
+	{
+		moveTowardCommand(command);
+	}
+	else if (command[0] == "sneak")
+	{
+		sneakCommand(command);
+	}
+	else if (command[0] == "exit")
+	{
+
 	}
 	else
 	{
@@ -187,7 +205,7 @@ void game::helpCommand(vector<string> command)
 			 << "'go start' will take you back to the tree you woke up under." << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
 			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
-			 << "'take rock' will take the Red Ochre rock found on the ground" << endl;
+			 << "'take red rock' will take the Red Ochre rock found on the ground" << endl;
 	}
 	else if (currRoom->getName() == "Pool of Water")
 	{
@@ -195,7 +213,8 @@ void game::helpCommand(vector<string> command)
 			 << "'go cave' will take you to the cave in the distance" << endl
 			 << "'go start' will take you back to the tree you woke up under." << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
-			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
+			 << "'move toward grazing animal' will move you closer to the grazing animals"
+			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock" << endl
 			 << "'take rock' will take the Red Ochre rock found on the ground" << endl;
 	}
 	else if (currRoom->getName() == "Predator Den")
@@ -224,6 +243,18 @@ void game::helpCommand(vector<string> command)
 		cout << "'go field' will go to the field with grazing animals" << endl
 			 << "'place <item> in <slot>' will place item from inventory in the specified altar slot" << endl;
 	}
+}
+
+/******************************************************************************
+** Function: saveCommand()
+** Description: processes the help command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::saveCommand(vector<string> command)
+{
+	cout << "saving game state..." << endl;
+	ourData.saveGame(*this);
 }
 
 /******************************************************************************
@@ -472,6 +503,7 @@ void game::takeCommand(vector<string> command)
 {
 	room * currRoom = player1->getLocation();
 	vector<string> currInventory = player1->getInventory();
+	vector<string> roomItems = player1->getRoomItems();
 
 	// take knife
 	if (currRoom->getName() == "Starting Room" && command[1] == "Knife with Runes")
@@ -491,11 +523,29 @@ void game::takeCommand(vector<string> command)
 	}
 
 	// take bag
-	if (currRoom->getName() == "Top of Tree" && command[1] == "Bag with Strange Runes")
+	else if (currRoom->getName() == "Top of Tree" && command[1] == "Bag with Strange Runes")
 	{
 		cout << "You take the bag and clip it to your belt..." << endl;
 		player1->addToInventory("Bag with Strange Runes");
 		currRoom->removeInteractable("Bag with Strange Runes");
+	}
+	
+	// 'take rock off back'
+	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Rock with Sword Symbol")
+	{
+		if (find(roomItems.begin(), roomItems.end(), "Sneak up on Animal") != roomItems.end())
+		{
+			cout << "You take the strange rock off the animals back and put it into your bag." << endl
+				 << "The animal doesn't seem to be bothered. It just shakes and moves to a new patch of grass." << endl;
+
+			currRoom->removeInteractable("Grazing Animal with a strange rock on its back");
+			player1->addToInventory("Rock with Sword Symbol");
+			currRoom->addInteractable("Grazing Animal");
+		}
+		else
+		{
+			cout << " You are too far away to reach the rock... Try moving closer." << endl;
+		}
 	}
 }
 
@@ -509,6 +559,7 @@ void game::cutCommand(vector<string> command)
 {
 	room * currRoom = player1->getLocation();
 	vector<string> currInventory = player1->getInventory();
+	vector<string> roomItems = player1->getRoomItems();
 
 	//cout << "cut command sent..." << endl;
 	// cut bushes
@@ -528,6 +579,59 @@ void game::cutCommand(vector<string> command)
 			cout << "Those thistles will tear me up.. I need a knife to chop down those bushes..." << endl;
 		}
 	}
+
+	// rock off animals back
+	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Rock with Sword Symbol")
+	{
+		if (find(roomItems.begin(), roomItems.end(), "Sneak up on Animal") != roomItems.end())
+		{
+			cout << "You cut the strange rock off the animals back with your knife." << endl
+				 << "The animal gets spooked and takes off running." << endl;
+		}
+		else
+		{
+			cout << " You are too far away to reach the rock... Try moving closer." << endl;
+		}
+	}
+}
+
+
+/******************************************************************************
+** Function: moveTowardCommand()
+** Description: processes the move toward command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::moveTowardCommand(vector<string> command)
+{
+	room * currRoom = player1->getLocation();
+
+	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange rock on its back")
+	{
+		cout << "The herd senses you and moves further along the plains, but you can still see them." << endl
+			 << "Maybe I should be more stealthy next time..." << endl;
+	} 
+
+}
+
+/******************************************************************************
+** Function: sneakCommand()
+** Description: processes the move toward command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::sneakCommand(vector<string> command)
+{
+	room * currRoom = player1->getLocation();
+
+	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange rock on its back")
+	{
+		cout << "You sneak up on the grazing animal with the strange rock on its back... " << endl
+			 << "You notice the rock has a sword like symbol on it. " << endl
+			 << "If I'm careful I could probably grab the strange rock off the animals back." << endl;
+		currRoom->addInteractable("Sneak up on Animal");
+	}
+
 }
 
 /******************************************************************************

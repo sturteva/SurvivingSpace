@@ -36,6 +36,7 @@ exit|exit
 quit|exit
 hint|hint
 clue|hint
+move toward|move toward
 savegame|savegame
 save|savegame
 save game|savegame

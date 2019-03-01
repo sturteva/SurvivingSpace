@@ -29,11 +29,14 @@ class game
 	    void start();
 	    void doCommand(vector<string>);
 	    void helpCommand(vector<string>);
+	    void saveCommand(vector<string>);
 	    void goCommand(vector<string>);
 	    void lookCommand(vector<string>);
 	    void inventoryCommand(vector<string>);
 	    void takeCommand(vector<string>);
 	    void cutCommand(vector<string>);
+	    void moveTowardCommand(vector<string>);
+	    void sneakCommand(vector<string>);
 	    vector<room*> getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();
