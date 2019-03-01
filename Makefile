@@ -12,8 +12,8 @@ player.o: player.cpp room.hpp
 room.o: room.cpp
 	g++ -c room.cpp $(CFLAGS)
 
-dataio.o: dataio.cpp room.hpp game.hpp
-	g++ -c dataio.cpp room.hpp game.hpp $(CFLAGS)
+dataio.o: dataio.cpp room.hpp game.hpp player.hpp
+	g++ -c dataio.cpp room.hpp game.hpp player.hpp $(CFLAGS)
 	find RoomFiles -type f -print0 | xargs -0 dos2unix 
 
 inventory.o: inventory.cpp player.hpp

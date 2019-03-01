@@ -5,6 +5,7 @@
 #include "dataio.hpp"
 #include "room.hpp"
 #include "game.hpp"
+#include "player.hpp"
 #include <vector>
 #include <dirent.h>
 #include <sys/stat.h>
@@ -16,6 +17,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <bits/stdc++.h>
+
 
 using std::cout;
 using std::cin;
@@ -248,7 +250,9 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
 *******************************************************************************/
 void dataIO::saveGame(game saveGame){
 
+
     if(saveGame.getNumPlayers() > 1){
+
         cout << "You are only allowed to save games in a Single Player Adventure" << endl;
         return;
     }
@@ -258,45 +262,60 @@ void dataIO::saveGame(game saveGame){
     cout << "What would you like to name your save folder?" << endl;
     getline(cin,folderName);
 
-    mkdir(folderName.c_str(), 0666);
+
+    mkdir(folderName.c_str(), 0777);
 
     vector<room*> theRooms = saveGame.getRooms();
 
     //Take each room in the current gameState and create a *.roomdat file
     for(int i = 0; i < (int)theRooms.size(); ++i){
 
+	//Remove Spaces from Roomname
+	string roomName = theRooms.at(i)->getName();
+	roomName.erase(remove(roomName.begin(), roomName.end(), ' '), roomName.end());
         //Lets build our filePath!
-        string filePath = folderName + "\\" + theRooms.at(i)->getName() + ".roomdat";
-        ofstream roomFile(filePath.c_str());
+        string filePath = folderName + "/" + roomName + ".roomdat";
 
-        //Now that we have a file with the right now, we need to input data in the correct format!
+        ofstream roomFile(filePath.c_str());
+	
+	//Now that we have a file with the right now, we need to input data in the correct format!
         roomFile << "<Name>" << theRooms.at(i)->getName() << "</Name>" << endl;
         roomFile << "<FD>" << theRooms.at(i)->getFullDesc() << "</FD>" << endl;
         roomFile << "<SD>" << theRooms.at(i)->getShortDesc() << "</SD>" << endl;
 
-
+	
         vector<string> interactables = theRooms.at(i)->getInteractables();
         //Grabs each interactable in the room
         for(int k = 0; k < (int)interactables.size(); ++k){
             roomFile << "<I>" << interactables.at(k) << "</I>" << endl;
         }
-
+	
         vector<room*> adjacent = theRooms.at(i)->getAdjacent();
         for(int k = 0; k < (int)adjacent.size(); ++k){
-            roomFile << "<A>" << adjacent.at(i)->getName() << "</A>" << endl;
+            roomFile << "<A>" << adjacent.at(k)->getName() << "</A>" << endl;
         }
-
+	
 	//Check if room has been visited
 	if(theRooms.at(i)->getVisited()){
 	    roomFile << "<V>" << endl;
 	}
-
+	
         roomFile.close();
 
     }
 
     //After that is saved, we will save player information
+    //Get Player 1 information
+    player*  thePlayer = saveGame.getPlayer1();
+    string playerPath = folderName + "/player.playerdat";
+    ofstream playerFile(playerPath.c_str());
+    playerFile << "<L>" << thePlayer->getLocation()->getName() << "</L>" << endl;
+    
+    vector<string> inventory = thePlayer->getInventory();
 
+   for(int i = 0; i < (int)inventory.size(); ++i){
+	playerFile << "<I>" << inventory.at(i) << "</I>" << endl;
+   }
 
 
 
@@ -313,8 +332,76 @@ game dataIO::loadGame(string folderName){
     game newGame;
     vector<room*> loadedRooms = roomIO(folderName.c_str());
     newGame.setRooms(loadedRooms);
+    vector<string> fileNames;
+    player* player1 = new player();
+    //Need to set the player stuff	
+    //first we need to open the directory that our Player data files are in.
+    dir = opendir(folderName.c_str());
+    if(!dir){
+      cout << "Directory Not Found, Error\n" << endl;
+    }
+    
+	//read all file names in the given directory
+     while((entry = readdir(dir)) != NULL){
+      if(entry->d_name[0] != '.'){
+         string name = string(entry->d_name);
+          fileNames.push_back(name);
+      }
+                                                                                     }
+     //After that, we go through all of the vector, and process any with file extension *.playerdat
+      for(int i = 0; i < (int)fileNames.size(); ++i){
+     
+     	if((size_t)fileNames.at(i).find(".playerdat") != std::string::npos){
 
-    //Need to set the player stuff
+		//build file name
+		string theFile = folderName + "/" + fileNames.at(i);
+
+		ifstream playerFile(theFile.c_str());
+
+		if(playerFile.is_open()){
+
+			string line;
+			while(getline(playerFile,line)){
+			size_t pos;
+
+			//Finding location and setting it
+			if(line.find("<L>") != std::string::npos){
+
+				pos = line.find("<L>");
+				line.erase(pos,3);
+				pos = line.find("</L>");
+				line.erase(pos,4);
+				
+				room* currentRoom = NULL;
+				//check the room vector for the room
+				for(int k = 0; k < (int)loadedRooms.size(); ++k){
+					
+					if(loadedRooms.at(i)->getName().compare(line) == 0){
+						currentRoom = loadedRooms.at(i);
+						break;
+					}
+				}
+
+				if(currentRoom == NULL){
+					cout << "Player's Room not Found" << endl;
+				}
+
+				else
+					player1->setLocation(currentRoom);
+			}
+
+				if(line.find("<I>") != std::string::npos){
+					pos = line.find("<I>");
+					line.erase(pos,3);
+					pos = line.find("</I>");
+					line.erase(pos,4);
+					player1->addToInventory(line);
+				}
+			}
+		}
+	}
+     }
+    newGame.setPlayers(player1);     
 
     return newGame;
 

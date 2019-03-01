@@ -780,3 +780,15 @@ void game::setRooms(vector<room*> newRooms)
     rooms = newRooms;
 }
 
+ /******************************************************************************
+ ** Function: setRooms()
+ ** Description: sets player 
+ ** Parameters: point to a player
+ ** Returns: None
+ ******************************************************************************/
+void game::setPlayers(player* p1){
+
+	player1 = p1;
+}
+
+
