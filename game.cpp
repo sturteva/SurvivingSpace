@@ -306,7 +306,7 @@ void game::goCommand(vector<string> command)
 						cout << "Those thistles will tear me up. Maybe I could use the knife to chop down the bushes..." << endl;
 					}
 				}
-				else
+				else if(command[1] == "Top of Tree")
 				{
 					cout << "Going to new location" << endl << endl;
 					currRoom->visitRoom();
@@ -315,6 +315,7 @@ void game::goCommand(vector<string> command)
 					// get new room
 					currRoom = player1->getLocation();
 					currRoom->printDescription();
+					break;
 				}
 			}
 
