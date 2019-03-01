@@ -1,6 +1,6 @@
 Action Verbs: 
 	- put
-		Aliases: place, put, use, set
+		Aliases: place, put, set
 		Function: 
 	- drop
 		Aliases: drop, remove
@@ -11,14 +11,14 @@ Action Verbs:
 	- crush
 		Aliases: break, crush, smash
 		Function: 
-	- mix
-		Aliases: mix, stir
+	- combine
+		Aliases: combine, merge, mix, stir
 		Function: 
 	- cut
 		Aliases: cut, slash, slice
 		Function: 
-	- ???
-		Aliases: 
+	- use
+		Aliases: interact, use
 		Function: 
 	- ???
 		Aliases: 
@@ -58,7 +58,7 @@ Required Verbs:
 		Aliases: climb, go, run, walk
 		Function: Allows traversal to another adjoining room.
 	- take
-		Aliases: collect, grab, interact, pick up, take
+		Aliases: collect, get, grab, pick up, take
 		Function: Acquire an object, storing it in the inventory.
 	- help
 		Aliases: help

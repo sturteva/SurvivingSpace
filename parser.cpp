@@ -137,6 +137,7 @@ vector<string> parseString()
 	bool bagFlag = false;
 	bool lookFlag = false;
 	bool formatFlag = false;
+	bool doneFlag = false;
 
 	
 	//run a while loop while foundFlag is false
@@ -235,6 +236,7 @@ vector<string> parseString()
 				command.push_back("inventory");
 				foundFlag = true;
 				bagFlag = false;
+				doneFlag = true;
 			}
 		
 			if (!foundFlag && lookFlag)
@@ -243,9 +245,16 @@ vector<string> parseString()
 				command.push_back("look");
 				foundFlag = true;
 				lookFlag = false;
+				doneFlag = true;
+			}
+			
+			//if it's a command that doesn't require a noun or room, we should ignore it because we're already done.
+			if (command[0] == "look" || command[0] == "exit" || command[0] == "help" || command[0] == "inventory" || command[0] == "hint" || command[0] == "savegame" || command[0] == "loadgame")
+			{
+				doneFlag = true;
 			}
 	
-			//if foundFlag is still false at this point or if the command is "go", check for a direction or a room; return an error if not found
+			//if foundFlag is still false at this point or if the command is "go", check for a direction or a room; return an error if not found; doneFlag not necessary here
 			if (!foundFlag || (foundFlag && command[0] == "go"))
 			{
 				for (std::map<string,string>::iterator itr = roomDict.begin(); itr != roomDict.end();)
@@ -270,6 +279,7 @@ vector<string> parseString()
 						//set iterator to the end
 						itr = roomDict.end();
 						foundFlag = true;
+						doneFlag = true;
 					}
 					else
 					{
@@ -289,49 +299,84 @@ vector<string> parseString()
 				}
 			}
 			
-			//code for "look at" goes here
-			
-			
 			
 			//code for "use" goes here
+			if (foundFlag && !doneFlag && (command[0] == "use" || command[0] == "put" || command[0] == "crush" || command[0] == "combine" || command[0] == "cut"))
+			{
+				/***************
+				*Debug Command
+				***************/
+				//cout << "DEBUG (multiple objects): " << itr->first << " | " << itr->second << endl;
+				cout << "Hello! You made it inside the function to interact with multiple objects, which is not currently implemented." << endl;
+				
+				doneFlag = true;
+				
+			}
 			
+			
+			//code for "look at" goes here; doneFlag not necessary here
+			if (foundFlag && command[0] == "look at")
+			{
+				for (std::map<string,string>::iterator itr = roomDict.begin(); itr != roomDict.end();)
+				{
+					string tempString = itr->first;
+				
+					/***************
+					*Debug Command
+					***************/
+					//cout << "DEBUG (look at): " << itr->first << " | " << itr->second << endl;
+				
+					size_t found = input.find(tempString);
+			
+					if (found != npos && tempString != "look at")
+					{
+						command.push_back(itr->second);
+						//set iterator to the end
+						itr = roomDict.end();
+						foundFlag = true;
+						doneFlag = true;
+					}
+					else
+					{
+						++itr;
+					}
+				}
+				//if we got to here, then "look at" is at an object, not a room destination, so it will proceed with the next patch of code
+			}
+		
 		
 			//if foundFlag is true at this point, check for dictionary terms
-	
-			if (foundFlag && command[0] != "go")
+			if (foundFlag && !doneFlag)
 			{
-				if (command[0] != "look" && command[0] != "exit" && command[0] != "help" && command[0] != "inventory" && command[0] != "hint" && command[0] != "savegame" && command[0] != "loadgame")
+				for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
 				{
-					for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
-					{
-						string tempString = itr->first;
+					string tempString = itr->first;
 				
-						/***************
-						*Debug Command
-						***************/
-						//cout << "DEBUG (not moving): " << itr->first << " | " << itr->second << endl;
+					/***************
+					*Debug Command
+					***************/
+					//cout << "DEBUG (not moving): " << itr->first << " | " << itr->second << endl;
 				
-						size_t found = input.find(tempString);
+					size_t found = input.find(tempString);
 			
-						if (found != npos)
-						{
-							//push back the value for the found key
-							command.push_back(itr->second);
-							//set iterator to the end
-							itr = nounDict.end();
-							foundFlag = true;
-						}
-						else
-						{
-							++itr;
-						}
-					}
-					if (command.size() != 2)
+					if (found != npos)
 					{
-						command.pop_back();
-						foundFlag = false;
-						cout << "The provided noun was not understood." << endl;
+						//push back the value for the found key
+						command.push_back(itr->second);
+						//set iterator to the end
+						itr = nounDict.end();
+						foundFlag = true;
 					}
+					else
+					{
+						++itr;
+					}
+				}
+				if (command.size() != 2)
+				{
+					command.pop_back();
+					foundFlag = false;
+					cout << "The provided noun was not understood." << endl;
 				}
 			}
 		}

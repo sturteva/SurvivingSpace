@@ -4,12 +4,11 @@ run|go
 walk|go
 take|take
 collect|take
+get|take
 grab|take
-interact|take
 pick up|take
 put|put
 set|put
-use|put
 place|put
 drop|drop
 remove|drop
@@ -27,11 +26,15 @@ crouch|sneak
 crush|crush
 smash|crush
 break|crush
-mix|mix
-stir|mix
+combine|combine
+mix|combine
+stir|combine
+merge|combine
 cut|cut
 slash|cut
 slice|cut
+interact|use
+use|use
 exit|exit
 quit|exit
 hint|hint
