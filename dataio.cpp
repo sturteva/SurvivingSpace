@@ -59,7 +59,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 
       if((size_t)fileNames.at(i).find(".roomdat") != std::string::npos){
             bool adj = false;
-            
+
             room* newRoom;
 
 		//build full filename
@@ -80,7 +80,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 
 
 
-			
+
                      size_t pos;
 
                     //Adds Name to the room
@@ -100,7 +100,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                         for(int k = 0; k < (int)roomVec.size(); ++k){
                             if(roomVec.at(k)->getName().compare(line) == 0){
                                 adj = true;
-                                
+
                                 newRoom = roomVec.at(k);
                             }
                         }
@@ -123,13 +123,13 @@ vector<room*> dataIO::roomIO(string direct_name){
                         pos = line.find("</FD>");
                         line.erase(pos,5);
 
-                        
+
                         //Gives the new room its long description
                         newRoom->setFD(line);
 
 			}
-                      
-                    
+
+
 
                      //Adds Short Description to the room
                     else if(line.find("<SD>")!= std::string::npos){
@@ -144,7 +144,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 
                         //Gives the new room its long description
                         newRoom->setSD(line);
-                        
+
                     }
 
                     //Adds Interactable to room
@@ -159,7 +159,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                         pos = line.find("</I>");
                         line.erase(pos,4);
 
-                        
+
                         //Gives the new room its long description
                         newRoom->addInteractable(line);
                     }
@@ -174,25 +174,25 @@ vector<room*> dataIO::roomIO(string direct_name){
                         line.erase(pos,3);
                         pos = line.find("</C>");
                         line.erase(pos,4);
-			
+
 			bool foundAdj = false;
                         for(int k = 0; k < (int)roomVec.size(); ++k){
 
-				
-				
+
+
                             if(roomVec.at(k)->getName() == line){
-                                 
-                                
+
+
                                 newRoom->addAdjacent(roomVec.at(k));
 				foundAdj = true;
 				break;
-                                        
+
                             }
                        }
 
 			if(!foundAdj){
 
-				 
+
 				room* newAdj = new room(line);
 				newRoom->addAdjacent(newAdj);
 				newAdj->addAdjacent(newRoom);
@@ -208,12 +208,12 @@ vector<room*> dataIO::roomIO(string direct_name){
 		//Mostly for Saved Games...if the room has been visited before
 		else if(line.find("<V>") != std::string::npos){
 			newRoom->visitRoom();
-			
-		}
-                
 
-                
-                
+		}
+
+
+
+
 
 
             }//END of WHILE loop
@@ -277,29 +277,29 @@ void dataIO::saveGame(game saveGame){
         string filePath = folderName + "/" + roomName + ".roomdat";
 
         ofstream roomFile(filePath.c_str());
-	
+
 	//Now that we have a file with the right now, we need to input data in the correct format!
         roomFile << "<Name>" << theRooms.at(i)->getName() << "</Name>" << endl;
         roomFile << "<FD>" << theRooms.at(i)->getFullDesc() << "</FD>" << endl;
         roomFile << "<SD>" << theRooms.at(i)->getShortDesc() << "</SD>" << endl;
 
-	
+
         vector<string> interactables = theRooms.at(i)->getInteractables();
         //Grabs each interactable in the room
         for(int k = 0; k < (int)interactables.size(); ++k){
             roomFile << "<I>" << interactables.at(k) << "</I>" << endl;
         }
-	
+
         vector<room*> adjacent = theRooms.at(i)->getAdjacent();
         for(int k = 0; k < (int)adjacent.size(); ++k){
-            roomFile << "<A>" << adjacent.at(k)->getName() << "</A>" << endl;
+            roomFile << "<C>" << adjacent.at(k)->getName() << "</C>" << endl;
         }
-	
+
 	//Check if room has been visited
 	if(theRooms.at(i)->getVisited()){
 	    roomFile << "<V>" << endl;
 	}
-	
+
         roomFile.close();
 
     }
@@ -310,7 +310,7 @@ void dataIO::saveGame(game saveGame){
     string playerPath = folderName + "/player.playerdat";
     ofstream playerFile(playerPath.c_str());
     playerFile << "<L>" << thePlayer->getLocation()->getName() << "</L>" << endl;
-    
+
     vector<string> inventory = thePlayer->getInventory();
 
    for(int i = 0; i < (int)inventory.size(); ++i){
@@ -334,13 +334,13 @@ game dataIO::loadGame(string folderName){
     newGame.setRooms(loadedRooms);
     vector<string> fileNames;
     player* player1 = new player();
-    //Need to set the player stuff	
+    //Need to set the player stuff
     //first we need to open the directory that our Player data files are in.
     dir = opendir(folderName.c_str());
     if(!dir){
       cout << "Directory Not Found, Error\n" << endl;
     }
-    
+
 	//read all file names in the given directory
      while((entry = readdir(dir)) != NULL){
       if(entry->d_name[0] != '.'){
@@ -350,7 +350,7 @@ game dataIO::loadGame(string folderName){
                                                                                      }
      //After that, we go through all of the vector, and process any with file extension *.playerdat
       for(int i = 0; i < (int)fileNames.size(); ++i){
-     
+
      	if((size_t)fileNames.at(i).find(".playerdat") != std::string::npos){
 
 		//build file name
@@ -371,11 +371,11 @@ game dataIO::loadGame(string folderName){
 				line.erase(pos,3);
 				pos = line.find("</L>");
 				line.erase(pos,4);
-				
+
 				room* currentRoom = NULL;
 				//check the room vector for the room
 				for(int k = 0; k < (int)loadedRooms.size(); ++k){
-					
+
 					if(loadedRooms.at(i)->getName().compare(line) == 0){
 						currentRoom = loadedRooms.at(i);
 						break;
@@ -401,7 +401,7 @@ game dataIO::loadGame(string folderName){
 		}
 	}
      }
-    newGame.setPlayers(player1);     
+    newGame.setPlayers(player1);
 
     return newGame;
 
