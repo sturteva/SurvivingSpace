@@ -19,12 +19,10 @@ int main()
 	// Variable Declaration
 	int playerChoice;
     game gameState;
-
-    // initialize gameState
-    gameState.initializeRooms();
-
-    // initilize dictionary for parser
-    gameState.initializeDict();
+    string folder;
+    
+	// initilize dictionary for parser
+	gameState.initializeDict();
 
 
     // DEBUG Room Vector
@@ -67,6 +65,9 @@ int main()
 	switch (playerChoice)
 	{
 		case 1:
+			// initialize gameState
+    		gameState.initializeRooms();
+
 			// clear the screen
 			system("clear");
 
@@ -100,7 +101,17 @@ int main()
 		
 		case 2:
 			//load game
-			cout << "Loading exisiting game state..." << endl;
+			
+
+			cout << "Enter name of folder that contains gamestate files: ";
+			cin >> folder;
+
+			gameState.loadGameFromFolder(folder);
+			cout << "Loading gamestate from files..." << endl;
+
+			// start game loop
+			gameState.start();
+
 
 			break;
 

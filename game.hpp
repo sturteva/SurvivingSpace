@@ -27,6 +27,7 @@ class game
 		game();
 		void initializeRooms();
 		void initializeDict();
+		void loadGameFromFolder(string);
 	    void start();
 	    void doCommand(vector<string>);
 	    void helpCommand(vector<string>);

@@ -69,6 +69,16 @@ void game::initializeDict()
 	//cout << "Initilizing parser dictionary..." << endl;
 }
 
+/*******************************************************************************
+** Function: loadGameFromFile()
+** Description: loads a gamestate from a file.
+** Parameters: None
+** Returns: None
+*******************************************************************************/
+void game::loadGameFromFolder(string folderName)
+{
+	ourData.loadGame(folderName);
+}
 
 /******************************************************************************
 ** Function: start()
@@ -81,7 +91,10 @@ void game::start()
     //GameStatus status;
 	vector<string> command;
     //string input;
-    //room * currRoom;
+
+    room * currRoom;
+    currRoom = player1->getLocation();
+    currRoom->printDescription();
 
 	do
 	{
@@ -615,7 +628,7 @@ void game::takeCommand(vector<string> command)
 			player1->addToInventory("Rock with Sword Symbol");
 			currRoom->addInteractable("Grazing Animal");
 		}
-		else if (sneakFlag == flase)
+		else if (sneakFlag == false)
 		{
 			cout << "You are too far away to reach the rock... Try moving closer." << endl;
 		}
