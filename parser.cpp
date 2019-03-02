@@ -253,7 +253,7 @@ vector<string> parseString()
 			}
 			
 			//if it's a command that doesn't require a noun or room, we should ignore it because we're already done.
-			if (command[0] == "look" || command[0] == "exit" || command[0] == "help" || command[0] == "inventory" || command[0] == "hint" || command[0] == "savegame" || command[0] == "loadgame")
+			if (foundFlag && (command[0] == "look" || command[0] == "exit" || command[0] == "help" || command[0] == "inventory" || command[0] == "hint" || command[0] == "savegame" || command[0] == "loadgame"))
 			{
 				doneFlag = true;
 			}
