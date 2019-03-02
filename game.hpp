@@ -21,29 +21,31 @@ class game
     	vector<room*> rooms;
     	dataIO ourData;
     	int numPlayers;
+    	bool sneakFlag;
 
 	public:
 		game();
 		void initializeRooms();
 		void initializeDict();
-	    	void start();
-	    	void doCommand(vector<string>);
-	    	void helpCommand(vector<string>);
-	    	void saveCommand(vector<string>);
-	    	void goCommand(vector<string>);
-	    	void lookCommand(vector<string>);
-	    	void lookAtCommand(vector<string>);
-	    	void inventoryCommand(vector<string>);
-	    	void takeCommand(vector<string>);
-	    	void cutCommand(vector<string>);
-	    	void moveTowardCommand(vector<string>);
-	    	void sneakCommand(vector<string>);
-	    	vector<room*> getRooms();
-	    	player* getPlayer1();
-	    	int getNumPlayers();
-	    	void setRooms(vector<room*>);
-		void setPlayers(player* p);
-	    	
+	    void start();
+	    void doCommand(vector<string>);
+	    void helpCommand(vector<string>);
+	    void saveCommand(vector<string>);
+	    void goCommand(vector<string>);
+	    void lookCommand(vector<string>);
+	    void lookAtCommand(vector<string>);
+	    void inventoryCommand(vector<string>);
+	    void takeCommand(vector<string>);
+	    void cutCommand(vector<string>);
+	    void moveTowardCommand(vector<string>);
+	    void sneakCommand(vector<string>);
+	    void putCommand(vector<string>);
+	    void crushCommand(vector<string>);
+	    vector<room*> getRooms();
+	    player* getPlayer1();
+	    int getNumPlayers();
+	    void setRooms(vector<room*>);
+	    void setPlayers(player* p);
 
 };
 
