@@ -26,6 +26,7 @@ class player
         vector<room*> getAdjacentRooms();
         vector<string> getRoomItems();
         void addToInventory(string);
+        void removeFromInventory(string);
         vector<string> getInventory();
 
 

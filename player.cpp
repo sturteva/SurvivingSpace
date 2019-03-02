@@ -8,6 +8,7 @@
 #include <iostream>
 
 using std::vector;
+using std::find;
 
 /*********************************************************
 ** Function: player()
@@ -74,6 +75,21 @@ void player::addToInventory(string item)
 	playerInventory.push_back(item);
 }
 
+/********************************************************
+ ** Function: addInventory()
+ ** Description: adds item to player inventory
+ ** Parameters: Item to be added
+ ** Returns: None
+ ********************************************************/
+void player::removeFromInventory(string item)
+{
+	/*
+	if (find(playerInventory.begin(), playerInventory.end(), item) != playerInventory.end())
+	{
+		playerInventory.erase(find(playerInventory.begin(), playerInventory.end(), item));
+	}
+	*/
+}
 /********************************************************
  ** Function: getInvnetory()
  ** Description: gets player inventory

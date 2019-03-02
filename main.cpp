@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "game.hpp"
 #include "room.hpp"
+#include "dataio.hpp"
 
 
 using std::string;
@@ -20,6 +21,7 @@ int main()
 	int playerChoice;
     game gameState;
     string folder;
+    dataIO data;
     
 	// initilize dictionary for parser
 	gameState.initializeDict();
@@ -84,8 +86,8 @@ int main()
 				 << "checking this planet out for rare minerals and to see if there was any intelligent life inhabiting the planet." << endl << endl
 				 << "You aren’t exactly sure what happened, but something down on this planet shot at your ship, " << endl
 				 << "forcing you to run to your escape pod..." << endl << endl
-				 << "You find yourself at the base of a large tree, no esacpe pod in sight. " << endl
-				 << "There is an animal path leading in two different directions, but the paths are completly blocked by a large thicket of bushes...."
+				 //<< "You find yourself at the base of a large tree, no esacpe pod in sight. " << endl
+				 //<< "There is an animal path leading in two different directions, but the paths are completly blocked by a large thicket of bushes...."
 				 << endl << endl;
 
 
@@ -106,7 +108,7 @@ int main()
 			cout << "Enter name of folder that contains gamestate files: ";
 			cin >> folder;
 
-			gameState.loadGameFromFolder(folder);
+			gameState = data.loadGame(folder);
 			cout << "Loading gamestate from files..." << endl;
 
 			// start game loop

@@ -185,6 +185,10 @@ void game::doCommand(vector<string> command)
 	{
 		crushCommand(command);
 	}
+	else if (command[0] == "combine")
+	{
+		combineCommand(command);
+	}
 	else if (command[0] == "exit")
 	{
 
@@ -662,7 +666,7 @@ void game::takeCommand(vector<string> command)
 
 	}
 	// take red rock
-	else if(currRoom->getName() == "Field with Grazing Animals" && command[1] == "Red Ochre")
+	else if(currRoom->getName() == "Field with Grazing Animals" && command[1] == "Red Ochre rock")
 	{
 		cout << "You pick up a soft red rock and put it in your bag." << endl;
 	}
@@ -683,9 +687,17 @@ void game::takeCommand(vector<string> command)
 	// take vines
 	else if (currRoom->getName() == "Top of Tree" && command[1] == "leafs filled branch")
 	{
-		cout << "You snap a long branch off of the tree and put it in your bag." << endl;
-		player1->addToInventory("leafs filled branch");
-		currRoom->removeInteractable("leafs filled branch");
+		if (find(currInventory.begin(), currInventory.end(), "Bag with Strange Runes") != currInventory.end())
+
+		{
+			cout << "You snap a long branch off of the tree and put it in your bag." << endl;
+			player1->addToInventory("leafs filled branch");
+			currRoom->removeInteractable("leafs filled branch");
+		}
+		else
+		{
+			cout << "You cant carry that branch and climb back down the tree! Maybe that strange bag would help." << endl;
+		}
 	}
 	
 }
@@ -795,7 +807,26 @@ void game::putCommand(vector<string> command)
 *******************************************************************************/
 void game::crushCommand(vector<string> command)
 {
- 
+	//room * currRoom = player1->getLocation();
+	vector<string> currInventory = player1->getInventory();
+
+	if(command[1] == "Red Ochre" && find(currInventory.begin(), currInventory.end(), "Red Ochre") != currInventory.end())
+	{
+		cout << "The Red Ochre rock is crushed down into a fine powder." << endl;
+		player1->removeFromInventory("Red Ochre");
+		player1->addToInventory("Crushed Red Ochre");
+	}
+}
+
+/******************************************************************************
+** Function: combineCommand()
+** Description: processes the combine command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::combineCommand(vector<string> command)
+{
+	
 }
 
 /******************************************************************************

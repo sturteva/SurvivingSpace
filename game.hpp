@@ -42,6 +42,7 @@ class game
 	    void sneakCommand(vector<string>);
 	    void putCommand(vector<string>);
 	    void crushCommand(vector<string>);
+	    void combineCommand(vector<string>);
 	    vector<room*> getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();
