@@ -177,6 +177,10 @@ void game::doCommand(vector<string> command)
 	{
 		putCommand(command);
 	}
+	else if (command[0] == "drop")
+	{
+		dropCommand(command);
+	}
 	else if (command[0] == "crush")
 	{
 		crushCommand(command);
@@ -404,6 +408,10 @@ void game::lookCommand(vector<string> command)
 		{
 			cout << "There is a strange bag with runes sewn on it hanging from one of the tree branches." << endl
 			 	 << "The runes look just like the ones on the knife down below." << endl; 
+		}
+		if (find(roomItems.begin(), roomItems.end(), "leafs filled branch") != roomItems.end())
+		{
+			cout << "There is a large tree branch that would make a great pole." << endl; 
 		}
 	}
 
@@ -817,7 +825,57 @@ void game::sneakCommand(vector<string> command)
 *******************************************************************************/
 void game::putCommand(vector<string> command)
 {
+	room * currRoom = player1->getLocation();
+	if(currRoom->getName() == "Pool of Water")
+	{
+		if (find(command.begin(), command.end(), "Makshift Fishing Pole") != command.end())
+		{
+			if(find(command.begin(), command.end(), "Water Bottle") != command.end())
+			{
+				cout << "You put the fishing pole in the water..." << endl
+					 << "After a few minutes you feel a bite. You pull a large fish out of the water!" << endl
+					 << "I bet this could distract the predator!" << endl
+					 << "You put the fish in your bag" << endl;
+				player1->addToInventory("Fish");
+			}
+		}
+	}
+}
 
+/******************************************************************************
+** Function: dropCommand()
+** Description: processes the drop command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::dropCommand(vector<string> command)
+{
+	room * currRoom = player1->getLocation();
+	vector<string> currInventory = player1->getInventory();
+	if(command[1] == "Fish")
+	{
+		if (find(currInventory.begin(), currInventory.end(), "Fish") != currInventory.end())
+		{
+			cout << "You drop the fish on the ground" << endl;
+			if(currRoom->getName() == "Predator Den")
+			{
+				cout << "The predator gets distracted and begins eatting the fish." << endl
+					 << "He gets distracted and forgets about the strange stone in his den." << endl
+					 << "I could probably grab it while he is eating." << endl;
+				predatorCounter = -1;
+			}
+			else
+			{
+				cout << "You drop the fish on the ground." << endl;
+				player1->removeFromInventory("Fish");
+				currRoom->addInteractable("Fish");
+			}
+		}
+		else
+		{
+			cout << "You do not have a fish in your inventory..." << endl;
+		}
+	}
 }
 
 /******************************************************************************
@@ -848,6 +906,8 @@ void game::crushCommand(vector<string> command)
 void game::combineCommand(vector<string> command)
 {
 	vector<string> currInventory = player1->getInventory();
+
+	// combine water and red ochre to make paint
 	if(find(command.begin(), command.end(), "Water Bottle") != command.end()) 
 	{
 		if(find(command.begin(), command.end(), "Red Ochre rock") != command.end())
@@ -857,6 +917,8 @@ void game::combineCommand(vector<string> command)
 				if(find(currInventory.begin(), currInventory.end(), "Water Bottle") != currInventory.end())
 				{
 					cout << "You put some of the crushed Red Ochre into the water bottle and shake it up to create a red/brown paint";
+					player1->removeFromInventory("Crushed Red Ochre");
+					player1->removeFromInventory("Water Bottle");
 					player1->addToInventory("Red/Brown Paint");
 				}
 				else
@@ -870,7 +932,40 @@ void game::combineCommand(vector<string> command)
 			}
 		}
 	}
+
+	// make fishing pole
+	if(find(command.begin(), command.end(), "leafs filled branch") != command.end() && find(command.begin(), command.end(), "string-like vines") != command.end() && find(command.begin(), command.end(), "Aluminum Hook") != command.end() && find(currInventory.begin(), currInventory.end(), "Aluminum Hook") != currInventory.end())
+	{
+		if(find(currInventory.begin(), currInventory.end(), "leafs filled branch") != command.end())
+		{
+			if( find(currInventory.begin(), currInventory.end(), "string-like vines") != currInventory.end()) 
+			{
+				if(find(command.begin(), command.end(), "Aluminum Hook") != command.end() && find(currInventory.begin(), currInventory.end(), "Aluminum Hook") != currInventory.end()) 
+				{
+					cout << "You combine the branch, string-like vines and hook to create a makeshift fishing pole." << endl;
+					player1->removeFromInventory("leafs filled branch");
+					player1->removeFromInventory("string-like vines");
+					player1->removeFromInventory("Aluminum Hook");
+					player1->addToInventory("Makeshift Fishing Pole");
+				}
+				else
+				{
+					cout << "You do not have the aluminum hook in your inventory." << endl;
+				}
+			}
+			else 
+			{
+				cout << "You do not have the string-like vines in your inventory." << endl;
+			}
+		}
+		else
+		{
+			cout << "You do not have the branch in your inventory." << endl;
+		}
+	}
+		
 }
+
 
 /******************************************************************************
 ** Function: getRooms()

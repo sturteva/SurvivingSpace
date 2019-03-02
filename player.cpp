@@ -6,8 +6,10 @@
 #include "room.hpp"
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 using std::vector;
+using std::iterator;
 using std::find;
 
 /*********************************************************
@@ -83,12 +85,10 @@ void player::addToInventory(string item)
  ********************************************************/
 void player::removeFromInventory(string item)
 {
-	/*
-	if (find(playerInventory.begin(), playerInventory.end(), item) != playerInventory.end())
-	{
-		playerInventory.erase(find(playerInventory.begin(), playerInventory.end(), item));
-	}
-	*/
+	vector<string>::iterator i = find(playerInventory.begin(), playerInventory.end(), item);
+    
+    // Found the item
+    playerInventory.erase(i);
 }
 /********************************************************
  ** Function: getInvnetory()
