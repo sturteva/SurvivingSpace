@@ -326,16 +326,17 @@ void dataIO::saveGame(game saveGame){
 ** Description: Loads game state from existing save folder
 ** Parameters: name of save folder
 *******************************************************************************/
-game dataIO::loadGame(string folderName){
+void dataIO::loadGame(string folderName,game* newGame){
 
     //Here is where we will create a new Gamesate, first pulling the room data
-    game newGame;
+    
     vector<room*> loadedRooms = roomIO(folderName.c_str());
-    newGame.setRooms(loadedRooms);
+    newGame->setRooms(loadedRooms);
     vector<string> fileNames;
     player* player1 = new player();
     //Need to set the player stuff
     //first we need to open the directory that our Player data files are in.
+
     dir = opendir(folderName.c_str());
     if(!dir){
       cout << "Directory Not Found, Error\n" << endl;
@@ -347,8 +348,10 @@ game dataIO::loadGame(string folderName){
          string name = string(entry->d_name);
           fileNames.push_back(name);
       }
-                                                                                     }
+ 
+    }
      //After that, we go through all of the vector, and process any with file extension *.playerdat
+
       for(int i = 0; i < (int)fileNames.size(); ++i){
 
      	if((size_t)fileNames.at(i).find(".playerdat") != std::string::npos){
@@ -366,18 +369,19 @@ game dataIO::loadGame(string folderName){
 
 			//Finding location and setting it
 			if(line.find("<L>") != std::string::npos){
-
+			
 				pos = line.find("<L>");
 				line.erase(pos,3);
 				pos = line.find("</L>");
 				line.erase(pos,4);
-
-				room* currentRoom = NULL;
+			
+				room* currentRoom;
 				//check the room vector for the room
 				for(int k = 0; k < (int)loadedRooms.size(); ++k){
-
-					if(loadedRooms.at(i)->getName().compare(line) == 0){
-						currentRoom = loadedRooms.at(i);
+					
+					if(loadedRooms.at(k)->getName().compare(line) == 0){
+						
+						currentRoom = loadedRooms.at(k);
 						break;
 					}
 				}
@@ -386,8 +390,9 @@ game dataIO::loadGame(string folderName){
 					cout << "Player's Room not Found" << endl;
 				}
 
-				else
-					player1->setLocation(currentRoom);
+				else{
+			
+					player1->setLocation(currentRoom);}
 			}
 
 				if(line.find("<I>") != std::string::npos){
@@ -401,9 +406,14 @@ game dataIO::loadGame(string folderName){
 		}
 	}
      }
-    newGame.setPlayers(player1);
+    newGame->setPlayers(player1);
 
-    return newGame;
+/*    cout << newGame->getPlayer1()->getLocation()->getName() << endl;
+
+    for(int j = 0; j < (int)newGame->getPlayer1()->getInventory().size(); ++j){
+	cout << newGame->getPlayer1()->getInventory().at(j) << endl;
+	}*/
+
 
 }
 

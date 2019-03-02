@@ -29,7 +29,7 @@ class dataIO{
     public:
         vector<room*> roomIO(string); // Will return a vector full of newly created rooms from our data files.
         void saveGame(game);
-        game loadGame(string);
+        void loadGame(string,game*);
         void cleanUp();
 
 };

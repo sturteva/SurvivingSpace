@@ -69,17 +69,10 @@ void game::initializeDict()
 	//cout << "Initilizing parser dictionary..." << endl;
 }
 
-/*******************************************************************************
-** Function: loadGameFromFile()
-** Description: loads a gamestate from a file.
-** Parameters: None
-** Returns: None
-*******************************************************************************/
-void game::loadGameFromFolder(string folderName)
+void game::loadGameFromFolder(string folder)
 {
-	ourData.loadGame(folderName);
+	ourData.loadGame(folder,this);
 }
-
 /******************************************************************************
 ** Function: start()
 ** Description: Starts the game loop
@@ -91,25 +84,26 @@ void game::start()
     //GameStatus status;
 	vector<string> command;
     //string input;
-
+    cout << "test 1" << endl;
     room * currRoom;
     currRoom = player1->getLocation();
     currRoom->printDescription();
-
+	cout << "test 2" << endl;
 	do
 	{
+		cout << "test 3" << endl;
 		// ask for player input and parse command
 		command = parseString();
-		
+		cout << "test 4" << endl;	
 		//DEBUG
-		/*
+		
 		cout << "\nParsed Command: ";
 		for (int count = 0; count < (int)command.size(); count++)
 		{
 			cout << command[count] << " ";
 		}
-		cout << endl << endl;
-		*/
+	cout << endl << endl;
+		
 
 		cout << endl;
 
