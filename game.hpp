@@ -21,6 +21,7 @@ class game
     	vector<room*> rooms;
     	dataIO ourData;
     	int numPlayers;
+    	int predatorCounter;
     	bool sneakFlag;
 
 	public:

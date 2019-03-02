@@ -11,7 +11,9 @@ leaf filled branch|leafs filled branch
 leafs|leafs filled branch
 branch|leafs filled branch
 fish|Fish
-water|Water
+water bottle|Water Bottle
+bottle|Water Bottle
+water|Water bottle
 grazing animal with a strange rock on its back|Grazing Animal with a strange rock on its back
 grazing animal with a strange rock|Grazing Animal with a strange rock on its back
 grazing animal with strange rock on back|Grazing Animal with a strange rock on its back
@@ -20,7 +22,7 @@ grazing animal|Grazing Animal with a strange rock on its back
 red ochre rock|Red Ochre rock
 red rock|Red Ochre rock
 predator|Predator
-rock|rock
+stone|stone
 rock with spiral symbol|Rock with Spiral Symbol
 rock with spiral|Rock with Spiral Symbol
 spiral rock|Rock with Spiral Symbol

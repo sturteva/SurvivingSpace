@@ -108,7 +108,7 @@ int main()
 			cout << "Enter name of folder that contains gamestate files: ";
 			cin >> folder;
 
-			gameState = data.loadGame(folder);
+			gameState.loadGameFromFolder(folder);
 			cout << "Loading gamestate from files..." << endl;
 
 			// start game loop
