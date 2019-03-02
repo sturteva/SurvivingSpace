@@ -21,6 +21,7 @@ class game
     	vector<room*> rooms;
     	dataIO ourData;
     	int numPlayers;
+    	bool sneakFlag;
 
 	public:
 		game();
@@ -38,6 +39,8 @@ class game
 	    void cutCommand(vector<string>);
 	    void moveTowardCommand(vector<string>);
 	    void sneakCommand(vector<string>);
+	    void putCommand(vector<string>);
+	    void crushCommand(vector<string>);
 	    vector<room*> getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();
