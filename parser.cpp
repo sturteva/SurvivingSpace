@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <cctype>
 #include <map>
+#include <boost/regex.hpp>
 #include <typeinfo> //for debugging
 
 using std::cin;
@@ -28,6 +29,10 @@ using std::streamsize;
 using std::isalpha;
 using std::isspace;
 using std::tolower;
+
+using boost::regex;
+using boost::smatch;
+using boost::regex_search;
 
 using std::ifstream;
 
@@ -328,9 +333,10 @@ vector<string> parseString()
 							***************/
 							//cout << "DEBUG (combine): " << itr->first << " | " << itr->second << endl;
 					
-							size_t found = input.find(tempString);
+							regex regexString("\\b" + tempString + "\\b");
+							smatch matchString;
 							
-							if (found != npos)
+							if (regex_search(input, matchString, regexString))
 							{
 								if (command.size() == 1)
 								{
@@ -453,9 +459,10 @@ vector<string> parseString()
 								***************/
 								//cout << "DEBUG (use pt1): " << itr->first << " | " << itr->second << endl;
 								string subinput = input.substr(0, input.find(prep));
-								size_t found = subinput.find(tempString);
+								regex regexString("\\b" + tempString + "\\b");
+								smatch matchString;
 			
-								if (found != npos)
+								if (regex_search(input, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -472,9 +479,10 @@ vector<string> parseString()
 								string tempString = itr->first;
 								//cout << "DEBUG (use pt2): " << itr->first << " | " << itr->second << endl;
 								string subinput = input.substr(input.find(prep));
-								size_t found = subinput.find(tempString);
+								regex regexString("\\b" + tempString + "\\b");
+								smatch matchString;
 							
-								if (found != npos)
+								if (regex_search(input, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -527,9 +535,10 @@ vector<string> parseString()
 								***************/
 								//cout << "DEBUG (cut pt1): " << itr->first << " | " << itr->second << endl;
 								string subinput = input.substr(0, input.find(prep));
-								size_t found = subinput.find(tempString);
+								regex regexString("\\b" + tempString + "\\b");
+								smatch matchString;
 			
-								if (found != npos)
+								if (regex_search(input, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -545,9 +554,10 @@ vector<string> parseString()
 								string tempString = itr->first;
 								//cout << "DEBUG (cut pt2): " << itr->first << " | " << itr->second << endl;
 								string subinput = input.substr(input.find(prep));
-								size_t found = subinput.find(tempString);
+								regex regexString("\\b" + tempString + "\\b");
+								smatch matchString;
 						
-								if (found != npos)
+								if (regex_search(input, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -594,9 +604,11 @@ vector<string> parseString()
 								***************/
 								//cout << "DEBUG (cut pt1): " << itr->first << " | " << itr->second << endl;
 								string subinput = input.substr(0, input.find("with"));
-								size_t found = subinput.find(tempString);
+								
+								regex regexString("\\b" + subinput + "\\b");
+								smatch matchString;
 			
-								if (found != npos)
+								if (regex_search(input, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -612,9 +624,10 @@ vector<string> parseString()
 								string tempString = itr->first;
 								//cout << "DEBUG (cut pt2): " << itr->first << " | " << itr->second << endl;
 								string subinput = input.substr(input.find("with "));
-								size_t found = subinput.find(tempString);
+								regex regexString("\\b" + subinput + "\\b");
+								smatch matchString;
 							
-								if (found != npos)
+								if (regex_search(input, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -661,11 +674,13 @@ vector<string> parseString()
 					*Debug Command
 					***************/
 					//cout << "DEBUG (look at): " << itr->first << " | " << itr->second << endl;
-				
-					size_t found = input.find(tempString);
-			
-					if (found != npos && tempString != "look at")
+					
+					regex regexString("\\b" + tempString + "\\b");
+					smatch matchString;
+					
+					if (regex_search(input, matchString, regexString))
 					{
+						//cout << "DEBUG (look at regex): " << itr->first << " | " << itr->second << endl;
 						command.push_back(itr->second);
 						//set iterator to the end
 						itr = roomDict.end();
@@ -693,15 +708,17 @@ vector<string> parseString()
 					***************/
 					//cout << "DEBUG (not moving): " << itr->first << " | " << itr->second << endl;
 				
-					size_t found = input.find(tempString);
-			
-					if (found != npos)
+					regex regexString("\\b" + tempString + "\\b");
+					smatch matchString;
+					
+					if (regex_search(input, matchString, regexString))
 					{
-						//push back the value for the found key
+						//cout << "DEBUG (look at regex): " << itr->first << " | " << itr->second << endl;
 						command.push_back(itr->second);
 						//set iterator to the end
 						itr = nounDict.end();
 						foundFlag = true;
+						doneFlag = true;
 					}
 					else
 					{

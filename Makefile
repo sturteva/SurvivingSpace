@@ -1,4 +1,4 @@
-CFLAGS= -Wall -g -std=c++11 
+CFLAGS= -Wall -g -std=c++11 -lboost_regex
 
 survivingSpace: main.cpp game.o player.o room.o dataio.o inventory.o parser.o
 	g++ -o survivingSpace main.cpp game.o player.o room.o dataio.o inventory.o parser.o $(CFLAGS)
