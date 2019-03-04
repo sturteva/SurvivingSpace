@@ -19,6 +19,25 @@ using std::endl;
 using std::vector;
 using std::find;
 
+//the following are UBUNTU/LINUX, and MacOS ONLY terminal color codes.
+#define RESET   "\033[0m"
+#define BLACK   "\033[30m"      /* Black */
+#define RED     "\033[31m"      /* Red */
+#define GREEN   "\033[32m"      /* Green */
+#define YELLOW  "\033[33m"      /* Yellow */
+#define BLUE    "\033[34m"      /* Blue */
+#define MAGENTA "\033[35m"      /* Magenta */
+#define CYAN    "\033[36m"      /* Cyan */
+#define WHITE   "\033[37m"      /* White */
+#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
+#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
+#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
+#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
+#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
+#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
+#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
+#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
+
 /*******************************************************************************
 ** Function: game ()
 ** Description: constructor
@@ -220,7 +239,7 @@ void game::helpCommand(vector<string> command)
 		cout << "'climb treetop' will take you to the Top of Tree" << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
 			 << "'take knfe' attempt to put knife in player inventory" << endl
-			 << "'go pool of water' will go to thr large pool of water once thistle bushes have been cut" << endl
+			 << "'go pool of water' will go to the large pool of water once thistle bushes have been cut" << endl
 			 << "'go field' will go to the field with grazing animals once thistle bushes have been cut" << endl;
 	}
 	else if (currRoom->getName() == "Top of Tree")
@@ -332,7 +351,7 @@ void game::goCommand(vector<string> command)
 					}
 					else
 					{
-						cout << "Those thistles will tear me up. Maybe I could use the knife to chop down the bushes..." << endl;
+						cout << "Those thistles will tear me up. Maybe I could use the " << BOLDGREEN << "knife" << RESET << " to chop down the bushes..." << endl;
 					}
 				}
 				else if(command[1] == "Top of Tree")
