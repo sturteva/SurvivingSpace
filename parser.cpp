@@ -462,7 +462,7 @@ vector<string> parseString()
 								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 			
-								if (regex_search(input, matchString, regexString))
+								if (regex_search(subinput, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -482,7 +482,7 @@ vector<string> parseString()
 								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 							
-								if (regex_search(input, matchString, regexString))
+								if (regex_search(subinput, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -538,7 +538,7 @@ vector<string> parseString()
 								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 			
-								if (regex_search(input, matchString, regexString))
+								if (regex_search(subinput, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -557,7 +557,7 @@ vector<string> parseString()
 								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 						
-								if (regex_search(input, matchString, regexString))
+								if (regex_search(subinput, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -605,10 +605,10 @@ vector<string> parseString()
 								//cout << "DEBUG (cut pt1): " << itr->first << " | " << itr->second << endl;
 								string subinput = input.substr(0, input.find("with"));
 								
-								regex regexString("\\b" + subinput + "\\b");
+								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 			
-								if (regex_search(input, matchString, regexString))
+								if (regex_search(subinput, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
@@ -623,11 +623,11 @@ vector<string> parseString()
 							{
 								string tempString = itr->first;
 								//cout << "DEBUG (cut pt2): " << itr->first << " | " << itr->second << endl;
-								string subinput = input.substr(input.find("with "));
-								regex regexString("\\b" + subinput + "\\b");
+								string subinput = input.substr(input.find("with"));
+								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 							
-								if (regex_search(input, matchString, regexString))
+								if (regex_search(subinput, matchString, regexString))
 								{
 									command.push_back(itr->second);
 									//set iterator to the end
