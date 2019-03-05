@@ -246,35 +246,39 @@ void game::helpCommand(vector<string> command)
 	{
 		cout << "'climb treebase' will take back down the base of the tree" << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
-			 << "'take bag' puts bag in player inventory" << endl;
+			 << "'take bag' puts bag in player inventory" << endl
+			 << "'take branch' puts large branch in player inventory" << endl;
 	}
 	else if (currRoom->getName() == "Field with Grazing Animals")
 	{
 		cout << "'go ruins' will take you to the ruins in the distance" << endl
 			 << "'go cave' will take you to the cave further down the trail" << endl
-			 << "'go start' will take you back to the tree you woke up under." << endl
+			 << "'go treebase' will take you back to the tree you woke up under." << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
-			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange rock"
+			 << "'sneak up on grazing animal' will sneak up behind the animal to examine the strange stone"
+			 << "'take stone' will try to take the strange stone off the grazing animal" << endl
 			 << "'take red rock' will take the Red Ochre rock found on the ground" << endl;
 	}
 	else if (currRoom->getName() == "Pool of Water")
 	{
 		cout << "'go rock outcropping' will take you to the rock outcropping overlooking the water " << endl
+			 << "'go predator den' will take you to the rock outcropping overlooking the water " << endl
 			 << "'go cave' will take you to the cave in the distance" << endl
 			 << "'go start' will take you back to the tree you woke up under." << endl
 			 << "'look around' will describe the items that can be interacted with" << endl
-			 << "'take water' will take the water bottle found near the water" << endl;
+			 << "'take water bottle' will take the water bottle found near the water" << endl;
 	}
 	else if (currRoom->getName() == "Predator Den")
 	{
 		cout << "'go pool of water' will take you to the large pool of water" << endl
 			 << "'go cave' will take you to the cave in the distance" << endl
-			 << "'go start' will take you back to the tree you woke up under" << endl;
+			 << "'go start' will take you back to the tree you woke up under" << endl
+			 << "'take stone' will take the stone with strange symbol found in the rubble" << endl;
 	}
 	else if (currRoom->getName() == "Tech Ruin")
 	{
 		cout << "'go field' will go to the field with grazing animals" << endl
-			 << "'take rock with lightning symbol' will take the rock with strange symbol found in the rubble" << endl
+			 << "'take stone' will take the stone with strange symbol found in the rubble" << endl
 			 << "'take hook' will take the aluminium hook found in the rubble" << endl
 			 << "'look at old datapad' will examine the old datapad found in the street" << endl;
 	}
@@ -523,6 +527,7 @@ void game::lookCommand(vector<string> command)
 void game::lookAtCommand(vector<string> command)
 {
 	vector<string> roomItems = player1->getRoomItems();
+	room * currRoom = player1->getLocation();
 
 	if (command[1] == "Knife with Runes")
 	{ 
@@ -538,16 +543,16 @@ void game::lookAtCommand(vector<string> command)
 		cout << "It is a small bag with a clip that looks like its for your belt" << endl
 			 << "There are runes printed all over the outside of the bag. They appear to match the ones seen on the knife below." << endl;
 	}
-	else if (command[1] == "Grazing Animal with a strange rock on its back")
+	else if (command[1] == "Grazing Animal with a strange stone on its back")
 	{
 		if(find(roomItems.begin(), roomItems.end(), "Sneak up on Animal") != roomItems.end())
 		{
-			cout << "The rock is round, smooth and has a sword like symbol on it. I bet I could take it without the animal knowing." << endl;
+			cout << "The stone is round, smooth and has a sword like symbol on it. I bet I could take it without the animal knowing." << endl;
 		}
 		else
 		{
 			cout << "The animal is large, violet colored and roughly the size of horses from the planet Terra in the system of Sol." << endl
-				 << "You notice what looks like a small rock balanced on its back." << endl
+				 << "You notice what looks like a small round stone balanced on its back." << endl
 				 << "If I was a little closer, maybe I could see what type of rock it is." << endl;
 		}
 	}
@@ -560,9 +565,39 @@ void game::lookAtCommand(vector<string> command)
 	{
 		cout << "It is a small aluminum hook. It looks like it used to be used for fishing." << endl;
 	}
-	else if (command[1] == "Rock with Lightning Symbol")
+	else if (command[1] == "stone" && currRoom->getName == "Tech Ruin")
 	{
-		cout << "It is a small smooth rock with a lighning symbol in the middle." << endl;
+		cout << "It is a small smooth stone with a lighning symbol in the middle." << endl;
+	}
+	else if (command[1] == "stone" && currRoom->getName == "Field with Grazing Animals")
+	{
+		cout << "It is a small smooth stone with a sword symbol in the middle." << endl;
+	}
+	else if (command[1] == "stone" && currRoom->getName == "Predator Den")
+	{
+		if(predatorCounter == -1)
+		{
+			cout << "It is a small smooth stone with a spiral symbol in the middle." << endl;
+		}
+		else
+		{
+			predatorCounter++;
+			if(predatorCounter == 1)
+			{
+				cout << "The predator growls loudly. Maybe you can distract him with something." << endl;
+			}
+			else if (predatorCounter == 2)
+			{
+				cout << "The predator stands up and threatens you with his large teeth. Maybe a distraction could save you from getting eaten." << endl;
+			}
+			else if (predatorCounter >= 3)
+			{
+				cout << "The predator lunges at you with a bloodthirsty roar. You have been eaten by the predator...." << endl << endl
+					 << "GAME OVER!" << endl;
+				exit (0);
+			}
+		}
+
 	}
 	else if (command[1] == "Old datapad")
 	{
@@ -643,48 +678,47 @@ void game::takeCommand(vector<string> command)
 	// take rock in field
 	else if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "stone")
 	{
-		if(find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange rock on its back") == roomItems.end())
+		if(find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange stone on its back") == roomItems.end())
 		{
 			cout << "The  stone is already in your inventory..." << endl;
 		}
 		else if(sneakFlag == true)
 		{
-			cout << "You take the strange rock off the animals back and put it into your bag." << endl
+			cout << "You take the strange stone off the animals back and put it into your bag." << endl
 				 << "The animal doesn't seem to be bothered. It just shakes and moves to a new patch of grass." << endl;
 
 			currRoom->removeInteractable("Grazing Animal with a strange rock on its back");
-			player1->addToInventory("Rock with Sword Symbol");
+			player1->addToInventory("Stone with Sword Symbol");
 			currRoom->addInteractable("Grazing Animal");
 		}
 		else if (sneakFlag == false)
 		{
-			cout << "You are too far away to reach the rock... Try moving closer." << endl;
+			cout << "You are too far away to reach the stone... Try moving closer." << endl;
 		}
 	}
 	// take rock in tech ruin
 	else if (currRoom->getName() == "Tech Ruin" && command[1] == "stone")
 	{
-		if(find(currInventory.begin(), currInventory.end(), "Rock with Lightning Symbol") != currInventory.end())
+		if(find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
 		{
 			cout << "You have already picked up the stone." << endl;
 		}
 
 		cout << "You pick up the stone with the lightning symbol and put it in your bag." << endl;
-		player1->addToInventory("Rock with Lightning Symbol");
-		currRoom->removeInteractable("Rock with Lightning Symbol");
+		player1->addToInventory("Stone with Lightning Symbol");
+		currRoom->removeInteractable("Stone with Lightning Symbol");
 	}
-	// =========== TODO ============
 	// take rock in predator den
 	else if (currRoom->getName() == "Predator Den" && command[1] == "stone")
 	{
-		if (find(currInventory.begin(), currInventory.end(), "Rock with Spiral Symbol") != currInventory.end())
+		if (find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
 		{
 			cout << "You have already picked up the stone." << endl;
 		}
 		else if(predatorCounter == -1)
 		{
 			cout << "You take the stone while the predator is distracted with the fish and put it in your bag.";
-			player1->addToInventory("Rock with Spiral Symbol");
+			player1->addToInventory("Stone with Spiral Symbol");
 		}
 		else
 		{
@@ -782,16 +816,16 @@ void game::cutCommand(vector<string> command)
 	}
 
 	// rock off animals back
-	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Rock with Sword Symbol")
+	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Stone with Sword Symbol")
 	{
 		if (find(roomItems.begin(), roomItems.end(), "Sneak up on Animal") != roomItems.end())
 		{
-			cout << "You cut the strange rock off the animals back with your knife." << endl
+			cout << "You cut the strange stone off the animals back with your knife." << endl
 				 << "The animal gets spooked and takes off running." << endl;
 		}
 		else
 		{
-			cout << " You are too far away to reach the rock... Try moving closer." << endl;
+			cout << " You are too far away to reach the stone... Try moving closer." << endl;
 		}
 	}
 }
@@ -807,7 +841,7 @@ void game::moveTowardCommand(vector<string> command)
 {
 	room * currRoom = player1->getLocation();
 
-	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange rock on its back")
+	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange stone on its back")
 	{
 		cout << "The herd senses you and moves further along the plains, but you can still see them." << endl
 			 << "Maybe I should be more stealthy next time..." << endl;
@@ -825,11 +859,11 @@ void game::sneakCommand(vector<string> command)
 {
 	room * currRoom = player1->getLocation();
 
-	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange rock on its back")
+	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange stone on its back")
 	{
-		cout << "You sneak up on the grazing animal with the strange rock on its back..." << endl
-			 << "You notice the rock is round, smooth, and has a sword like symbol on it." << endl
-			 << "If I'm careful I could probably grab the strange rock off the animals back." << endl;
+		cout << "You sneak up on the grazing animal with the strange stone on its back..." << endl
+			 << "You notice the stone is round, smooth, and has a sword like symbol on it." << endl
+			 << "If I'm careful I could probably grab the strange stone off the animals back." << endl;
 		sneakFlag = true;
 		currRoom->addInteractable("Sneak up on Animal");
 	}
