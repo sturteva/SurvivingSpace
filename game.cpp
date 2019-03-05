@@ -895,6 +895,10 @@ void game::putCommand(vector<string> command)
 			}
 		}
 	}
+	else if(currRoom->getName() == "Magic Dome")
+	{
+
+	}
 }
 
 /******************************************************************************
