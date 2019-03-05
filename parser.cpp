@@ -510,13 +510,21 @@ vector<string> parseString()
 						//prepositions: above, by, in, into, on, over, under, with
 						vector<string> prepVect = {"above", "by", "in", "into", "on", "over", "under", "with"};
 						string prep = "";
+						int prepPos = -1;
 						int vectSize = prepVect.size();
 						
 						for (int count = 0; count < vectSize; count++)
 						{
 							prep = prepVect[count];
-							if (input.find(prep) != npos)
+							regex prepString("\\b" + prep + "\\b");
+							smatch matchPrep;
+							
+							if (regex_search(input, matchPrep, prepString))
 							{
+								prep = matchPrep[0];
+								prepPos = matchPrep.position();
+								//cout << matchPrep[0] << endl;
+								//cout << prepPos << endl;
 								count = vectSize - 1;
 							}
 							else
@@ -534,7 +542,7 @@ vector<string> parseString()
 								*Debug Command
 								***************/
 								//cout << "DEBUG (cut pt1): " << itr->first << " | " << itr->second << endl;
-								string subinput = input.substr(0, input.find(prep));
+								string subinput = input.substr(0, prepPos);
 								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 			
@@ -553,7 +561,7 @@ vector<string> parseString()
 							{
 								string tempString = itr->first;
 								//cout << "DEBUG (cut pt2): " << itr->first << " | " << itr->second << endl;
-								string subinput = input.substr(input.find(prep));
+								string subinput = input.substr(prepPos+prep.length());
 								regex regexString("\\b" + tempString + "\\b");
 								smatch matchString;
 						
