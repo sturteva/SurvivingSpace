@@ -352,6 +352,7 @@ void game::goCommand(vector<string> command)
 						// get new room
 						currRoom = player1->getLocation();
 						currRoom->printDescription();
+						break;
 					}
 					else
 					{
@@ -393,6 +394,7 @@ void game::goCommand(vector<string> command)
 				// get new room
 				currRoom = player1->getLocation();
 				currRoom->printDescription();
+				break;
 			}
 		}
 	}
@@ -565,15 +567,15 @@ void game::lookAtCommand(vector<string> command)
 	{
 		cout << "It is a small aluminum hook. It looks like it used to be used for fishing." << endl;
 	}
-	else if (command[1] == "stone" && currRoom->getName == "Tech Ruin")
+	else if (command[1] == "stone" && currRoom->getName() == "Tech Ruin")
 	{
 		cout << "It is a small smooth stone with a lighning symbol in the middle." << endl;
 	}
-	else if (command[1] == "stone" && currRoom->getName == "Field with Grazing Animals")
+	else if (command[1] == "stone" && currRoom->getName() == "Field with Grazing Animals")
 	{
 		cout << "It is a small smooth stone with a sword symbol in the middle." << endl;
 	}
-	else if (command[1] == "stone" && currRoom->getName == "Predator Den")
+	else if (command[1] == "stone" && currRoom->getName() == "Predator Den")
 	{
 		if(predatorCounter == -1)
 		{
@@ -675,10 +677,10 @@ void game::takeCommand(vector<string> command)
 		player1->addToInventory("Bag with Strange Runes");
 		currRoom->removeInteractable("Bag with Strange Runes");
 	}
-	// take rock in field
+	// take stone in field
 	else if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "stone")
 	{
-		if(find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange stone on its back") == roomItems.end())
+		if(find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
 		{
 			cout << "The  stone is already in your inventory..." << endl;
 		}
@@ -696,7 +698,7 @@ void game::takeCommand(vector<string> command)
 			cout << "You are too far away to reach the stone... Try moving closer." << endl;
 		}
 	}
-	// take rock in tech ruin
+	// take stone in tech ruin
 	else if (currRoom->getName() == "Tech Ruin" && command[1] == "stone")
 	{
 		if(find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
@@ -708,7 +710,7 @@ void game::takeCommand(vector<string> command)
 		player1->addToInventory("Stone with Lightning Symbol");
 		currRoom->removeInteractable("Stone with Lightning Symbol");
 	}
-	// take rock in predator den
+	// take stone in predator den
 	else if (currRoom->getName() == "Predator Den" && command[1] == "stone")
 	{
 		if (find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
