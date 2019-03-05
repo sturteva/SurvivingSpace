@@ -23,6 +23,7 @@ class game
     	int numPlayers;
     	int predatorCounter;
     	bool sneakFlag;
+    	bool magicDomeOpen;
 
 	public:
 		game();
@@ -42,6 +43,7 @@ class game
 	    void moveTowardCommand(vector<string>);
 	    void sneakCommand(vector<string>);
 	    void putCommand(vector<string>);
+	    void checkStones();
 	    void dropCommand(vector<string>);
 	    void crushCommand(vector<string>);
 	    void combineCommand(vector<string>);

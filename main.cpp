@@ -122,8 +122,6 @@ int main()
 		
 		case 2:
 			//load game
-			
-
 			cout << "Enter name of folder that contains gamestate files: ";
 			cin >> folder;
 
