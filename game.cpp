@@ -715,7 +715,7 @@ void game::takeCommand(vector<string> command)
 		currRoom->removeInteractable("Bag with Strange Runes");
 	}
 	// take stone in field
-	else if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "stone")
+	else if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Stone with Sword Symbol")
 	{
 		if(find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
 		{
@@ -736,7 +736,7 @@ void game::takeCommand(vector<string> command)
 		}
 	}
 	// take stone in tech ruin
-	else if (currRoom->getName() == "Tech Ruin" && command[1] == "stone")
+	else if (currRoom->getName() == "Tech Ruin" && command[1] == "Stone with Lightning Symbol")
 	{
 		if(find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
 		{
@@ -748,7 +748,7 @@ void game::takeCommand(vector<string> command)
 		currRoom->removeInteractable("Stone with Lightning Symbol");
 	}
 	// take stone in predator den
-	else if (currRoom->getName() == "Predator Den" && command[1] == "stone")
+	else if (currRoom->getName() == "Predator Den" && command[1] == "Stone with Spiral Symbol")
 	{
 		if (find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
 		{
