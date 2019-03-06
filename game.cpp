@@ -106,17 +106,14 @@ void game::start()
     //GameStatus status;
 	vector<string> command;
     //string input;
-    //cout << "test 1" << endl;
     room * currRoom;
     currRoom = player1->getLocation();
     currRoom->printDescription();
-	//cout << "test 2" << endl;
+
 	do
 	{
-		//cout << "test 3" << endl;
 		// ask for player input and parse command
 		command = parseString();
-		//cout << "test 4" << endl;	
 		//DEBUG
 		
 		cout << "\nParsed Command: ";
@@ -124,7 +121,7 @@ void game::start()
 		{
 			cout << command[count] << " ";
 		}
-	cout << endl << endl;
+		cout << endl << endl;
 		
 
 		cout << endl;
@@ -487,6 +484,7 @@ void game::lookCommand(vector<string> command)
 	// predator den
 	else if (currRoom->getName() == "Predator Den")
 	{
+		cout << "Describe predator den..." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Rock with Spiral Symbol") != roomItems.end())
 		{
 			cout << "You see a small rock with a spiral symbol on it behind the predator." << endl
@@ -635,8 +633,8 @@ void game::lookAtCommand(vector<string> command)
 	else if (currRoom->getName() == "Magic Dome" && command[1] == "Altar")
 	{
 
-		cout << "On the alter, is a carving that, just like the door, translates itself to read:" << endl
-			 << "On this alter, place the tokens of our people's progression." << endl
+		cout << "On the altar, is a carving that, just like the door, translates itself to read:" << endl
+			 << "On this altar, place the tokens of our people's progression." << endl
 			 << "From warriors, to mages with an understanding of electricity," << endl
 			 << "then finally one with the cosmos" << endl;
 	}
@@ -984,7 +982,7 @@ void game::putCommand(vector<string> command)
 	// put fishing pole in water
 	if(currRoom->getName() == "Pool of Water")
 	{
-		if (find(command.begin(), command.end(), "Makshift Fishing Pole") != command.end())
+		if (find(command.begin(), command.end(), "Makeshift Fishing Pole") != command.end())
 		{
 			if(find(command.begin(), command.end(), "Water") != command.end())
 			{
