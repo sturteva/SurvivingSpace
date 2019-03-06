@@ -108,18 +108,18 @@ void dictMapInit()
 /******************************************************************************
 ** Function: checkAlpha()
 ** Description: Checks to make sure that a user's string input contains only
-** 				letters and spaces.
+** 				letters, numbers and spaces.
 ** Parameters: String to be checked
-** Returns: bool if string contains only letters and numbers
+** Returns: bool if string contains only letters, numbers and spaces.
 *******************************************************************************/
 bool checkAlpha(string input)
 {
 	int strLength = input.length();
 	for (int pos = 0; pos < strLength; pos++)
 	{
-		if (!isalpha(input[pos]) && !isspace(input[pos]))
+		if (!isalnum(input[pos]) && !isspace(input[pos]))
 		{
-			cout << "Invalid input. Commands should contain letters and spaces only, no punctuation." << endl;
+			cout << "Invalid input. Commands should contain letters, numbers and spaces only, no punctuation." << endl;
 			return false;
 		}
 	}
@@ -180,7 +180,7 @@ vector<string> parseString()
 			int strLength = input.length();
 			for (int pos = 0; pos < strLength; pos++)
 			{
-				if (!isspace(input[pos]))
+				if (!isspace(input[pos]) && !isdigit(input[pos]))
 				{
 					input[pos] = tolower(input[pos]);
 				}
