@@ -49,7 +49,8 @@ game::game()
 	numPlayers = 1;
 	predatorCounter = 0;
 	sneakFlag = false;
-	magicDomeOpen = true;
+	magicDomeOpen = false;
+	shipFixed = false;
 
 }
 
@@ -481,7 +482,7 @@ void game::lookCommand(vector<string> command)
 		}
 	}
 
-	// predator den
+	// Predator Den
 	else if (currRoom->getName() == "Predator Den")
 	{
 		cout << "Describe predator den..." << endl;
@@ -492,7 +493,7 @@ void game::lookCommand(vector<string> command)
 		}
 	}
 
-	// tech ruin
+	// Tech Ruin
 	else if (currRoom->getName() == "Tech Ruin")
 	{
 		cout << "What used to be large buildings long ago, appear half crumbling and falling apart." << endl
@@ -514,6 +515,7 @@ void game::lookCommand(vector<string> command)
 
 	}
 
+	// Caves
 	else if (currRoom->getName() == "Caves")
 	{
 		cout << "The entrance to the cave is covered by small string like vines." << endl;
@@ -523,11 +525,124 @@ void game::lookCommand(vector<string> command)
 		}
 	}
 
+	// Magic Dome
 	else if (currRoom->getName() == "Magic Dome")
 	{
 		cout << "You see an altar with some strange writing on it. Tht altar has 3 slots on the top about the size of those strange rocks ive been seeing." << endl;
 	}
 
+	// Personal Cabin
+	else if (currRoom->getName() == "Personal Cabin")
+	{
+		cout << "You are back on your ship in your personal cabin." << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Picture of Family") != roomItems.end())
+		{
+			cout << "There is a picture of your family on the bedside table." << endl;
+		}
+		if (find(roomItems.begin(), roomItems.end(), "Old nadion emitter") != roomItems.end())
+		{
+			cout << "The old nadion emitter from the FTL engine lays on a shelf over your bed." << endl;
+		}
+		if (find(roomItems.begin(), roomItems.end(), "Strange Magic Circle") != roomItems.end())
+		{
+			cout << "There also is a strange magic circle that appeared on the ground below you." << endl;
+		}
+	}
+
+	// Galley
+	else if (currRoom->getName() == "Galley")
+	{
+		cout << "This is the galley where you usually take your meals." << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Tools") != roomItems.end())
+		{
+			cout << "There are some assorted tools scattered on the table." << endl;
+		}
+		if (find(roomItems.begin(), roomItems.end(), "Nutrition Wafer Bar") != roomItems.end())
+		{
+			cout << "A nutrition wafer bar lays on the counter." << endl;
+		}
+	}
+
+	// Engine Room 
+	else if (currRoom->getName() == "Engine Room")
+	{
+		if (find(roomItems.begin(), roomItems.end(), "broken FTL engine") != roomItems.end())
+		{
+			cout << "Something chewed through the engine casing and pulled out the nadion emitter." << endl
+				 << "A large amount of wiring was also pulled out that connects the nadion emitter to the photon splitter." << endl;
+		}
+		if (find(roomItems.begin(), roomItems.end(), "hammock") != roomItems.end())
+		{
+			
+		}
+	}
+
+	// The Head 
+	else if (currRoom->getName() == "The Head")
+	{
+		cout << "" << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Rugvuk") != roomItems.end())
+		{
+			cout << "A Rugvuk seems to have escaped it's cage while you were planetside!" << endl;
+		}
+		if (find(roomItems.begin(), roomItems.end(), "pile of wiring") != roomItems.end())
+		{
+			cout << "You see the Rugvuk laying on the pile of wires it pulled out of the nadion emitter as a bed." << endl;
+		}
+	}
+
+	// Med Bay
+	else if (currRoom->getName() == "Med Bay")
+	{
+		cout << "The medical and science bay. " << endl
+			 << "It contains basic first aid supplies, as well as small flora and fauna collected from previous expeditions." << endl;
+
+		if (find(roomItems.begin(), roomItems.end(), "Empty Cage") != roomItems.end())
+		{
+			cout << "A few of the auto-feeding cages contain animals resting peacefully." << endl
+				 << "You notice the door to one of the auto-feeding cages is wide open!" << endl;
+		}
+		if (find(roomItems.begin(), roomItems.end(), "Animal Sleeping pills") != roomItems.end())
+		{
+			cout << "There are some animal sleeping pills sitting next to the cages." << endl;
+		}
+	}
+
+	// Armory
+	else if (currRoom->getName() == "Armory")
+	{
+		cout << "This armory holds some self defense wepons to defend yourself during your travels." << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Stun Gun") != roomItems.end())
+		{
+			cout << "There is an animal stun gun on a rack. Looks like it still has a few charges." << endl;
+		} 
+		if (find(roomItems.begin(), roomItems.end(), "Deoderant") != roomItems.end())
+		{
+			cout << "Some deoderant is sitting in the locker." << endl;
+		}
+	}
+
+	// Helm 
+	else if (currRoom->getName() == "Helm")
+	{
+		cout << "" << endl;
+		if (find(roomItems.begin(), roomItems.end(), "Scanning Console") != roomItems.end())
+		{
+			cout << "The scanning console allows you to scan planets and space around the ship." << endl;
+		}
+		if (find(roomItems.begin(), roomItems.end(), "Piloting Console") != roomItems.end())
+		{
+			if (!shipFixed)
+			{
+				cout << "The piloiting console sits as a blank screen..." << endl
+				 	 << "The damage to the FTL engine must be causing the outage" << endl;
+			}
+			else if (shipFixed)
+			{
+				cout << "The piloiting console has power again. The ship is back online!" << endl;
+			}
+		}
+	}
 }
 
 /******************************************************************************
@@ -541,20 +656,24 @@ void game::lookAtCommand(vector<string> command)
 	vector<string> roomItems = player1->getRoomItems();
 	room * currRoom = player1->getLocation();
 
+	// Knife
 	if (currRoom->getName() == "Starting Room" && command[1] == "Knife with Runes")
 	{ 
 		cout << "It is a large knife, about 10 inches long. There are strange runes printed all over the blade." << endl;
 	}
+	// Bushes
 	else if (currRoom->getName() == "Starting Room" && command[1] == "Thistle filled bushes")
 	{
 		cout << "The bushes are thick and you are unable to see through to the other side..." << endl
 			 << "The thorns on the branches are long and look painful." << endl;
 	}
+	// Bag
 	else if (currRoom->getName() == "Top of Tree" && command[1] == "Bag with Strange Runes")
 	{
 		cout << "It is a small bag with a clip that looks like its for your belt" << endl
 			 << "There are runes printed all over the outside of the bag. They appear to match the ones seen on the knife below." << endl;
 	}
+	// Grazing animal
 	else if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange stone on its back")
 	{
 		if(find(roomItems.begin(), roomItems.end(), "Sneak up on Animal") != roomItems.end())
@@ -568,24 +687,29 @@ void game::lookAtCommand(vector<string> command)
 				 << "If I was a little closer, maybe I could see what type of rock it is." << endl;
 		}
 	}
+	// Red Ochre Rock
 	else if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Red Ochre rock")
 	{
 		cout << "The red rocks on the ground look to be Red Ochre." << endl
 			 << "They look soft and could probably be crushed into a powder." << endl;
 	}
+	// Aluminum Hook
 	else if (currRoom->getName() == "Tech Ruins" && command[1] == "Aluminum Hook")
 	{
 		cout << "It is a small aluminum hook. It looks like it used to be used for fishing." << endl;
 	}
-	else if (command[1] == "stone" && currRoom->getName() == "Tech Ruin")
+	// Stone with Lightning Symbol
+	else if (command[1] == "Stone with Lightning Symbol" && currRoom->getName() == "Tech Ruin")
 	{
 		cout << "It is a small smooth stone with a lighning symbol in the middle." << endl;
 	}
-	else if (command[1] == "stone" && currRoom->getName() == "Field with Grazing Animals")
+	// Stone with Sword Symbol
+	else if (command[1] == "Stone with Sword Symbol" && currRoom->getName() == "Field with Grazing Animals")
 	{
 		cout << "It is a small smooth stone with a sword symbol in the middle." << endl;
 	}
-	else if (command[1] == "stone" && currRoom->getName() == "Predator Den")
+	// Stone with Spiral Symbol
+	else if (command[1] == "Stone with Spiral Symbol" && currRoom->getName() == "Predator Den")
 	{
 		if(predatorCounter == -1)
 		{
@@ -611,6 +735,7 @@ void game::lookAtCommand(vector<string> command)
 		}
 
 	}
+	//old datapad
 	else if (currRoom->getName() == "Tech Ruins" && command[1] == "Old datapad")
 	{
 		cout << "It is an old datapad that was once owned by an inhabitant of the abandonded city." << endl
@@ -620,16 +745,19 @@ void game::lookAtCommand(vector<string> command)
 			 << "We've decided to just abandon this colony and go back to Zelon." << endl
 			 << "Strange, as soon as we started packing up, all of our problems stopped, almost as if the planet wanted to help us leave quickly'" << endl;
 	}
+	// water bottle
 	else if (currRoom->getName() == "Pool of Water" && command[1] == "Water Bottle")
 	{
 		cout << "It is a small bottle that looks to be filled with water." << endl;
 	}
+	// door
 	else if (currRoom->getName() == "Caves" && command[1] == "Door with strange writing")
 	{
 		cout << "It is a large stone door with strange writing on it." << endl
 			 << "As you're looking, the words magicaly change to read:" << endl
 			 << "Blood of the Planet painted on this door gains you access to the stars." << endl;
 	}
+	// altar
 	else if (currRoom->getName() == "Magic Dome" && command[1] == "Altar")
 	{
 
@@ -638,18 +766,78 @@ void game::lookAtCommand(vector<string> command)
 			 << "From warriors, to mages with an understanding of electricity," << endl
 			 << "then finally one with the cosmos" << endl;
 	}
+	// slot 1
 	else if (currRoom->getName() == "Magic Dome" && command[1] == "Slot1")
 	{
 		cout << "This first slot has a sword symbol above it." << endl;
+
+		if(find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Sword Symbol") != roomItems.end())
+		{
+			cout << "The stone with sword symbol is currently in this spot." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Lightning Symbol") != roomItems.end())
+		{
+			cout << "The stone with lightning symbol is currently in this spot." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Spiral Symbol") != roomItems.end())
+		{
+			cout << "The stone with spiral symbol is currently in this spot." << endl;
+		}
+		
 	}
+	// slot 2
 	else if (currRoom->getName() == "Magic Dome" && command[1] == "Slot2")
 	{
 		cout << "This second slot has a lightning symbol above it." << endl;
+
+		if(find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Sword Symbol") != roomItems.end())
+		{
+			cout << "The stone with sword symbol is currently in this spot." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Lightning Symbol") != roomItems.end())
+		{
+			cout << "The stone with lightning symbol is currently in this spot." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Spiral Symbol") != roomItems.end())
+		{
+			cout << "The stone with spiral symbol is currently in this spot." << endl;
+		}
 	}
+	// slot 3
 	else if (currRoom->getName() == "Magic Dome" && command[1] == "Slot3")
 	{
 		cout << "This third slot has a spiral symbol above it." << endl;
+
+		if(find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Sword Symbol") != roomItems.end())
+		{
+			cout << "The stone with sword symbol is currently in this spot." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Lightning Symbol") != roomItems.end())
+		{
+			cout << "The stone with lightning symbol is currently in this spot." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Spiral Symbol") != roomItems.end())
+		{
+			cout << "The stone with spiral symbol is currently in this spot." << endl;
+		}
 	}
+	// picture of family
+	else if (currRoom->getName() == "Personal Cabin" && command[1] == "Picture of Family")
+	{
+		cout << "You look at the picture of your family and it reminds you of home." << endl;
+	}
+	// old nadion emitter
+	else if (currRoom->getName() == "Personal Cabin" && command[1] == "Old nadion emitter")
+	{
+		cout << "The old nadion emitter that was recently replaced in the FTL." << endl
+			 << "It should still be functional, we just upgraded a few missions ago." << endl;
+	}
+	// strange magic circle
+	else if (currRoom->getName() == "Personal Cabin" && command[1] == "Strange Magic Circle")
+	{
+		cout << "It is a strange magic circle that is glowing the same color as the teleportation circle on the altar." << endl;
+	}
+
 
 }
 
@@ -1103,10 +1291,19 @@ void game::checkStones()
 		cout << "A you place the last rock in the altar, it begins releasing dancing waves of light." << endl
 			 << "They completly engulf you as you begin to become weightless." << endl;
 		// teleport back to ship
-		player1->setLocation(adjacentRooms[1]);
-		currRoom = player1->getLocation();
-		currRoom->printDescription();
-		currRoom->visitRoom();
+		for (int i = 0; i < (int)adjacentRooms.size(); i++)
+		{
+			if (adjacentRooms[i]->getName() == "Personal Cabin") 
+			{
+				player1->setLocation(adjacentRooms[i]);
+				currRoom = player1->getLocation();
+				currRoom->printDescription();
+				currRoom->visitRoom();
+				break;
+			}
+		} 
+
+		
 	}
 
 }

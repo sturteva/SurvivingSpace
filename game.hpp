@@ -24,6 +24,7 @@ class game
     	int predatorCounter;
     	bool sneakFlag;
     	bool magicDomeOpen;
+    	bool shipFixed;
 
 	public:
 		game();
