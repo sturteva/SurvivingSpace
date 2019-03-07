@@ -27,6 +27,26 @@ using std::ofstream;
 using std::vector;
 using std::string;
 
+//the following are UBUNTU/LINUX, and MacOS ONLY terminal color codes.
+#define RESET   "\033[0m"
+#define BLACK   "\033[30m"      /* Black */
+#define RED     "\033[31m"      /* Red */
+#define GREEN   "\033[32m"      /* Green */
+#define YELLOW  "\033[33m"      /* Yellow */
+#define BLUE    "\033[34m"      /* Blue */
+#define MAGENTA "\033[35m"      /* Magenta */
+#define CYAN    "\033[36m"      /* Cyan */
+#define WHITE   "\033[37m"      /* White */
+#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
+#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
+#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
+#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
+#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
+#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
+#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
+#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
+
+
 /******************************************************************************
 ** Function: roomIO()
 ** Description: Loads room vector using roomdat files
@@ -122,11 +142,16 @@ vector<room*> dataIO::roomIO(string direct_name){
                         line.erase(pos,4);
                         pos = line.find("</FD>");
                         line.erase(pos,5);
+						
+		/*	line.insert(5,BOLDRED);
+			line.insert((int)line.length()-6,RESET);
+			cout << "OTHER TEST HERE" << endl;
+			cout << line << endl;*/
 
-
+			
                         //Gives the new room its long description
                         newRoom->setFD(line);
-
+			
 			}
 
 
@@ -211,9 +236,80 @@ vector<room*> dataIO::roomIO(string direct_name){
 
 		}
 
+		//If there is a KeyWord, we will be finding that keyword, and then
+		//Adding some color
+		else if(line.find("<KW>") != std::string::npos){
+		
+	 		pos = line.find("<KW>");
+                        line.erase(pos,4);
+                        pos = line.find("</KW>");
+                        line.erase(pos,5);
 
+			string keyWord = line;
+			string fullDes = newRoom->getFullDesc();
+			string color;
+			getline(roomFile,color);
 
+			pos = color.find("<COL>");
+			color.erase(pos,5);
+			pos = color.find("</COL>");
+			color.erase(pos,6);
+			
 
+			/*Tranlate the color from file into an actual color code*/
+			string trueColor;
+			if(color == "RESET")
+				trueColor = RESET;
+			else if(color == "BLACK")
+				trueColor = BLACK;
+			else if(color == "RED")
+				trueColor = RED;
+			else if(color == "GREEN")
+				trueColor = GREEN;
+			else if(color == "YELLOW")
+				trueColor = YELLOW;
+			else if(color == "BLUE")
+				trueColor = BLUE;
+			else if(color == "MAGENTA")
+				trueColor = MAGENTA;
+			else if(color == "CYAN")
+				trueColor = CYAN;
+			else if(color == "WHITE")
+				trueColor = WHITE;
+			else if(color == "BOLDBLACK")
+				trueColor = BOLDBLACK;
+			else if(color == "BOLDRED")
+				trueColor = BOLDRED;
+			else if(color == "BOLDGREEN")
+				trueColor = BOLDGREEN;
+			else if(color == "BOLDYELLOW")
+				trueColor = BOLDYELLOW;
+			else if(color == "BOLDBLUE")
+				trueColor = BOLDBLUE;
+			else if(color == "BOLDMAGENTA")
+				trueColor = BOLDMAGENTA;
+			else if(color == "BOLDCYAN")
+				trueColor = BOLDCYAN;
+			else if(color == "BOLDWHITE")
+				trueColor = BOLDWHITE;
+			else
+				trueColor = RESET;
+			
+
+			//Find position of keyWord in fullDescription
+			pos = fullDes.find(keyWord);
+			//Insert the Color Choice at Description
+			fullDes.insert(pos,trueColor);
+			//Find position of keyWord again, so that we can reset color
+			pos = fullDes.find(keyWord);
+			fullDes.insert(pos+keyWord.length(),RESET);
+
+			//Replace the original fullDescription
+			newRoom->setFD(fullDes);
+
+	
+
+		}
 
 
             }//END of WHILE loop
