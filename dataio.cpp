@@ -239,7 +239,8 @@ vector<room*> dataIO::roomIO(string direct_name){
 		//If there is a KeyWord, we will be finding that keyword, and then
 		//Adding some color
 		else if(line.find("<KW>") != std::string::npos){
-		
+			
+
 	 		pos = line.find("<KW>");
                         line.erase(pos,4);
                         pos = line.find("</KW>");
@@ -254,7 +255,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 			color.erase(pos,5);
 			pos = color.find("</COL>");
 			color.erase(pos,6);
-			
+
 
 			/*Tranlate the color from file into an actual color code*/
 			string trueColor;
@@ -294,7 +295,6 @@ vector<room*> dataIO::roomIO(string direct_name){
 				trueColor = BOLDWHITE;
 			else
 				trueColor = RESET;
-			
 
 			//Find position of keyWord in fullDescription
 			pos = fullDes.find(keyWord);
@@ -303,7 +303,6 @@ vector<room*> dataIO::roomIO(string direct_name){
 			//Find position of keyWord again, so that we can reset color
 			pos = fullDes.find(keyWord);
 			fullDes.insert(pos+keyWord.length(),RESET);
-
 			//Replace the original fullDescription
 			newRoom->setFD(fullDes);
 
