@@ -50,7 +50,8 @@ game::game()
 	predatorCounter = 0;
 	sneakFlag = false;
 	magicDomeOpen = false;
-	shipFixed = false;
+	rugvukFlag = false;
+	engineFixed = false;
 
 }
 
@@ -207,13 +208,25 @@ void game::doCommand(vector<string> command)
 	{
 		combineCommand(command);
 	}
+	else if (command[0] == "give")
+	{
+		giveCommand(command);
+	}
+	else if (command[0] == "use")
+	{
+		useCommand(command);
+	}
+	else if (command[0] == "fix")
+	{
+		fixCommand(command);
+	}
 	else if (command[0] == "exit")
 	{
 
 	}
 	else
 	{
-		cout << "That command is not recognized... Please try again." << endl;
+		cout << "That command is not recognized... Please try again" << endl;
 	}
 
 }
@@ -573,7 +586,7 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "hammock") != roomItems.end())
 		{
-			
+			cout << "My old hammock hangs between two poles." << endl;
 		}
 	}
 
@@ -632,12 +645,12 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Piloting Console") != roomItems.end())
 		{
-			if (!shipFixed)
+			if (!engineFixed)
 			{
 				cout << "The piloiting console sits as a blank screen..." << endl
 				 	 << "The damage to the FTL engine must be causing the outage" << endl;
 			}
-			else if (shipFixed)
+			else if (engineFixed)
 			{
 				cout << "The piloiting console has power again. The ship is back online!" << endl;
 			}
@@ -837,8 +850,34 @@ void game::lookAtCommand(vector<string> command)
 	{
 		cout << "It is a strange magic circle that is glowing the same color as the teleportation circle on the altar." << endl;
 	}
+	// tools in galley
+	else if (currRoom->getName() == "Galley" && command[1] == "Tools")
+	{
 
-
+		cout << "The tools on the table are from when I changed the nadion emitter a few weeks ago." << endl;
+	}
+	// nutrition wafer bar in galley
+	else if (currRoom->getName() == "Galley" && command[1] == "Nutrition Wafer Bar")
+	{
+		cout << "It is a nutrition wafer bar I usually take with me to eat on the go." << endl;
+	}
+	// broken FTL Engine
+	else if (currRoom->getName() == "Engine Room" && command[1] == "broken FTL engine")
+	{
+		if (engineFixed == true)
+		{
+			cout << "The FTL engine appears to be online." << endl;
+		}
+		else 
+		{
+			cout << "The FTL engine is offline." << endl
+				 << "Something has chewed through the casing and pulled out the nadion emitter" << endl
+				 << "It also has pulled a large amount of wiring that used to connect the nadion emitter to the photon splitter" << endl
+				 << "If I remember right the old nadion emitter is in my cabin" << endl
+				 << "and my tools are in the galley." << endl;
+		}
+		
+	}
 }
 
 /******************************************************************************
@@ -988,7 +1027,7 @@ void game::takeCommand(vector<string> command)
 		player1->addToInventory("string-like vines");
 		currRoom->removeInteractable("string-like vines");
 	}
-	// take vines
+	// take branch
 	else if (currRoom->getName() == "Top of Tree" && command[1] == "leafs filled branch")
 	{
 		if (find(currInventory.begin(), currInventory.end(), "Bag with Strange Runes") != currInventory.end())
@@ -1006,7 +1045,7 @@ void game::takeCommand(vector<string> command)
 	// take water bottle
 	else if (currRoom->getName() == "Pool of Water" && command[1] == "Water Bottle")
 	{
-		cout << "You put the small bottle of water in your bag.";
+		cout << "You put the small bottle of water in your bag." << endl;
 		player1->addToInventory("Water Bottle");
 	}
 	// take stone with sword symbol off altar
@@ -1065,6 +1104,61 @@ void game::takeCommand(vector<string> command)
 			player1->addToInventory("Stone with Spiral Symbol");
 			currRoom->removeInteractable("Slot 3: Stone with Spiral Symbol");
 		}
+	}
+	// take old nadion emitter
+	else if (currRoom->getName() == "Personal Cabin" && command[1] == "Old nadion emitter")
+	{
+		cout << "You put the nadion emitter in your bag." << endl;
+		player1->addToInventory("Old nadion emitter");
+		currRoom->removeInteractable("Old nadion emitter");
+	}
+	// take tools
+	else if (currRoom->getName() == "Galley" && command[1] == "Tools")
+	{
+		cout << "You put the tools in your bag." << endl;
+		player1->addToInventory("Tools");
+		currRoom->removeInteractable("Tools");
+	}
+	// take nutrition wafer bar
+	else if (currRoom->getName() == "Galley" && command[1] == "Nutrition Wafer Bar")
+	{
+		cout << "You put the nutrition wafer bar in your bag." << endl;
+		player1->addToInventory("Nutrition Wafer Bar");
+		currRoom->removeInteractable("Nutrition Wafer Bar");
+	}
+	// take pile of wiring
+	else if (currRoom->getName() == "The Head" && command[1] == "pile of wiring")
+	{
+		if(rugvukFlag)
+		{
+			cout << "You put the wires in your bag." << endl;
+			player1->addToInventory("Wires");
+			currRoom->removeInteractable("pile of wiring");
+		}
+		else
+		{
+			cout << "The Rugvuk lunges to bite you." << endl
+				 << "Im gonna have to knock out this animal before I can take the wires" << endl;
+		}
+	}
+	// take animal sleeping pills
+	else if (currRoom->getName() == "Med Bay" && command[1] == "Animal Sleeping pills")
+	{
+		cout << "You put the animal sleeping pills in your bag." << endl;
+		player1->addToInventory("Animal Sleeping pills");
+		currRoom->removeInteractable("Animal Sleeping pills");
+	}
+	// take stun gun
+	else if (currRoom->getName() == "Armory" && command[1] == "Stun Gun")
+	{
+		cout << "You put the stun gun in your bag." << endl;
+		player1->addToInventory("Stun Gun");
+		currRoom->removeInteractable("Stun Gun");
+	}
+
+	else
+	{
+		cout << "You cannot take that item" << endl;
 	}
 }
 
@@ -1280,6 +1374,13 @@ void game::putCommand(vector<string> command)
 	
 }
 
+/******************************************************************************
+** Function: checkStones()
+** Description: Helper functionthat checks the altar stones are in correct 
+**			    position
+** Parameters: None
+** Returns: None
+*******************************************************************************/
 void game::checkStones()
 {
 	room * currRoom = player1->getLocation();
@@ -1302,10 +1403,7 @@ void game::checkStones()
 				break;
 			}
 		} 
-
-		
 	}
-
 }
 
 /******************************************************************************
@@ -1429,9 +1527,119 @@ void game::combineCommand(vector<string> command)
 			cout << "You do not have the branch in your inventory." << endl;
 		}
 	}
+
+	// combine sleeping pills and wafer
+	if(find(command.begin(), command.end(), "Animal Sleeping pills") != command.end()) 
+	{
+		if(find(command.begin(), command.end(), "Nutrition Wafer Bar") != command.end())
+		{
+			if(find(currInventory.begin(), currInventory.end(), "Animal Sleeping pills") != currInventory.end())
+			{
+				if(find(currInventory.begin(), currInventory.end(), "Nutrition Wafer Bar") != currInventory.end())
+				{
+					cout << "You combine the animal sleeping pills and the nutrition wafer bar to make a medicated wafer." << endl
+						 << "I bet it could knock out the Rugvuk." << endl;
+					player1->removeFromInventory("Animal Sleeping pills");
+					player1->removeFromInventory("Nutrition Wafer Bar");
+					player1->addToInventory("Medicated Wafer");
+				}
+			}
+		}
+	}
 		
 }
 
+/******************************************************************************
+** Function: giveCommand()
+** Description: processes the give command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::giveCommand(vector<string> command)
+{
+	room * currRoom = player1->getLocation();
+	vector<string> currInventory = player1->getInventory();
+
+	if (currRoom->getName() == "The Head" && command[1] == "Nutrition Wafer Bar")
+	{
+		if (find(currInventory.begin(), currInventory.end(), "Medicated Wafer") != currInventory.end())
+		{
+			cout << "You give the medicated wafer to the Rugvk." << endl
+				 << "The Rugvk lays down and closes his eyes. It looks like the sleeping pills worked." << endl;
+			rugvukFlag = true;
+			player1->removeFromInventory("Medicated Wafer");
+		}
+	}
+
+}
+
+/******************************************************************************
+** Function: useCommand()
+** Description: processes the use command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::useCommand(vector<string> command)
+{
+	room * currRoom = player1->getLocation();
+	vector<string> currInventory = player1->getInventory();
+
+	if (currRoom->getName() == "The Head" && command[1] == "Stun Gun")
+	{
+		if (find(currInventory.begin(), currInventory.end(), "Stun Gun") != currInventory.end())
+		{
+			cout << "You use the stun gun to stun the Rugvk." << endl
+				 << "It gets knocked out and falls limp to the ground." << endl;
+			rugvukFlag = true;
+		}
+	}
+
+}
+
+/******************************************************************************
+** Function: fixCommand()
+** Description: processes the fix command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::fixCommand(vector<string> command)
+{
+	room * currRoom = player1->getLocation();
+	vector<string> currInventory = player1->getInventory();
+
+	// fix engine
+	if(find(command.begin(), command.end(), "broken FTL engine") != command.end() && currRoom->getName() == "Engine Room") 
+	{
+		if(find(currInventory.begin(), currInventory.end(), "Tools") != currInventory.end())
+		{
+			if(find(currInventory.begin(), currInventory.end(), "Old nadion emitter") != currInventory.end())
+			{
+				if(find(currInventory.begin(), currInventory.end(), "Wires") != currInventory.end())
+				{
+
+					cout << "You fix the engine by re-intsalling the nadion emitter and splicing the wires back toghether." << endl;
+					player1->removeFromInventory("Old nadion emitter");
+					player1->removeFromInventory("Wires");
+					engineFixed = true;
+				}
+				else
+				{
+					cout << "You do not have the wiring in your inventory" << endl;
+				}
+			}
+			else
+			{
+				cout << "You do not have the old nadion emitter in your inventory" << endl;
+			}
+		}
+		else
+		{
+			cout << "You do not have any tools in your inventory" << endl;
+		}
+		
+	}
+
+}
 
 /******************************************************************************
 ** Function: getRooms()

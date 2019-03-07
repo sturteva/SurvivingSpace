@@ -24,7 +24,8 @@ class game
     	int predatorCounter;
     	bool sneakFlag;
     	bool magicDomeOpen;
-    	bool shipFixed;
+    	bool rugvukFlag;
+    	bool engineFixed;
 
 	public:
 		game();
@@ -48,6 +49,9 @@ class game
 	    void dropCommand(vector<string>);
 	    void crushCommand(vector<string>);
 	    void combineCommand(vector<string>);
+	    void giveCommand(vector<string>);
+	    void useCommand(vector<string>);
+	    void fixCommand(vector<string>);
 	    vector<room*> getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();

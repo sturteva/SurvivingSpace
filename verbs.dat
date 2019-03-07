@@ -48,3 +48,6 @@ load|loadgame
 load game|loadgame
 warp|warp
 teleport|warp
+give|give
+use|use
+fix|fix
