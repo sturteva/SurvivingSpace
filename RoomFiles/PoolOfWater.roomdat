@@ -5,8 +5,11 @@
 <I>Water Bottle</I>
 <I>Water</I>
 <C>Starting Room</C>
+<DIR>North</DIR>
 <C>Predator Den</C>
+<DIR>South</DIR>
 <C>Caves</C>
+<DIR>East</DIR>
 <KW>fish</KW>
 <COL>BOLDGREEN</COL>
 <KW>south</KW>

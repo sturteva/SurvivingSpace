@@ -11,9 +11,13 @@
 <DIR>South</DIR>
 <KW>pile of wire</KW>
 <COL>BOLDGREEN</COL>
-<KW>Rugvuk</WK>
+<KW>Rugvuk</KW>
 <COL>BOLDGREEN</COL>
-<KW>east, west, and south</KW>
+<KW>east</KW>
+<COL>BOLDYELLOW</COL>
+<KW>west</KW>
+<COL>BOLDYELLOW</COL>
+<KW>south</KW>
 <COL>BOLDYELLOW</COL>
 
 

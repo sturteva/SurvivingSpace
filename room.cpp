@@ -122,6 +122,11 @@ void room::addAdjacent(room* newAdj)
     adjacent.push_back(newAdj);
 }
 
+void room::addAdjDir(string newDir)
+{
+	adjDir.push_back(newDir);
+}
+
 /*******************************************************************************
 ** Function: addInteractable()
 ** Description: sets the full description name
@@ -179,6 +184,11 @@ vector<room*> room::getAdjacent()
 {
 
     return adjacent;
+}
+
+vector<string> room::getAdjDir()
+{
+	return adjDir;
 }
 
 /*******************************************************************************

@@ -193,7 +193,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                     else if(line.find("<C>") != std::string::npos){
 
 			//Debug
-			//cout << "Inside <C>" << endl;
+		
 		        //Removes the Tags from the line.
                         pos = line.find("<C>");
                         line.erase(pos,3);
@@ -220,13 +220,18 @@ vector<room*> dataIO::roomIO(string direct_name){
 
 				room* newAdj = new room(line);
 				newRoom->addAdjacent(newAdj);
-				newAdj->addAdjacent(newRoom);
-				roomVec.push_back(newAdj);
-
-				//Debug
-				//cout << "New Adj Name: " << newAdj->getName() << endl;
-
+				roomVec.push_back(newAdj);			
 			}
+
+			string direction;
+			getline(roomFile,direction);
+
+			pos = direction.find("<DIR>");
+			direction.erase(pos,5);
+			pos = direction.find("</DIR>");
+			direction.erase(pos,6);
+
+			newRoom->addAdjDir(direction);
 
                     }
 
@@ -239,13 +244,13 @@ vector<room*> dataIO::roomIO(string direct_name){
 		//If there is a KeyWord, we will be finding that keyword, and then
 		//Adding some color
 		else if(line.find("<KW>") != std::string::npos){
+				
 			
-
 	 		pos = line.find("<KW>");
                         line.erase(pos,4);
                         pos = line.find("</KW>");
                         line.erase(pos,5);
-
+			
 			string keyWord = line;
 			string fullDes = newRoom->getFullDesc();
 			string color;
@@ -256,7 +261,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 			pos = color.find("</COL>");
 			color.erase(pos,6);
 
-
+			
 			/*Tranlate the color from file into an actual color code*/
 			string trueColor;
 			if(color == "RESET")
@@ -386,8 +391,12 @@ void dataIO::saveGame(game saveGame){
         }
 
         vector<room*> adjacent = theRooms.at(i)->getAdjacent();
+	vector<string> adjDir = theRooms.at(i)->getAdjDir();
+
+
         for(int k = 0; k < (int)adjacent.size(); ++k){
             roomFile << "<C>" << adjacent.at(k)->getName() << "</C>" << endl;
+	    roomFile << "<DIR>" << adjDir.at(k) << "</DIR>" << endl;
         }
 
 	//Check if room has been visited
