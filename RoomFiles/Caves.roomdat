@@ -1,13 +1,25 @@
 <Name>Caves</Name>
-<FD>This large hole in the hills seems to go deeper into the ground, with the entrance covered in small string-like vines. Looking deeper into the cave, you see some strange writing over what looks like a stone door.</FD>
-<SD>A cave with strange writing above a door deeper in the cave.</SD>
+<FD>This large hole in the hills seems to go deeper into the ground, with the entrance covered in small string-like vines. Looking deeper into the cave, you see some strange writing over what looks like a stone door to the south. The paths leaving here go north, east and west.</FD>
+<SD>A cave with strange writing above a door deeper in the cave to the south.The paths leaving here go north, east and west.</SD>
 <I>string-like vines</I>
 <I>Door with strange writing</I>
 <C>Field with Grazing Animals</C>
+<DIR>East</DIR>
 <C>Predator Den</C>
+<DIR>West</DIR>
 <C>Pool of Water</C>
+<DIR>North</DIR>
 <C>Magic Dome</C>
+<DIR>South</DIR>
 <KW>stone door</KW>
 <COL>BOLDGREEN</COL>
 <KW>string-like vines</KW>
 <COL>BOLDGREEN</COL>
+<KW>south</KW>
+<COL>BOLDYELLOW</COL>
+<KW>north</KW>
+<COL>BOLDYELLOW</COL>
+<KW>east</KW>
+<COL>BOLDYELLOW</COL>
+<KW>west</KW>
+<COL>BOLDYELLOW</COL>

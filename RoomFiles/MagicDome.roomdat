@@ -1,11 +1,14 @@
 <Name>Magic Dome</Name>
-<FD>This large dome-like room lights up as you enter in an eerie violet color. All about the dome are similar runes to those on your bag and dagger, providing the light.  One the floor though, is a large circle with an altar in the middle with some strange writing on it, and three slots.</FD>
-<SD>A large domed room, with a circle on the ground and an altar in the middle.</SD>
+<FD>This large dome-like room lights up as you enter in an eerie violet color. All about the dome are similar runes to those on your bag and dagger, providing the light.  One the floor though, is a large circle with an altar in the middle with some strange writing on it, and three slots. The path out leads north.</FD>
+<SD>A large domed room, with a circle on the ground and an altar in the middle.The path out leads north.</SD>
 <I>Altar</I>
 <I>Slot1</I>
 <I>Slot2</I>
 <I>Slot3</I>
 <C>Caves</C>
+<DIR>North</DIR>
 <C>Personal Cabin</C>
 <KW>altar</KW>
 <COL>BOLDGREEN</COL>
+<KW>north</KW>
+<COL>BOLDYELLOW</COL>

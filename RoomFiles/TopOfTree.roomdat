@@ -1,9 +1,10 @@
 <Name>Top of Tree</Name>
-<FD>Upon getting to the top of the large tree, you take a look around the vast landscape of this strange planet.  Seeing plants and flying fauna that you have never seen before in your vast travels.  There is also a strange bag with runes sewn on it hanging from one of the branches. To the west, you see some large grazing animals in a field, with some buildings in the distance.  To the east, you see a small lake.</FD>
-<SD>At the top of the tree you take a look around. To the west, you see some large grazing animals in a field, with some buildings in the distance.  To the east, you see a small lake.</SD>
+<FD>Upon getting to the top of the large tree, you take a look around the vast landscape of this strange planet.  Seeing plants and flying fauna that you have never seen before in your vast travels.  There is also a strange bag with runes sewn on it hanging from one of the branches. To the west, you see some large grazing animals in a field, with some buildings in the distance.  To the east, you see a small lake. You'll need to climb down to leave.</FD>
+<SD>At the top of the tree you take a look around. To the west, you see some large grazing animals in a field, with some buildings in the distance.  To the east, you see a small lake. You'll need to climb down to leave.</SD>
 <I>Bag with Strange Runes</I>
 <I>leafs filled branch</I>
 <C>Starting Room</C>
+<DIR>down</DIR>
 <KW>strange bag with runes</KW>
 <COL>BOLDGREEN</COL>
 <KW>animals in a field</KW>
@@ -11,4 +12,6 @@
 <KW>buildings</KW>
 <COL>BOLDYELLOW</COL>
 <KW>lake</KW>
+<COL>BOLDYELLOW</COL>
+<KW>down</KW>
 <COL>BOLDYELLOW</COL>

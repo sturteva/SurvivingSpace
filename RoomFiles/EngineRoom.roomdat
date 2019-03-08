@@ -1,11 +1,13 @@
 <Name>Engine Room</Name>
-<FD>Walking into your engine room, you quickly see that something chewed through the casing, pulling out the nadion emitter, and destroying it in the process.  It also appears that a large amount of the wiring from the nadion emitter to the photon splitter was pulled out as well, but it does not appear to be in the engine room.</FD>
-<SD>The engine room.</SD>
+<FD>Walking into your engine room, you quickly see that something chewed through the casing, pulling out the nadion emitter, and destroying it in the process.  It also appears that a large amount of the wiring from the nadion emitter to the photon splitter was pulled out as well, but it does not appear to be in the engine room.The only exit is north.</FD>
+<SD>The engine room. The only exit is north.</SD>
 <I>broken FTL engine</I>
 <I>hammock</I>
 <C>Personal Cabin</C>
-<C>Med Bay</C>
+<DIR>North</DIR>
 <KW>nadion emitter</KW>
 <COL>BOLDGREEN</COL>
 <KW>wiring</KW>
 <COL>BOLDGREEN</COL>
+<KW>north</KW>
+<COL>BOLDYELLOW</COL>

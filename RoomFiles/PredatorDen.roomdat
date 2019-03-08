@@ -1,11 +1,21 @@
 <Name>Predator Den</Name>
-<FD>Walking into this shaded rock outcropping, you smell the fetid stench of rotting meat, and near the wall, you see a small rock with a spiraling symbol on it amongst a small pile of bones.  As you get closer, you hear a growling noise!</FD>
-<SD>This rock outcropping has some bones underneath it</SD>
+<FD>Walking into this shaded rock outcropping, you smell the fetid stench of rotting meat, and near the wall, you see a small rock with a spiraling symbol on it amongst a small pile of bones. To the north is the pool of water, and a cave to the east.  As you get closer, you hear a growling noise!</FD>
+<SD>This rock outcropping has some bones underneath it. A trail going north and east.</SD>
 <I>Predator</I>
 <I>Stone with Spiral Symbol</I>
 <C>Pool of Water</C>
+<DIR>North</DIR>
 <C>Caves</C>
+<DIR>East</DIR>
 <KW>small rock</KW>
 <COL>BOLDGREEN</COL>
 <KW>growling noise!</KW>
 <COL>BOLDRED</COL>
+<KW>north</KW>
+<COL>BOLDYELLOW</KW>
+<KW>pool of water</KW>
+<COL>BOLDYELLOW</KW>
+<KW>cave</KW>
+<COL>BOLDYELLOW</COL>
+<KW>east</KW>
+<COL>BOLDYELLOW</COL>

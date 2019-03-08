@@ -1,11 +1,17 @@
 <Name>Galley</Name>
-<FD>This small galley is where you normally take your meals, especially while in FTL between solar systems.  On the wall of this gallery are the pictures of the previous commanders of this vessel. There are some tools, and food left out</FD>
-<SD>This is the galley</SD>
+<FD>This small galley is where you normally take your meals, especially while in FTL between solar systems.  On the wall of this gallery are the pictures of the previous commanders of this vessel. There are some tools, and food left out. The exits are north and south.</FD>
+<SD>This is the galley. The exits are north and south.</SD>
 <I>Tools</I>
 <I>Nutrition Wafer Bar</I>
 <C>The Head</C>
+<DIR>North</DIR>
 <C>Personal Cabin</C>
+<DIR>South</DIR>
 <KW>tools</KW>
 <COL>BOLDGREEN</COL>
 <KW>food</KW>
 <COL>BOLDGREEN</COL>
+<KW>north</KW>
+<COL>BOLDYELLOW</COL>
+<KW>south</KW>
+<COL>BOLDYELLOW</COL>

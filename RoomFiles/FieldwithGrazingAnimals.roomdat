@@ -1,14 +1,23 @@
 <Name>Field with Grazing Animals</Name>
-<FD>Looking out upon a large field, you see a large herd of animals roughly the size of horses from the planet Terra in the system of Sol.  These violet colored animals, are peacefully eating, with one of the animals on an obvious lookout. The lookout, seems to have something on its back.  In the distance, you see what looks like buildings.  In the forest to the west, you see what might be the outline of a cave entrance</FD>
+<FD>Looking out upon a large field, you see a large herd of animals roughly the size of horses from the planet Terra in the system of Sol.  These violet colored animals, are peacefully eating, with one of the animals on an obvious lookout. The lookout, seems to have something on its back.  In the distance, you see what looks like buildings to the south.  In the forest to the west, you see what might be the outline of a cave entrance. North will take you back to the tree you woke up at.</FD>
 <SD>A field with buildings in the distance, and possible a cave in the forest just beyond.</SD>
 <I>Grazing Animal with a strange stone on its back</I>
 <I>Red Ochre rock</I>
 <C>Starting Room</C>
+<DIR>North</DIR>
 <C>Tech Ruin</C>
+<DIR>South</DIR>
 <C>Caves</C>
+<DIR>West</DIR>
 <KW>buildings</KW>
 <COL>BOLDYELLOW</COL>
 <KW>cave</KW>
 <COL>BOLDYELLOW</COL>
 <KW>back</KW>
 <COL>BOLDGREEN</COL>
+<KW>west</KW>
+<COL>BOLDYELLOW</COL>
+<KW>south</KW>
+<COL>BOLDYELLOW</COL>
+<KW>North</KW>
+<COL>BOLDYELLOW</COL>

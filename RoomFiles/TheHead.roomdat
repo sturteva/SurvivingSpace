@@ -1,12 +1,17 @@
 <Name>The Head</Name>
-<FD>This Head, assumes that there are at least two or three people on the ship, but there hasn't been more than one crewmember about the “Harlequin” for decades, ever since the Tulqin Blight ravaged the International Space Federation sectors.  On the floor you see a pile of wires, and the Rugvuk sitting atop it as a bed.</FD>
-<SD>The head, built for two or three people.</SD>
+<FD>This Head, assumes that there are at least two or three people on the ship, but there hasn't been more than one crewmember about the “Harlequin” for decades, ever since the Tulqin Blight ravaged the International Space Federation sectors.  On the floor you see a pile of wires, and the Rugvuk sitting atop it as a bed. To the east, west and south are exits.</FD>
+<SD>The head, built for two or three people. To the east, west and south are exits.</SD>
 <I>a Rugvuk</I>
 <I>pile of wiring</I>
 <C>Med Bay</C>
+<DIR>West</DIR>
 <C>Armory</C>
+<DIR>East</DIR>
 <C>Galley</C>
+<DIR>South</DIR>
 <KW>pile of wire</KW>
 <COL>BOLDGREEN</COL>
 <KW>Rugvuk</WK>
 <COL>BOLDGREEN</COL>
+<KW>east, west, and south</KW>
+<COL>BOLDYELLOW</COL>

@@ -1,14 +1,21 @@
 <Name>Starting Room</Name>
-<FD>You find yourself at the bottom of a large tree, one of the largest you've ever seen before. There is an animal path leading in two different directions, currently blocked by a large thicket of bushes. On the ground next to you is a knife with strange runes</FD>
-<SD>You are next to the tree that you awoke next to.</SD>
+<FD>You find yourself at the bottom of a large tree, one of the largest you've ever seen before, but you feel you can climb up it. There is an animal path leading in two different directions both east and west, currently blocked by a large thicket of bushes. On the ground next to you is a knife with strange runes.</FD>
+<SD>You are next to the tree that you awoke next to, that you can climb up. Beyond you see a trail goin east and west.</SD>
 <I>Knife with Runes</I>
 <I>Thistle filled bushes</I>
 <C>Top of Tree</C>
+<DIR>Up</DIR>
 <C>Pool of Water</C>
+<DIR>West</DIR>
 <C>Field with Grazing Animals</C>
+<DIR>East</DIR>
 <KW>large tree</KW>
 <COL>BOLDYELLOW</COL>
 <KW>bushes</KW>
 <COL>BOLDGREEN</COL>
 <KW>knife with strange runes</KW>
 <COL>BOLDGREEN</COL>
+<KW>climb up it.</KW>
+<COL>BOLDYELLOW</COL>
+<KW>east and west</KW>
+<COL>BOLDYELLOW</COL>

@@ -1,5 +1,5 @@
 <Name>Pool of Water</Name>
-<FD>This beautiful pool of clear water, looks to have fish within it. You see two trails, one heading south, and one east. </FD>
+<FD>This beautiful pool of clear water, looks to have fish within it. You see two trails, one heading south, and one east, and your trail to the north. </FD>
 <SD>A pool of water. </SD>
 <I>Fish</I>
 <I>Water Bottle</I>
@@ -9,3 +9,9 @@
 <C>Caves</C>
 <KW>fish</KW>
 <COL>BOLDGREEN</COL>
+<KW>south</KW>
+<COL>BOLDYELLOW</COL>
+<KW>east</KW>
+<COL>BOLDYELLOW</COL>
+<KW>north</KW>
+<COL>BOLDYELLOW</COL>
