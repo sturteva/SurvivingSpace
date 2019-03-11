@@ -386,7 +386,7 @@ void game::goCommand(vector<string> command)
 			// move away from animal
 			else if(currRoom->getName() == "Caves")
 			{
-				if(magicDomeOpen)
+				if(magicDomeOpen && command[1] == "Magic Dome" )
 				{
 					cout << "Going to new location" << endl << endl;
 					currRoom->visitRoom();
@@ -397,9 +397,22 @@ void game::goCommand(vector<string> command)
 					currRoom->printDescription();
 					break;
 				}
-				else
+				else if(command[1] == "Magic Dome")
 				{
 					cout << "The large stone door is shut tight..." << endl;
+				}
+
+				else{
+
+					cout << "Going to new location" << endl << endl;
+                                        currRoom->visitRoom();
+                                        player1->setLocation(adjacentRooms[i]);
+
+                                        // get new room
+                                        currRoom = player1->getLocation();
+                                        currRoom->printDescription();
+                                        break;
+
 				}
 			}
 			// all other rooms
@@ -450,16 +463,16 @@ void game::lookCommand(vector<string> command)
 	// Top of Tree
 	else if (currRoom->getName() == "Top of Tree")
 	{
-		cout << "To the west, you see some large grazing animals in a field, with some buildings in the distance." << endl
-			 << "To the east, you see a small lake with fish in it." << endl;
+		cout << "To the" << BOLDYELLOW << " west" << RESET << ", you see some large " << BOLDYELLOW << "grazing animals in a field" << RESET << ", with some buildings in the distance." << endl
+			 << "To the" << BOLDYELLOW << " east" << RESET << " , you see a small lake with fish in it." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Bag with Strange Runes") != roomItems.end())
 		{
-			cout << "There is a strange bag with runes sewn on it hanging from one of the tree branches." << endl
+			cout << "There is a" << BOLDGREEN "  strange bag with runes" << RESET << " sewn on it hanging from one of the tree branches." << endl
 			 	 << "The runes look just like the ones on the knife down below." << endl; 
 		}
 		if (find(roomItems.begin(), roomItems.end(), "leafs filled branch") != roomItems.end())
 		{
-			cout << "There is a large tree branch that would make a great pole." << endl; 
+			cout << "There is a large tree" << BOLDGREEN " branch" << RESET << " that would make a great pole." << endl; 
 		}
 	}
 
@@ -470,27 +483,27 @@ void game::lookCommand(vector<string> command)
 			 << "In the forest to the west you see a cave entrance." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange rock on its back") != roomItems.end())
 		{
-			cout << "You notice one of the grazing animals has a rock with strange symbols on its back." << endl; 
+			cout << "You notice one of the grazing animals has a" << BOLDGREEN << " rock with strange symbols" << RESET << " on its back." << endl; 
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Red Ochre rock") != roomItems.end())
 		{
-			cout << "There is a pile of soft red rocks on the ground." << endl;
+			cout << "There is a pile of soft" << BOLDGREEN << " red rocks" << RESET << " on the ground." << endl;
 		}	
 	}
 
 	// Pool of Water
 	else if (currRoom->getName() == "Pool of Water")
 	{
-		cout << "A trail runs to the south toward what looks like a cave carved into one of the hills." << endl
-			 << "Another trail runs to the east that leads ot a rock outcropping overlooking the water.." << endl
-			 << "You can see through the crystal clear water and see the fish swimming." << endl;
+		cout << "A trail runs to the" << BOLDYELLOW << " south" << RESET << " toward what looks like a cave carved into one of the hills." << endl
+			 << "Another trail runs to the" << BOLDYELLOW << " east" << RESET << " that leads ot a rock outcropping overlooking the water.." << endl
+			 << "You can see through the crystal clear water and see the" << BOLDGREEN<< " fish" << RESET " swimming." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Fish") != roomItems.end())
 		{
-			cout << "There are a lot of fish swimming in the water. Maybe I could find something to fish one out" << endl; 
+			cout << "There are a lot of " << BOLDGREEN << "fish " << RESET << " swimming in the water. Maybe I could find something to fish one out" << endl; 
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Water Bottle") != roomItems.end())
 		{
-			cout << "You notice a small bottle on the ground by the edge of the water." << endl
+			cout << "You notice a small " << BOLDGREEN << "bottle " << RESET << "on the ground by the edge of the water." << endl
 				 << "It looks like it is filled with water from the lake." << endl; 
 		}
 	}
@@ -515,15 +528,15 @@ void game::lookCommand(vector<string> command)
 			 << "There is rubble and trash left from whoever built these buildings." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Aluminum Hook") != roomItems.end())
 		{
-			cout << "Among the rubble you see an aluminum hook similar to a fishing hook." << endl;
+			cout << "Among the rubble you see an" << BOLDGREEN << " aluminum hook" << RESET << " similar to a fishing hook." << endl;
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Rock with Lightning Symbol") != roomItems.end())
 		{
-			cout << "You also spot a small rock with a lightning symbol on it." << endl;
+			cout << "You also spot a small" << BOLDGREEN << " rock with a lightning symbol" << RESET << " on it." << endl;
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Old datapad") != roomItems.end())
 		{
-			cout << "There is an old datapad lying in the middle of the street." << endl;
+			cout << "There is an old "<< BOLDGREEN << "datapad" << RESET << " lying in the middle of the street." << endl;
 		}
 
 	}
@@ -1240,7 +1253,7 @@ void game::sneakCommand(vector<string> command)
 	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange stone on its back")
 	{
 		cout << "You sneak up on the grazing animal with the strange stone on its back..." << endl
-			 << "You notice the stone is round, smooth, and has a sword like symbol on it." << endl
+			 << "You notice the" << BOLDGREEN << " stone with sword symbol" << RESET << "is round and smooth ." << endl
 			 << "If I'm careful I could probably grab the strange stone off the animals back." << endl;
 		sneakFlag = true;
 		currRoom->addInteractable("Sneak up on Animal");
