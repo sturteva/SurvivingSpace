@@ -56,9 +56,6 @@ vector<room*> dataIO::roomIO(string direct_name){
 
     vector<string> fileNames;
 
-    //DEBUG
-    //cout << "Directory Name: " << direct_name << endl;
-
     //first we need to open the directory that our Room data files are in.
     dir = opendir(direct_name.c_str());
     if(!dir){
@@ -85,8 +82,7 @@ vector<room*> dataIO::roomIO(string direct_name){
 		//build full filename
 		string theFile =  direct_name + "/" + fileNames.at(i);
 
-		//DEBUG LINE
-		//cout << "full file name: " << theFile << endl;
+	
             //Open the File
             ifstream roomFile(theFile.c_str());
 
@@ -106,9 +102,6 @@ vector<room*> dataIO::roomIO(string direct_name){
                     //Adds Name to the room
                     if(line.find("<Name>") != std::string::npos){
 
-			//Debug
-			//cout << "inside <NAME>" << endl;
-
                         //Removes the Tags from the line
                         pos = line.find("<Name>");
 
@@ -124,8 +117,7 @@ vector<room*> dataIO::roomIO(string direct_name){
                                 newRoom = roomVec.at(k);
                             }
                         }
-			//Debug
-			//cout << "After erasing:" << line << endl;
+
                         //Gives the new room its name
                         if(!adj)
 			    newRoom = new room();
@@ -135,20 +127,12 @@ vector<room*> dataIO::roomIO(string direct_name){
                     //Adds Long Description to the room
                     else if(line.find("<FD>")!= std::string::npos){
 
-			//Debug
-			//cout << "Inside <FD>" << endl;
                         //Removes the Tags from the line.
                         pos = line.find("<FD>");
                         line.erase(pos,4);
                         pos = line.find("</FD>");
                         line.erase(pos,5);
 						
-		/*	line.insert(5,BOLDRED);
-			line.insert((int)line.length()-6,RESET);
-			cout << "OTHER TEST HERE" << endl;
-			cout << line << endl;*/
-
-			
                         //Gives the new room its long description
                         newRoom->setFD(line);
 			
@@ -159,8 +143,6 @@ vector<room*> dataIO::roomIO(string direct_name){
                      //Adds Short Description to the room
                     else if(line.find("<SD>")!= std::string::npos){
 
-			//Debug
-			//cout << "Inside <SD>" << endl;
                         //Removes the Tags from the line.
                         pos = line.find("<SD>");
                         line.erase(pos,4);
@@ -174,9 +156,6 @@ vector<room*> dataIO::roomIO(string direct_name){
 
                     //Adds Interactable to room
                     else if(line.find("<I>") != std::string::npos){
-
-			//debug
-			//cout << "Inside <I>" << endl;
 
                         //Removes the Tags from the line.
                         pos = line.find("<I>");
@@ -192,8 +171,6 @@ vector<room*> dataIO::roomIO(string direct_name){
                     //This is a room it is connected to
                     else if(line.find("<C>") != std::string::npos){
 
-			//Debug
-		
 		        //Removes the Tags from the line.
                         pos = line.find("<C>");
                         line.erase(pos,3);
@@ -330,17 +307,7 @@ else cout << "Unable to open Room Data File:" << fileNames.at(i) << endl;
         }
     }
 
-//Debug
-/*for(int j = 0; j < (int)roomVec.size(); ++j){
-
-	cout << "ROOM NAME: " << roomVec.at(j)->getName() << endl;
-	vector<room*> adjRooms = roomVec.at(j)->getAdjacent();
-	for(int m = 0; m < (int)adjRooms.size(); ++m){
-		cout << "Ajacent:  " <<adjRooms.at(m)->getName() << endl;
-	}
-}*/
-
-    return roomVec;
+	return roomVec;
 }
 
 /******************************************************************************
@@ -511,13 +478,6 @@ void dataIO::loadGame(string folderName,game* newGame){
 	}
      }
     newGame->setPlayers(player1);
-
-/*    cout << newGame->getPlayer1()->getLocation()->getName() << endl;
-
-    for(int j = 0; j < (int)newGame->getPlayer1()->getInventory().size(); ++j){
-	cout << newGame->getPlayer1()->getInventory().at(j) << endl;
-	}*/
-
 
 }
 

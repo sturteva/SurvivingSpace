@@ -118,12 +118,12 @@ void game::start()
 		command = parseString();
 		//DEBUG
 		
-		cout << "\nParsed Command: ";
+/*		cout << "\nParsed Command: ";
 		for (int count = 0; count < (int)command.size(); count++)
 		{
 			cout << command[count] << " ";
 		}
-		cout << endl << endl;
+		cout << endl << endl;*/
 		
 
 		cout << endl;
