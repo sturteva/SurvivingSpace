@@ -184,42 +184,52 @@ void game::doCommand(vector<string> command)
 	{
 		cutCommand(command);
 	}
+	// move toward command
 	else if (command[0] == "move toward")
 	{
 		moveTowardCommand(command);
 	}
+	// sneak command
 	else if (command[0] == "sneak")
 	{
 		sneakCommand(command);
 	}
+	// put command
 	else if (command[0] == "put")
 	{
 		putCommand(command);
 	}
+	// drop command
 	else if (command[0] == "drop")
 	{
 		dropCommand(command);
 	}
+	// crush command
 	else if (command[0] == "crush")
 	{
 		crushCommand(command);
 	}
+	// combine command
 	else if (command[0] == "combine")
 	{
 		combineCommand(command);
 	}
+	// give command
 	else if (command[0] == "give")
 	{
 		giveCommand(command);
 	}
+	// use command
 	else if (command[0] == "use")
 	{
 		useCommand(command);
 	}
+	// fix command
 	else if (command[0] == "fix")
 	{
 		fixCommand(command);
-	}
+	} 
+	// exit command
 	else if (command[0] == "exit")
 	{
 
@@ -330,7 +340,8 @@ void game::saveCommand(vector<string> command)
 void game::goCommand(vector<string> command)
 {
 	room * currRoom = player1->getLocation();
-	vector<room*> adjacentRooms = player1->getAdjacentRooms();
+	vector<room*> adjacentRooms = currRoom->getAdjacent();
+	vector<string> adjacentDirs = currRoom->getAdjDir();
 	vector<string> roomItems = player1->getRoomItems();
 
 /*
@@ -343,8 +354,23 @@ void game::goCommand(vector<string> command)
 	currInventory = player1->getInventory();
 */
 
-	//debug
-	//cout << "Adjacent rooms: " << endl;
+	if(command[1] == "tree" && currRoom->getName() == "Starting Room")
+	{
+		cout << "Going to new location" << endl << endl;
+		currRoom->visitRoom();
+		for (int i = 0; i < (int)adjacentRooms.size(); i++)
+		{
+			if(adjacentRooms[i]->getName() == "Top of Tree")
+			{
+				player1->setLocation(adjacentRooms[i]);
+				// get new room
+				currRoom = player1->getLocation();
+				currRoom->printDescription();
+				break;
+			}
+		}
+	}
+
 
 	for (int i = 0; i < (int)adjacentRooms.size(); i++)
 	{
@@ -435,6 +461,20 @@ void game::goCommand(vector<string> command)
 		}
 	}
 
+	for (int i = 0; i < (int)adjacentDirs.size(); i++)
+	{
+		if (adjacentDirs[i] == command[1])
+		{
+			cout << "Going to new location" << endl << endl;
+			currRoom->visitRoom();
+			player1->setLocation(adjacentRooms[i]);
+
+			// get new room
+			currRoom = player1->getLocation();
+			currRoom->printDescription();
+			break;
+		}
+	}
 
 }
 
@@ -494,8 +534,8 @@ void game::lookCommand(vector<string> command)
 	// Pool of Water
 	else if (currRoom->getName() == "Pool of Water")
 	{
-		cout << "A trail runs to the" << BOLDYELLOW << " south" << RESET << " toward what looks like a cave carved into one of the hills." << endl
-			 << "Another trail runs to the" << BOLDYELLOW << " east" << RESET << " that leads ot a rock outcropping overlooking the water.." << endl
+		cout << "A trail runs to the" << BOLDYELLOW << " east" << RESET << " toward what looks like a cave carved into one of the hills." << endl
+			 << "Another trail runs to the" << BOLDYELLOW << " south" << RESET << " that leads ot a rock outcropping overlooking the water.." << endl
 			 << "You can see through the crystal clear water and see the" << BOLDGREEN<< " fish" << RESET " swimming." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Fish") != roomItems.end())
 		{
@@ -891,6 +931,10 @@ void game::lookAtCommand(vector<string> command)
 		}
 		
 	}
+	else if (command[1] == "inventory")
+	{
+		inventoryCommand(command);
+	}
 }
 
 /******************************************************************************
@@ -1194,7 +1238,7 @@ void game::cutCommand(vector<string> command)
 		//check knife is in inventory
 		if (find(currInventory.begin(), currInventory.end(), "Knife with Runes") != currInventory.end() )
 		{
-			cout << "You cut the bushes using the knife with the strange runes to reveal the field to the west and the small lake to the east. \nOnly a pile of cut bushes remains." << endl;
+			cout << "You cut the bushes using the knife with the strange runes to reveal the small lake to the west and the field to the east. \nOnly a pile of cut bushes remains." << endl;
 			//remove bushes from interactables
 			currRoom->removeInteractable("Thistle filled bushes");
 			// add pile of bushes to interactables

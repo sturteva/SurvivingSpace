@@ -18,7 +18,7 @@ class room
     	string shortDesc;
     	vector<string> interactables;
     	vector<room*> adjacent;
-	vector<string> adjDir;
+	    vector<string> adjDir;
     	bool visited;
 
 	public:
