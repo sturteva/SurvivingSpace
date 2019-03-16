@@ -11,6 +11,7 @@
 #include <iostream>
 #include <stdlib.h> 
 #include <algorithm>
+#include <unistd.h>
 
 using std::string;
 using std::cout;
@@ -228,6 +229,16 @@ void game::doCommand(vector<string> command)
 	else if (command[0] == "fix")
 	{
 		fixCommand(command);
+	} 
+	// eat command
+	else if (command[0] == "eat")
+	{
+		eatCommand(command);
+	} 
+	// sleep command
+	else if (command[0] == "sleep")
+	{
+		sleepCommand(command);
 	} 
 	// exit command
 	else if (command[0] == "exit")
@@ -784,7 +795,7 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Animal Sleeping pills") != roomItems.end())
 		{
-			cout << "There are some" <<  BOLDYELLOW << "animal sleeping pills " << RESET << "sitting next to the cages." << endl;
+			cout << "There are some " <<  BOLDYELLOW << "animal sleeping pills " << RESET << "sitting next to the cages." << endl;
 		}
 	}
 
@@ -1091,15 +1102,22 @@ void game::takeCommand(vector<string> command)
 	vector<string> roomItems = player1->getRoomItems();
 
 	// take knife
-	if (currRoom->getName() == "Starting Room" && command[1] == "Knife with Runes")
+	if (currRoom->getName() == "Starting Room" && find(command.begin(), command.end(), "Knife with Runes") != command.end())
 	{
-		if(!currInventory.empty())  
+		if(find(currInventory.begin(), currInventory.end(), "Bag with Strange Runes") != currInventory.end())  
 		{
-			/* The bag is in inventory */
-			cout << "You put the knife in the bag, but the small bag does not grow... \nThe bag appears to be enchanted to hold items without growing." << endl;
-			player1->addToInventory("Knife with Runes");
-			currRoom->removeInteractable("Knife with Runes");
-		} 
+			if (find(currInventory.begin(), currInventory.end(), "Knife with Runes") != currInventory.end())
+			{
+				cout << "The " << BOLDGREEN << "knife with runes" << RESET << " is already in your inventory..." << endl;
+			} 
+			else
+			{
+				/* The bag is in inventory */
+				cout << "You put the knife in the bag, but the small bag does not grow... \nThe bag appears to be enchanted to hold items without growing." << endl;
+				player1->addToInventory("Knife with Runes");
+				currRoom->removeInteractable("Knife with Runes");
+			}
+		}
 		else 
 		{
 			/* player hasnt gotten the bag yet*/
@@ -1107,22 +1125,29 @@ void game::takeCommand(vector<string> command)
 		}
 	}
 	// take bag
-	else if (currRoom->getName() == "Top of Tree" && command[1] == "Bag with Strange Runes")
+	else if (currRoom->getName() == "Top of Tree" && find(command.begin(), command.end(), "Bag with Strange Runes") != command.end())
 	{
-		cout << "You take the bag and clip it to your belt..." << endl;
-		player1->addToInventory("Bag with Strange Runes");
-		currRoom->removeInteractable("Bag with Strange Runes");
+		if (find(roomItems.begin(), roomItems.end(), "Bag with Strange Runes") != roomItems.end())
+		{
+			cout << "You take the " << BOLDGREEN << "bag with strange runes" << RESET << " and clip it to your belt..." << endl;
+			player1->addToInventory("Bag with Strange Runes");
+			currRoom->removeInteractable("Bag with Strange Runes");
+		}
+		else if (find(currInventory.begin(), currInventory.end(), "Bag with Strange Runes") != currInventory.end())
+		{
+			cout << "The " << BOLDGREEN << "bag with strange runes" << RESET << " is already in your inventory." << endl;
+		}
 	}
 	// take stone in field
-	else if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Stone with Sword Symbol")
+	else if (currRoom->getName() == "Field with Grazing Animals" && find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end())
 	{
 		if(find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
 		{
-			cout << "The  stone is already in your inventory..." << endl;
+			cout << "The " << BOLDGREEN << "stone with sword symbol" << RESET << " is already in your inventory..." << endl;
 		}
 		else if(sneakFlag == true)
 		{
-			cout << "You take the strange stone off the animals back and put it into your bag." << endl
+			cout << "You take the " << BOLDGREEN << "stone with sword symbol" << RESET << " off the grazing animals back and put it into your bag." << endl
 				 << "The animal doesn't seem to be bothered. It just shakes and moves to a new patch of grass." << endl;
 
 			currRoom->removeInteractable("Grazing Animal with a strange rock on its back");
@@ -1131,31 +1156,35 @@ void game::takeCommand(vector<string> command)
 		}
 		else if (sneakFlag == false)
 		{
-			cout << "You are too far away to reach the stone... Try moving closer." << endl;
+			cout << "You are too far away to reach the " << BOLDGREEN << "stone with sword symbol" << RESET << "... Try moving closer to the grazing animal." << endl;
 		}
 	}
 	// take stone in tech ruin
-	else if (currRoom->getName() == "Tech Ruin" && command[1] == "Stone with Lightning Symbol")
+	else if (currRoom->getName() == "Tech Ruin" && find(command.begin(), command.end(), "Stone with Lightning Symbol") != command.end())
 	{
 		if(find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
 		{
-			cout << "You have already picked up the stone." << endl;
+			cout << "You have already picked up the " << BOLDGREEN << "stone with lightning symbol" << RESET << endl;
+		}
+		else
+		{
+			cout << "You pick up the " << BOLDGREEN << "stone with lightning symbol" << RESET << " and put it in your bag." << endl;
+			player1->addToInventory("Stone with Lightning Symbol");
+			currRoom->removeInteractable("Stone with Lightning Symbol");
 		}
 
-		cout << "You pick up the stone with the lightning symbol and put it in your bag." << endl;
-		player1->addToInventory("Stone with Lightning Symbol");
-		currRoom->removeInteractable("Stone with Lightning Symbol");
+		
 	}
 	// take stone in predator den
-	else if (currRoom->getName() == "Predator Den" && command[1] == "Stone with Spiral Symbol")
+	else if (currRoom->getName() == "Predator Den" && find(command.begin(), command.end(), "Stone with Spiral Symbol") != command.end())
 	{
 		if (find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
 		{
-			cout << "You have already picked up the stone." << endl;
+			cout << "You have already picked up the " << BOLDGREEN << "stone with spiral symbol" << RESET << endl;
 		}
 		else if(predatorCounter == -1)
 		{
-			cout << "You take the stone while the predator is distracted with the fish and put it in your bag.";
+			cout << "You take the " << BOLDGREEN << "stone with spiral symbol" << RESET << " while the predator is distracted with the fish and put it in your bag.";
 			player1->addToInventory("Stone with Spiral Symbol");
 		}
 		else
@@ -1179,35 +1208,64 @@ void game::takeCommand(vector<string> command)
 		}
 	}
 	// take red rock
-	else if(currRoom->getName() == "Field with Grazing Animals" && command[1] == "Red Ochre rock")
+	else if(currRoom->getName() == "Field with Grazing Animals" && find(command.begin(), command.end(), "Red Ochre rock") != command.end())
 	{
-		cout << "You pick up a soft red rock and put it in your bag." << endl;
-		player1->addToInventory("Red Ochre rock");
-		currRoom->removeInteractable("Red Ochre rock");
+		if (find(currInventory.begin(), currInventory.end(), "Red Ochre rock") != currInventory.end() || find(currInventory.begin(), currInventory.end(), "Crushed Red Ochre") != currInventory.end() || find(currInventory.begin(), currInventory.end(), "Red/Brown Paint") != currInventory.end())
+		{
+			cout << "You already have " << BOLDGREEN << "red ochre rock" << RESET << " in your inventory." << endl;
+		}
+		else
+		{
+			cout << "You pick up a " << BOLDGREEN << "red ochre rock" << RESET << " and put it in your bag." << endl;
+			player1->addToInventory("Red Ochre rock");
+			currRoom->removeInteractable("Red Ochre rock");
+		}
+
 	}
 	// take hook
-	else if (currRoom->getName() == "Tech Ruin" && command[1] == "Aluminum Hook")
+	else if (currRoom->getName() == "Tech Ruin" && find(command.begin(), command.end(), "Aluminum Hook") != command.end())
 	{
-		cout << "You pick up the aluminum hook and put it in your bag." << endl;
-		player1->addToInventory("Aluminum Hook");
-		currRoom->removeInteractable("Aluminum Hook");
+		if(find(currInventory.begin(), currInventory.end(), "Aluminum Hook") != currInventory.end() )
+		{
+			cout << "You already have the " << BOLDGREEN << "aluminum hook" << RESET << " in your inventory." << endl;
+		}
+		else
+		{
+			cout << "You pick up the " << BOLDGREEN << "aluminum hook" << RESET << " and put it in your bag." << endl;
+			player1->addToInventory("Aluminum Hook");
+			currRoom->removeInteractable("Aluminum Hook");
+		}
+
 	}
 	// take vines
-	else if (currRoom->getName() == "Caves" && command[1] == "string-like vines")
+	else if (currRoom->getName() == "Caves" && find(command.begin(), command.end(), "string-like vines") != command.end())
 	{
-		cout << "You pull down some of the string like vines and put it in your bag." << endl;
-		player1->addToInventory("string-like vines");
-		currRoom->removeInteractable("string-like vines");
+		if(find(currInventory.begin(), currInventory.end(), "string-like vines") != currInventory.end() )
+		{
+			cout << "You already have " << BOLDGREEN << "string-like vines" << RESET << " in your inventory." << endl;
+		}
+		else
+		{
+			cout << "You pull down some of the string like vines and put it in your bag." << endl;
+			player1->addToInventory("string-like vines");
+			currRoom->removeInteractable("string-like vines");
+		}
 	}
 	// take branch
-	else if (currRoom->getName() == "Top of Tree" && command[1] == "leafs filled branch")
+	else if (currRoom->getName() == "Top of Tree" && find(command.begin(), command.end(), "leafs filled branch") != command.end())
 	{
 		if (find(currInventory.begin(), currInventory.end(), "Bag with Strange Runes") != currInventory.end())
-
 		{
-			cout << "You snap a long branch off of the tree and put it in your bag." << endl;
-			player1->addToInventory("leafs filled branch");
-			currRoom->removeInteractable("leafs filled branch");
+			if (find(currInventory.begin(), currInventory.end(), "leafs filled branch") != currInventory.end())
+			{
+				cout << "The " << BOLDGREEN << "branch" << RESET << " is already in your inventory..." << endl;
+			} 
+			else
+			{
+				cout << "You snap a long branch off of the tree and put it in your bag." << endl;
+				player1->addToInventory("leafs filled branch");
+				currRoom->removeInteractable("leafs filled branch");
+			}
 		}
 		else
 		{
@@ -1215,10 +1273,18 @@ void game::takeCommand(vector<string> command)
 		}
 	}
 	// take water bottle
-	else if (currRoom->getName() == "Pool of Water" && command[1] == "Water Bottle")
+	else if (currRoom->getName() == "Pool of Water" && find(command.begin(), command.end(), "Water Bottle") != command.end())
 	{
-		cout << "You put the small bottle of water in your bag." << endl;
-		player1->addToInventory("Water Bottle");
+		if (find(currInventory.begin(), currInventory.end(), "Water Bottle") != currInventory.end() || find(currInventory.begin(), currInventory.end(), "Red/Brown Paint") != currInventory.end())
+		{
+			cout << "The " << BOLDGREEN << "water bottle" << RESET << " is already in your inventory..." << endl;
+		}
+		else
+		{
+			cout << "You put the small bottle of water in your bag." << endl;
+			player1->addToInventory("Water Bottle");
+		}
+
 	}
 	// take stone with sword symbol off altar
 	else if (currRoom->getName() == "Magic Dome" && command[1] == "Stone with Sword Symbol")
@@ -1278,34 +1344,67 @@ void game::takeCommand(vector<string> command)
 		}
 	}
 	// take old nadion emitter
-	else if (currRoom->getName() == "Personal Cabin" && command[1] == "Old nadion emitter")
+	else if (currRoom->getName() == "Personal Cabin" && find(command.begin(), command.end(), "Old nadion emitter") != command.end())
 	{
-		cout << "You put the nadion emitter in your bag." << endl;
-		player1->addToInventory("Old nadion emitter");
-		currRoom->removeInteractable("Old nadion emitter");
+		if (find(currInventory.begin(), currInventory.end(), "Old nadion emitter") != currInventory.end())
+		{
+			cout << "The " << BOLDGREEN << "nadion emitter" << RESET << " is already in your inventory..." << endl;
+		}
+		else
+		{
+			cout << "You put the nadion emitter in your bag." << endl;
+			player1->addToInventory("Old nadion emitter");
+			currRoom->removeInteractable("Old nadion emitter");
+		}
 	}
 	// take tools
-	else if (currRoom->getName() == "Galley" && command[1] == "Tools")
+	else if (currRoom->getName() == "Galley" && find(command.begin(), command.end(), "Tools") != command.end())
 	{
-		cout << "You put the tools in your bag." << endl;
-		player1->addToInventory("Tools");
-		currRoom->removeInteractable("Tools");
+		if (find(currInventory.begin(), currInventory.end(), "Old nadion emitter") != currInventory.end())
+		{
+			cout << "The " << BOLDGREEN << "tools" << RESET << " are already in your inventory..." << endl;
+		}
+		else
+		{
+			cout << "You put the" << BOLDGREEN << "tools" << RESET << " in your bag." << endl;
+			player1->addToInventory("Tools");
+			currRoom->removeInteractable("Tools");
+		}
 	}
 	// take nutrition wafer bar
-	else if (currRoom->getName() == "Galley" && command[1] == "Nutrition Wafer Bar")
+	else if (currRoom->getName() == "Galley" && find(command.begin(), command.end(), "Nutrition Wafer Bar") != command.end())
 	{
-		cout << "You put the nutrition wafer bar in your bag." << endl;
-		player1->addToInventory("Nutrition Wafer Bar");
-		currRoom->removeInteractable("Nutrition Wafer Bar");
+		if (find(currInventory.begin(), currInventory.end(), "Nutrition Wafer Bar") != currInventory.end())
+		{
+			cout << "The " << BOLDGREEN << "nutrition wafer bar" << RESET << " is already in your inventory..." << endl;
+		}
+		else if (find(roomItems.begin(), roomItems.end(), "Nutrition Wafer Bar") == roomItems.end())
+		{
+			cout << "You already took the "<< BOLDGREEN << "nutrition wafer bar" << RESET << " from the galley." << endl;
+		}
+		else
+		{
+			cout << "You put the" << BOLDGREEN << "nutrition wafer bar" << RESET << " in your bag." << endl;
+			player1->addToInventory("Nutrition Wafer Bar");
+			currRoom->removeInteractable("Nutrition Wafer Bar");
+		}
 	}
 	// take pile of wiring
-	else if (currRoom->getName() == "The Head" && command[1] == "pile of wiring")
+	else if (currRoom->getName() == "The Head" && find(command.begin(), command.end(), "pile of wiring") != command.end())
 	{
 		if(rugvukFlag)
 		{
-			cout << "You put the wires in your bag." << endl;
-			player1->addToInventory("Wires");
-			currRoom->removeInteractable("pile of wiring");
+			if (find(currInventory.begin(), currInventory.end(), "Wires") != currInventory.end())
+			{
+				cout << "The " << BOLDGREEN << "wires" << RESET << " are already in your inventory..." << endl;
+			}
+			else 
+			{
+				cout << "You put the wires in your bag." << endl;
+				player1->addToInventory("Wires");
+				currRoom->removeInteractable("pile of wiring");
+			}
+
 		}
 		else
 		{
@@ -1314,18 +1413,32 @@ void game::takeCommand(vector<string> command)
 		}
 	}
 	// take animal sleeping pills
-	else if (currRoom->getName() == "Med Bay" && command[1] == "Animal Sleeping pills")
+	else if (currRoom->getName() == "Med Bay" && find(command.begin(), command.end(), "Animal Sleeping pills") != command.end())
 	{
-		cout << "You put the animal sleeping pills in your bag." << endl;
-		player1->addToInventory("Animal Sleeping pills");
-		currRoom->removeInteractable("Animal Sleeping pills");
+		if (find(currInventory.begin(), currInventory.end(), "Animal Sleeping pills") != currInventory.end())
+		{
+			cout << "The " << BOLDGREEN << "animal sleeping pills" << RESET << " are already in your inventory..." << endl;
+		}
+		else 
+		{
+			cout << "You put the animal sleeping pills in your bag." << endl;
+			player1->addToInventory("Animal Sleeping pills");
+			currRoom->removeInteractable("Animal Sleeping pills");
+		}
 	}
 	// take stun gun
-	else if (currRoom->getName() == "Armory" && command[1] == "Stun Gun")
+	else if (currRoom->getName() == "Armory" && find(command.begin(), command.end(), "Stun Gun") != command.end())
 	{
-		cout << "You put the stun gun in your bag." << endl;
-		player1->addToInventory("Stun Gun");
-		currRoom->removeInteractable("Stun Gun");
+		if (find(currInventory.begin(), currInventory.end(), "Stun Gun") != currInventory.end())
+		{
+			cout << "The " << BOLDGREEN << "stun gun" << RESET << " is already in your inventory..." << endl;
+		}
+		else 
+		{
+			cout << "You put the stun gun in your bag." << endl;
+			player1->addToInventory("Stun Gun");
+			currRoom->removeInteractable("Stun Gun");
+		}
 	}
 
 	else
@@ -1767,7 +1880,7 @@ void game::useCommand(vector<string> command)
 			rugvukFlag = true;
 		}
 	}
-	else if (currRoom->getName() == "Helm" && command[1] == "Piloting Console")
+	else if (currRoom->getName() == "Helm" && find(command.begin(), command.end(), "Piloting Console") != command.end())
 	{
 		if (engineFixed)
 		{
@@ -1779,7 +1892,7 @@ void game::useCommand(vector<string> command)
 			cout << "The console is dark. Looks like the FTL engine is offline" << endl;
 		}
 	}
-	else if (currRoom->getName() == "Helm" && command[1] == "Scanning Console")
+	else if (currRoom->getName() == "Helm" && find(command.begin(), command.end(), "Scanning Console") != command.end())
 	{
 		if (command[2] == "planet")
 		{
@@ -1790,6 +1903,10 @@ void game::useCommand(vector<string> command)
 		{
 			cout << "There are no freindly ships nearby." << endl;
 		}
+	}
+	else if (find(command.begin(), command.end(), "Deoderant") != command.end() && (find(currInventory.begin(), currInventory.end(), "Deoderant") != currInventory.end() || currRoom->getName() == "Personal Cabin"))
+	{
+		cout << "You use the deoderant to freshen up a little bit." << endl; 
 	}
 
 }
@@ -1839,6 +1956,54 @@ void game::fixCommand(vector<string> command)
 
 }
 
+/******************************************************************************
+** Function: eatCommand()
+** Description: processes the eat command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::eatCommand(vector<string> command)
+{
+	//room * currRoom = player1->getLocation();
+	vector<string> currInventory = player1->getInventory();
+
+	if(find(command.begin(), command.end(), "Nutrition Wafer Bar") != command.end())
+	{
+		if (find(currInventory.begin(), currInventory.end(), "Nutrition Wafer Bar") != currInventory.end())
+		{
+			cout << "You eat the " << BOLDYELLOW << "nutrition wafer bar." << RESET << endl;
+			player1->removeFromInventory("Nutrition Wafer Bar");
+		}
+		
+	}
+	else
+	{
+		cout << "You cannot eat that." << endl;
+	}
+
+}
+
+/******************************************************************************
+** Function: sleepCommand()
+** Description: processes the sleep command sent from the parser
+** Parameters: Vector of parsed commands
+** Returns: None
+*******************************************************************************/
+void game::sleepCommand(vector<string> command)
+{
+	room * currRoom = player1->getLocation();
+	//vector<string> currInventory = player1->getInventory();
+
+	if(currRoom->getName() == "Personal Cabin")
+	{
+		cout << "You lay down in your bed and rest for a bit..." << endl << endl << endl;
+	}
+	else if(currRoom->getName() == "Engine Room")
+	{
+		cout << "You lay down in the hammock and rest for a bit..." << endl << endl << endl;
+	}
+
+}
 /******************************************************************************
 ** Function: getRooms()
 ** Description: returns room vector

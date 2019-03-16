@@ -52,6 +52,8 @@ class game
 	    void giveCommand(vector<string>);
 	    void useCommand(vector<string>);
 	    void fixCommand(vector<string>);
+	    void eatCommand(vector<string>);
+	    void sleepCommand(vector<string>);
 	    vector<room*> getRooms();
 	    player* getPlayer1();
 	    int getNumPlayers();
