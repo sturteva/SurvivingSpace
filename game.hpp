@@ -26,6 +26,7 @@ class game
     	bool magicDomeOpen;
     	bool rugvukFlag;
     	bool engineFixed;
+	bool bushCut;
 
 	public:
 		game();

@@ -53,6 +53,7 @@ game::game()
 	magicDomeOpen = false;
 	rugvukFlag = false;
 	engineFixed = false;
+	bushCut = false;
 
 }
 
@@ -638,7 +639,14 @@ void game::lookCommand(vector<string> command)
 	// Starting Room
 	if (currRoom->getName() == "Starting Room")
 	{
-		cout << "The bushes blocking the animal path are large and filled with thistles. I wonder whats on the other side?" << endl;
+
+		if(!bushCut){
+		cout << "The bushes blocking the animal path are large and filled with thistles. I wonder whats on the other side?" << endl;}
+
+		if(bushCut){
+
+			cout << "There are cut branches on ground,and a path leading " << BOLDYELLOW << " east and west." << RESET << endl;
+		}
 		//knife in room
 		if (find(roomItems.begin(), roomItems.end(), "Knife with Runes") != roomItems.end())
 		{
@@ -1517,6 +1525,7 @@ void game::cutCommand(vector<string> command)
 			currRoom->removeInteractable("Thistle filled bushes");
 			// add pile of bushes to interactables
 			currRoom->addInteractable("Pile of cut bushes");
+			bushCut = true;
 		}
 		else
 		{
