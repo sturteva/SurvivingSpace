@@ -441,14 +441,48 @@ vector<string> parseString()
 						{
 							prep = "on";
 						}
+						//change this next if statement to be a search for a noun later on
 						else
 						{
-							cout << "A valid preposition was not found. Try including 'with' or 'on'." << endl;
-							foundFlag = false;
-							doneFlag = true;
+							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
+							{
+								string tempString = itr->first;
+				
+								/***************
+								*Debug Command
+								***************/
+								//cout << "DEBUG (not moving): " << itr->first << " | " << itr->second << endl;
+				
+								regex regexString("\\b" + tempString + "\\b");
+								smatch matchString;
+					
+								if (regex_search(input, matchString, regexString))
+								{
+									//cout << "DEBUG (look at regex): " << itr->first << " | " << itr->second << endl;
+									command.push_back(itr->second);
+									//set iterator to the end
+									itr = nounDict.end();
+									foundFlag = true;
+									doneFlag = true;
+								}
+								else
+								{
+									++itr;
+								}
+							}
+							
+							if (command.size() != 2)
+							{
+								command.pop_back();
+								foundFlag = false;
+								doneFlag = true;
+								cout << "Something went wrong. Returning to prompt." << endl;
+								cout << "Correct format for this command is 'Use' <object> <preposition> <object>." << endl;
+								cout << "Alternative usage is: 'Use' <object>." << endl;
+							}
 						}
 						
-						if (prep != "")
+						if (prep != "" && !doneFlag)
 						{
 							for (std::map<string,string>::iterator itr = nounDict.begin(); itr != nounDict.end();)
 							{
@@ -500,6 +534,7 @@ vector<string> parseString()
 						{
 							cout << "Something went wrong. Returning to prompt." << endl;
 							cout << "Correct format for this command is 'Use' <object> <preposition> <object>." << endl;
+							cout << "Alternative usage is: 'Use' <object>." << endl;
 							foundFlag = false;
 							doneFlag = true;
 						}

@@ -20,23 +20,17 @@ Action Verbs:
 	- use
 		Aliases: interact, use
 		Function: 
-	- ???
+	- give
 		Aliases: 
 		Function: 
-	- ???
+	- fix
 		Aliases: 
 		Function: 
-	- ???
+	- sleep
 		Aliases: 
 		Function: 
 
 Command Verbs: 
-	- warp (MIGHT COUNT FOR ACTION)
-		Aliases: warp, teleport
-		Function: 
-	- hint (MIGHT COUNT FOR ACTION)
-		Aliases: clue, hint
-		Function: Provides a hint for the current room.
 	- savegame (required)
 		Aliases: save, save game, savegame
 		Function: Save the state of the game to a file.
