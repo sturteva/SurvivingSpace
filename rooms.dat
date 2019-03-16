@@ -1,4 +1,5 @@
 base of tree|Starting Room
+base of the tree|Starting Room
 tree base|Starting Room
 treebase|Starting Room
 bottom of tree|Starting Room
@@ -7,6 +8,7 @@ starting room|Starting Room
 start|Starting Room
 start tree|Starting Room
 top of tree|Top of Tree
+top of the tree|Top of Tree
 tree top|Top of Tree
 treetop|Top of Tree
 treetops|Top of Tree
@@ -45,8 +47,10 @@ the head|The Head
 latrine|Latrine
 bathroom|Latrine
 med bay|Med Bay
+medbay|Med Bay
 medical bay|Med Bay
 armory|Armory
+closet|Armory
 helm|Helm
 bridge|Helm
 north|North

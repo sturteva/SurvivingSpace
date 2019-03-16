@@ -1,0 +1,19 @@
+Able to pick up multiples of the same item
+
+SEGFAULT: Using an object if you have multiples of the object.
+	Ex: Pick up two bags, then pick up a branch.
+	Ex: Pick up two knives, then try to cut the bushes.
+
+
+After cutting the bush, using the look command returns dialogue as though the bushes are still present. Leaving the area and then returning does not fix. 
+
+After cutting the bush, using the look at command results in dialogue as though the bushes are still present.
+
+There is no mention of the rock with the lightning symbol in the tech ruins. Also, the datapad cannot be interacted with.
+
+
+Stone Puzzle: 
+
+Attempting to put the sword stone in Slot 2 automatically puts it in slot 1. The stone cannot be retrieved once placed.
+
+Attempting to put the spiral stone in Slot 1 (instead of 3) puts it in slot 1. However, if another stone is already there, it overwrites it and both stones are lost.

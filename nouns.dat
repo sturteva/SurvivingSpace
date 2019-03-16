@@ -23,7 +23,9 @@ red ochre rock|Red Ochre rock
 red rock|Red Ochre rock
 predator|Predator
 stone with spiral symbol|Stone with Spiral Symbol
+stone with the spiral symbol|Stone with Spiral Symbol
 stone with spiral|Stone with Spiral Symbol
+stone with the spiral|Stone with Spiral Symbol
 spiral stone|Stone with Spiral Symbol
 spiral symbol|Stone with Spiral Symbol
 stone with lightning symbol|Stone with Lightning Symbol
@@ -31,12 +33,15 @@ stone with lightning|Stone with Lightning Symbol
 lightning stone|Stone with Lightning Symbol
 lightning symbol|Stone with Lightning Symbol
 stone with lightning symbol|Stone with Lightning Symbol
+stone with the lightning symbol|Stone with Lightning Symbol
 stone with lightning|Stone with Lightning Symbol
+stone with the lightning|Stone with Lightning Symbol
 lightning stone|Stone with Lightning Symbol
 lightning symbol|Stone with Lightning Symbol
 stone with sword symbol|Stone with Sword Symbol
+stone with the sword symbol|Stone with Sword Symbol
 sword stone|Stone with Sword Symbol
-stone off back|Stone with Sword Symbol
+stone off its back|Stone with Sword Symbol
 aluminum hook|Aluminum Hook
 hook|Aluminum Hook
 old datapad|Old datapad
@@ -47,21 +52,27 @@ altar|Altar
 slot1|Slot1
 slot 1|Slot1
 slot one|Slot1
+first slot|Slot1
 slot2|Slot2
 slot 2|Slot2
 slot two|Slot2
+second slot|Slot2
 slot3|Slot3
 slot 3|Slot3
 slot three|Slot3
+third slot|Slot3
 stringlike vines|string-like vines
 string like vines|string-like vines
 string vines|string-like vines
+vines|string-like vines
 door with strange writing|Door with strange writing
 door|Door with strange writing
 strange door|Door with strange writing
 door with writing|Door with strange writing
 fishing pole|Makeshift Fishing Pole
 fishing rod|Makeshift Fishing Pole
+pole|Makeshift Fishing Pole
+rod|Makeshift Fishing Rod
 makeshift fishing pole|Makeshift Fishing Pole
 makeshift fishing rod|Makeshift Fishing Pole
 fish|Fish
@@ -69,8 +80,12 @@ paint|Red/Brown Paint
 red paint|Red/Brown Paint
 picture of family|Picture of Family
 family picture|Picture of Family
+photo|Picture of Family
+picture|Picture of Family
 old nadion emitter|Old nadion emitter
 nadion emitter|Old nadion emitter
+emitter|Old nadion emitter
+strange symbol|Strange Magic Circle
 magic circle|Strange Magic Circle
 glowing circle|Strange Magic Circle
 tools|Tools
@@ -88,4 +103,5 @@ stun gun|Stun Gun
 deoderant|Deoderant
 scanning console|Scanning Console
 piloting console|Piloting Console
+pilot console|Piloting Console
 inventory|inventory
