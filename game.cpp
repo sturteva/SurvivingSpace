@@ -465,14 +465,103 @@ void game::goCommand(vector<string> command)
 	{
 		if (adjacentDirs[i] == command[1])
 		{
-			cout << "Going to new location" << endl << endl;
-			currRoom->visitRoom();
-			player1->setLocation(adjacentRooms[i]);
 
-			// get new room
-			currRoom = player1->getLocation();
-			currRoom->printDescription();
-			break;
+			
+			if (currRoom->getName() == "Starting Room")
+                        {
+                                if (command[1] == "East" || command[1] == "West")
+                                {
+                                        if (find(roomItems.begin(), roomItems.end(), "Pile of cut bushes") != roomItems.end() || roomItems.empty())
+                                        {
+                                                cout << "Going to new location" << endl << endl;
+                                                currRoom->visitRoom();
+                                                player1->setLocation(adjacentRooms[i]);
+
+                                                // get new room
+                                                currRoom = player1->getLocation();
+                                                currRoom->printDescription();
+                                                break;
+                                         }
+
+                                         else{
+                                         	cout << "Those thistles will tear me up. Maybe I could use the " << BOLDGREEN << "knife" << RESET << " to chop down the bushes..." << endl;
+                                         }
+                                }
+
+				else if (command[1]== "Up"){
+					cout <<"Going to new location"<< endl << endl;
+					currRoom->visitRoom();
+					player1->setLocation(adjacentRooms[i]);
+
+					//get new room
+					currRoom = player1->getLocation();
+					currRoom->printDescription();
+					break;
+				}
+                                
+			}
+
+			 else if(currRoom->getName() == "Caves")
+                        {
+                                if(magicDomeOpen && command[1] == "South" )
+                                {
+                                        cout << "Going to new location" << endl << endl;
+                                        currRoom->visitRoom();
+                                        player1->setLocation(adjacentRooms[i]);
+					
+					//get new room	
+                                        currRoom = player1->getLocation();
+                                        currRoom->printDescription();
+                                        break;
+                                }
+                                else if(command[1] == "South")
+                                {
+                                        cout << "The large stone door is shut tight..." << endl;
+                                }
+				
+
+                                else{
+
+                                        cout << "Going to new location" << endl << endl;
+                                        currRoom->visitRoom();
+                                        player1->setLocation(adjacentRooms[i]);
+
+					//get new room
+                                        currRoom = player1->getLocation();
+                                        currRoom->printDescription();
+                                        break;
+
+                                }
+                        }
+
+			else if (currRoom->getName() == "Magic Dome"){
+				bool check = checkStones();	
+				if( command[1] == "Up" && check == false){
+					cout << "Nothing happens" << endl;
+				}
+
+				else{
+
+					cout << "Going to new location" << endl << endl;
+					currRoom->visitRoom();
+					player1->setLocation(adjacentRooms[i]);
+				
+					//get new room
+					currRoom = player1->getLocation();
+					currRoom->printDescription();
+					break;}
+			}
+
+			else{
+				cout << "Going to new location" << endl << endl;
+				currRoom->visitRoom();
+				player1->setLocation(adjacentRooms[i]);
+
+				// get new room
+				currRoom = player1->getLocation();
+				currRoom->printDescription();
+				break;
+			}
 		}
 	}
 
@@ -1464,7 +1553,7 @@ void game::putCommand(vector<string> command)
 ** Parameters: None
 ** Returns: None
 *******************************************************************************/
-void game::checkStones()
+bool game::checkStones()
 {
 	room * currRoom = player1->getLocation();
 	vector<string> roomItems = player1->getRoomItems();
@@ -1485,8 +1574,10 @@ void game::checkStones()
 				currRoom->visitRoom();
 				break;
 			}
-		} 
+		}
+		return true; 
 	}
+return false;
 }
 
 /******************************************************************************
