@@ -610,18 +610,19 @@ void game::lookCommand(vector<string> command)
 	// Personal Cabin
 	else if (currRoom->getName() == "Personal Cabin")
 	{
-		cout << "You are back on your ship in your personal cabin." << endl;
+		cout << "You are back on your ship in your personal cabin." << endl
+			 << "The bed looks real comfortable." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Picture of Family") != roomItems.end())
 		{
-			cout << "There is a picture of your family on the bedside table." << endl;
+			cout << "There is a " << BOLDYELLOW << "picture of your family" << RESET << " on the bedside table." << endl;
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Old nadion emitter") != roomItems.end())
 		{
-			cout << "The old nadion emitter from the FTL engine lays on a shelf over your bed." << endl;
+			cout << "The " << BOLDYELLOW << "old nadion emitter " << RESET << "from the FTL engine lays on a shelf over your bed." << endl;
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Strange Magic Circle") != roomItems.end())
 		{
-			cout << "There also is a strange magic circle that appeared on the ground below you." << endl;
+			cout << "There also is a " << BOLDYELLOW << "strange magic circle " << RESET << "that appeared on the ground below you." << endl;
 		}
 	}
 
@@ -1674,7 +1675,15 @@ void game::useCommand(vector<string> command)
 	}
 	else if (currRoom->getName() == "Helm" && command[1] == "Scanning Console")
 	{
-		
+		if (command[2] == "planet")
+		{
+			cout << "!!!RESTART GAME!!!" << endl;
+
+		}
+		else if (command[2] == "space")
+		{
+			cout << "There are no freindly ships nearby." << endl;
+		}
 	}
 
 }
