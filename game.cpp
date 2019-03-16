@@ -328,6 +328,52 @@ void game::helpCommand(vector<string> command)
 		cout << "'go field' will go to the field with grazing animals" << endl
 			 << "'place <item> in <slot>' will place item from inventory in the specified altar slot" << endl;
 	}
+
+	else if (currRoom->getName() == "Personal Cabin"){
+
+		cout << " 'go Galley' will go to the galley of the ship" << endl;
+		cout << " 'go Engine Room' will go to the engine room of the ship" << endl;
+		cout << " 'take nadion emitter' will take the nadion emitter" << endl;
+		cout << " 'look at picture' will let you look at the picture" << endl;
+	}
+
+	else if (currRoom->getName() == "Engine Room"){
+		cout << " 'go Personal Cabin' will take you to  your cabin" << endl;
+	}
+
+	else if (currRoom->getName() == "Galley"){
+		cout << " 'take tools' will let you take the tools" << endl;
+		cout << " 'take food' will let you take the food" << endl;
+		cout << " 'go to The Head' will take you to the ships head" << endl; 
+	}
+
+	else if (currRoom->getName() == "The Head"){
+		cout << " ' take wiring' will let you take the wiring" << endl;
+		cout << " 'go to Armory' will take you to the armory" << endl;
+		cout << " 'go to Galley' will take you to the galley" << endl;
+		cout << " 'go to Med Bay' will take you to the Med Bay" << endl;
+	
+	}
+
+	else if(currRoom->getName() == "Med Bay"){
+		cout <<"'take animal sleeping pills' to take the pills" << endl;
+		cout <<"'go to Helm' will take you to the ship's helm" << endl;
+		cout <<"'go to head' will take you to the ship's head" << endl;
+	}
+
+	else if(currRoom->getName() == "Armory"){
+		
+		cout <<"'take stun gun' will let you take the stun gun" << endl;
+		cout <<"'go Helm' will take you to the Helm" << endl;
+		cout <<"'go The Head' will take you to the head" << endl;
+	}	
+
+	else if(currRoom->getName() == "Helm"){
+		cout << "'use pilot console' will let you use the pilot console"<< endl;
+		cout << "'use scanning console' will let you use the scanning console" << endl;
+		cout << "'go Med Bay'will take you to the Med Bay" << endl;
+		cout << "'go Armor' will take you to the Armory" << endl;
+	}
 }
 
 /******************************************************************************
