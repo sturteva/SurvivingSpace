@@ -611,7 +611,9 @@ void game::lookCommand(vector<string> command)
 	else if (currRoom->getName() == "Personal Cabin")
 	{
 		cout << "You are back on your ship in your personal cabin." << endl
-			 << "The bed looks real comfortable." << endl;
+			 << "The galley is " << BOLDYELLOW << "north" << RESET << "." << endl
+			 << "The engine room is " << BOLDYELLOW << "south" << RESET << "." << endl
+			 << "Your bed looks real comfortable." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Picture of Family") != roomItems.end())
 		{
 			cout << "There is a " << BOLDYELLOW << "picture of your family" << RESET << " on the bedside table." << endl;
@@ -629,42 +631,52 @@ void game::lookCommand(vector<string> command)
 	// Galley
 	else if (currRoom->getName() == "Galley")
 	{
-		cout << "This is the galley where you usually take your meals." << endl;
+		cout << "This is the galley where you usually take your meals." << endl
+			 << "The head is " << BOLDYELLOW << "north" << RESET << "." << endl
+			 << "Your personal cabin is " << BOLDYELLOW << "south" << RESET << "." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Tools") != roomItems.end())
 		{
-			cout << "There are some assorted tools scattered on the table." << endl;
+			cout << "There are some assorted" << BOLDYELLOW << " tools" << RESET " scattered on the table." << endl;
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Nutrition Wafer Bar") != roomItems.end())
 		{
-			cout << "A nutrition wafer bar lays on the counter." << endl;
+			cout << "A " << BOLDYELLOW << "nutrition wafer bar " << RESET "lays on the counter." << endl;
 		}
 	}
 
 	// Engine Room 
 	else if (currRoom->getName() == "Engine Room")
 	{
-		if (find(roomItems.begin(), roomItems.end(), "broken FTL engine") != roomItems.end())
+		cout << "Your personal cabin is " << BOLDYELLOW << "north" << RESET << "." << endl;
+		if (!engineFixed)
 		{
-			cout << "Something chewed through the engine casing and pulled out the nadion emitter." << endl
-				 << "A large amount of wiring was also pulled out that connects the nadion emitter to the photon splitter." << endl;
+			cout << "Something chewed through the engine casing and pulled out the " <<BOLDYELLOW << "nadion emitter" << RESET << "." << endl
+				 << "A large amount of " <<BOLDYELLOW << "wiring" << RESET << " was also pulled out that connects the nadion emitter to the photon splitter." << endl;
+		}
+		else
+		{
+			cout << "The FTL engine is repaired. I think we are ready to get out of here!" << endl;
 		}
 		if (find(roomItems.begin(), roomItems.end(), "hammock") != roomItems.end())
 		{
-			cout << "My old hammock hangs between two poles." << endl;
+			cout << "My old " << BOLDYELLOW << "hammock " << RESET << "hangs between two poles." << endl;
 		}
 	}
 
 	// The Head 
 	else if (currRoom->getName() == "The Head")
 	{
-		cout << "" << endl;
+		cout << "The head, built for two or three people." << endl
+			 << "The armory is " << BOLDYELLOW << "east" << RESET << "." << endl
+			 << "The med bay is " << BOLDYELLOW << "west" << RESET << "." << endl
+			 << "The galley is " << BOLDYELLOW << "south" << RESET << "." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Rugvuk") != roomItems.end())
 		{
 			cout << "A Rugvuk seems to have escaped it's cage while you were planetside!" << endl;
 		}
 		if (find(roomItems.begin(), roomItems.end(), "pile of wiring") != roomItems.end())
 		{
-			cout << "You see the Rugvuk laying on the pile of wires it pulled out of the nadion emitter as a bed." << endl;
+			cout << "You see the Rugvuk laying on the pile of " << BOLDYELLOW << "wires " << RESET << "it pulled out of the nadion emitter as a bed." << endl;
 		}
 	}
 
@@ -672,7 +684,9 @@ void game::lookCommand(vector<string> command)
 	else if (currRoom->getName() == "Med Bay")
 	{
 		cout << "The medical and science bay. " << endl
-			 << "It contains basic first aid supplies, as well as small flora and fauna collected from previous expeditions." << endl;
+			 << "It contains basic first aid supplies, as well as small flora and fauna collected from previous expeditions." << endl
+			 << "The helm is " << BOLDYELLOW << "north" << RESET << "." << endl
+			 << "The head is " << BOLDYELLOW << "south" << RESET << "." << endl;
 
 		if (find(roomItems.begin(), roomItems.end(), "Empty Cage") != roomItems.end())
 		{
@@ -681,43 +695,44 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Animal Sleeping pills") != roomItems.end())
 		{
-			cout << "There are some animal sleeping pills sitting next to the cages." << endl;
+			cout << "There are some" <<  BOLDYELLOW << "animal sleeping pills " << RESET << "sitting next to the cages." << endl;
 		}
 	}
 
 	// Armory
 	else if (currRoom->getName() == "Armory")
 	{
-		cout << "This armory holds some self defense wepons to defend yourself during your travels." << endl;
+		cout << "This armory holds some self defense wepons to defend yourself during your travels." << endl
+			 << "The helm is " << BOLDYELLOW << "north" << RESET << "." << endl
+			 << "The head is " << BOLDYELLOW << "south" << RESET << "." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Stun Gun") != roomItems.end())
 		{
-			cout << "There is an animal stun gun on a rack. Looks like it still has a few charges." << endl;
+			cout << "There is an animal " << BOLDYELLOW << "stun gun " << RESET << "on a rack. Looks like it still has a few charges." << endl;
 		} 
 		if (find(roomItems.begin(), roomItems.end(), "Deoderant") != roomItems.end())
 		{
-			cout << "Some deoderant is sitting in the locker." << endl;
+			cout << "Some " << BOLDYELLOW << "deoderant" << RESET << " is sitting in the locker." << endl;
 		}
 	}
 
 	// Helm 
 	else if (currRoom->getName() == "Helm")
 	{
-		cout << "" << endl;
-		if (find(roomItems.begin(), roomItems.end(), "Scanning Console") != roomItems.end())
+		cout << "This is the helm, where you spend a lot of your work hours." << endl
+			 << "The med bay is " << BOLDYELLOW << "west" << RESET << "." << endl
+			 << "The armory is " << BOLDYELLOW << "east" << RESET << "." << endl;
+
+		cout << "The " << BOLDYELLOW << "scanning console" << RESET << " allows you to scan " << BOLDYELLOW << "planets" << RESET 
+			 << " and " << BOLDYELLOW << "space" << RESET << " around the ship." << endl;
+		 
+		if (!engineFixed)
 		{
-			cout << "The scanning console allows you to scan planets and space around the ship." << endl;
+			cout << "The " << BOLDYELLOW << "piloting console" << RESET << " sits as a blank screen..." << endl
+			 	 << "The damage to the FTL engine must be causing the outage" << endl;
 		}
-		if (find(roomItems.begin(), roomItems.end(), "Piloting Console") != roomItems.end())
+		else if (engineFixed)
 		{
-			if (!engineFixed)
-			{
-				cout << "The piloiting console sits as a blank screen..." << endl
-				 	 << "The damage to the FTL engine must be causing the outage" << endl;
-			}
-			else if (engineFixed)
-			{
-				cout << "The piloiting console has power again. The ship is back online!" << endl;
-			}
+			cout << "The " << BOLDYELLOW << " piloting console" << RESET << " has power again. The ship is back online!" << endl;
 		}
 	}
 }
