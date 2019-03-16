@@ -551,7 +551,9 @@ void game::lookCommand(vector<string> command)
 	// Predator Den
 	else if (currRoom->getName() == "Predator Den")
 	{
-		cout << "Describe predator den..." << endl;
+		cout << "A trail runs to the" << BOLDYELLOW << " south" << RESET << " back toward the pool of water." << endl
+			 << "Another trail runs to the" << BOLDYELLOW << " east" << RESET << " toward the cave." << endl;
+
 		if (find(roomItems.begin(), roomItems.end(), "Rock with Spiral Symbol") != roomItems.end())
 		{
 			cout << "You see a small rock with a spiral symbol on it behind the predator." << endl
@@ -565,7 +567,8 @@ void game::lookCommand(vector<string> command)
 		cout << "What used to be large buildings long ago, appear half crumbling and falling apart." << endl
 			 << "Some of these buildings appear to have once been a school, hospital, warehouse, and even some sort of civic center." << endl
 			 << "The architecture is foreign to you, but some of the galaxy-wide accepted symbols are present." << endl
-			 << "There is rubble and trash left from whoever built these buildings." << endl;
+			 << "There is rubble and trash left from whoever built these buildings." << endl
+			 << "A trail runs to the" << BOLDYELLOW << " north" << RESET << " back toward the field." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Aluminum Hook") != roomItems.end())
 		{
 			cout << "Among the rubble you see an" << BOLDGREEN << " aluminum hook" << RESET << " similar to a fishing hook." << endl;
@@ -584,17 +587,24 @@ void game::lookCommand(vector<string> command)
 	// Caves
 	else if (currRoom->getName() == "Caves")
 	{
-		cout << "The entrance to the cave is covered by small string like vines." << endl;
-		if (find(roomItems.begin(), roomItems.end(), "Door with strange writing") != roomItems.end())
+		cout << "The entrance to the cave is covered by small string like vines." << endl
+			 << "The trail runs" << BOLDYELLOW << " west" << RESET << " to the predator den and" 
+			 << BOLDYELLOW << " east" << RESET << " to the field."<< endl
+			 << "To the" << BOLDYELLOW << " north" << RESET << "is the pool of water."<< endl;
+		if (magicDomeOpen)
 		{
-			cout << "You see a door deeper within the cave with strange writing above it." << endl;
+			cout << "Inside the cave to the" << BOLDYELLOW << " south" << RESET << "is the magic dome with the altar."<< endl;
+		}
+		else
+		{
+			cout << "There is a" << BOLDYELLOW << " door with strange writing" << RESET << " above it deeper within the cave to the" << BOLDYELLOW << " south" << RESET << endl;
 		}
 	}
 
 	// Magic Dome
 	else if (currRoom->getName() == "Magic Dome")
 	{
-		cout << "You see an altar with some strange writing on it. Tht altar has 3 slots on the top about the size of those strange rocks ive been seeing." << endl;
+		cout << "You see an " << BOLDYELLOW << "altar" << RESET << " with some strange writing on it. Tht altar has 3 slots on the top about the size of those strange rocks i've been seeing." << endl;
 	}
 
 	// Personal Cabin
@@ -1649,6 +1659,22 @@ void game::useCommand(vector<string> command)
 				 << "It gets knocked out and falls limp to the ground." << endl;
 			rugvukFlag = true;
 		}
+	}
+	else if (currRoom->getName() == "Helm" && command[1] == "Piloting Console")
+	{
+		if (engineFixed)
+		{
+			cout << "You select your destination, and the ship takes off toward your next adventure." << endl;
+			exit (0);
+		}
+		else
+		{
+			cout << "The console is dark. Looks like the FTL engine is offline" << endl;
+		}
+	}
+	else if (currRoom->getName() == "Helm" && command[1] == "Scanning Console")
+	{
+		
 	}
 
 }
