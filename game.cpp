@@ -677,7 +677,7 @@ void game::lookCommand(vector<string> command)
 			 << "In the forest to the west you see a cave entrance." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Grazing Animal with a strange rock on its back") != roomItems.end())
 		{
-			cout << "You notice one of the grazing animals has a" << BOLDGREEN << " rock with strange symbols" << RESET << " on its back." << endl; 
+			cout << "You notice one of the grazing animals has a" << BOLDGREEN << " rock with sword symbol" << RESET << " on its back." << endl; 
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Red Ochre rock") != roomItems.end())
 		{
@@ -751,7 +751,7 @@ void game::lookCommand(vector<string> command)
 		}
 		else
 		{
-			cout << "There is a" << BOLDYELLOW << " door with strange writing" << RESET << " above it deeper within the cave to the" << BOLDYELLOW << " south" << RESET << endl;
+			cout << "There is a" << BOLDGREEN << " door with strange writing" << RESET << " above it deeper within the cave to the" << BOLDYELLOW << " south" << RESET << endl;
 		}
 	}
 
@@ -770,15 +770,15 @@ void game::lookCommand(vector<string> command)
 			 << "Your bed looks real comfortable." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Picture of Family") != roomItems.end())
 		{
-			cout << "There is a " << BOLDYELLOW << "picture of your family" << RESET << " on the bedside table." << endl;
+			cout << "There is a " << BOLDGREEN << "picture of your family" << RESET << " on the bedside table." << endl;
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Old nadion emitter") != roomItems.end())
 		{
-			cout << "The " << BOLDYELLOW << "old nadion emitter " << RESET << "from the FTL engine lays on a shelf over your bed." << endl;
+			cout << "The " << BOLDGREEN << "old nadion emitter " << RESET << "from the FTL engine lays on a shelf over your bed." << endl;
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Strange Magic Circle") != roomItems.end())
 		{
-			cout << "There also is a " << BOLDYELLOW << "strange magic circle " << RESET << "that appeared on the ground below you." << endl;
+			cout << "There also is a " << BOLDGREEN << "strange magic circle " << RESET << "that appeared on the ground below you." << endl;
 		}
 	}
 
@@ -794,7 +794,7 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Nutrition Wafer Bar") != roomItems.end())
 		{
-			cout << "A " << BOLDYELLOW << "nutrition wafer bar " << RESET "lays on the counter." << endl;
+			cout << "A " << BOLDGREEN << "nutrition wafer bar " << RESET "lays on the counter." << endl;
 		}
 	}
 
@@ -804,8 +804,8 @@ void game::lookCommand(vector<string> command)
 		cout << "Your personal cabin is " << BOLDYELLOW << "north" << RESET << "." << endl;
 		if (!engineFixed)
 		{
-			cout << "Something chewed through the engine casing and pulled out the " <<BOLDYELLOW << "nadion emitter" << RESET << "." << endl
-				 << "A large amount of " <<BOLDYELLOW << "wiring" << RESET << " was also pulled out that connects the nadion emitter to the photon splitter." << endl;
+			cout << "Something chewed through the engine casing and pulled out the " << BOLDGREEN << "nadion emitter" << RESET << "." << endl
+				 << "A large amount of " << BOLDGREEN << "wiring" << RESET << " was also pulled out that connects the nadion emitter to the photon splitter." << endl;
 		}
 		else
 		{
@@ -813,7 +813,7 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "hammock") != roomItems.end())
 		{
-			cout << "My old " << BOLDYELLOW << "hammock " << RESET << "hangs between two poles." << endl;
+			cout << "My old " << BOLDGREEN << "hammock " << RESET << "hangs between two poles." << endl;
 		}
 	}
 
@@ -830,7 +830,7 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "pile of wiring") != roomItems.end())
 		{
-			cout << "You see the Rugvuk laying on the pile of " << BOLDYELLOW << "wires " << RESET << "it pulled out of the nadion emitter as a bed." << endl;
+			cout << "You see the Rugvuk laying on the pile of " << BOLDGREEN << "wires " << RESET << "it pulled out of the nadion emitter as a bed." << endl;
 		}
 	}
 
@@ -849,7 +849,7 @@ void game::lookCommand(vector<string> command)
 		}
 		if (find(roomItems.begin(), roomItems.end(), "Animal Sleeping pills") != roomItems.end())
 		{
-			cout << "There are some " <<  BOLDYELLOW << "animal sleeping pills " << RESET << "sitting next to the cages." << endl;
+			cout << "There are some " <<  BOLDGREEN << "animal sleeping pills " << RESET << "sitting next to the cages." << endl;
 		}
 	}
 
@@ -861,11 +861,11 @@ void game::lookCommand(vector<string> command)
 			 << "The head is " << BOLDYELLOW << "south" << RESET << "." << endl;
 		if (find(roomItems.begin(), roomItems.end(), "Stun Gun") != roomItems.end())
 		{
-			cout << "There is an animal " << BOLDYELLOW << "stun gun " << RESET << "on a rack. Looks like it still has a few charges." << endl;
+			cout << "There is an animal " << BOLDGREEN << "stun gun " << RESET << "on a rack. Looks like it still has a few charges." << endl;
 		} 
 		if (find(roomItems.begin(), roomItems.end(), "Deoderant") != roomItems.end())
 		{
-			cout << "Some " << BOLDYELLOW << "deoderant" << RESET << " is sitting in the locker." << endl;
+			cout << "Some " << BOLDGREEN << "deoderant" << RESET << " is sitting in the locker." << endl;
 		}
 	}
 
@@ -876,17 +876,17 @@ void game::lookCommand(vector<string> command)
 			 << "The med bay is " << BOLDYELLOW << "west" << RESET << "." << endl
 			 << "The armory is " << BOLDYELLOW << "east" << RESET << "." << endl;
 
-		cout << "The " << BOLDYELLOW << "scanning console" << RESET << " allows you to scan " << BOLDYELLOW << "planets" << RESET 
-			 << " and " << BOLDYELLOW << "space" << RESET << " around the ship." << endl;
+		cout << "The " << BOLDGREEN << "scanning console" << RESET << " allows you to scan " << BOLDYELLOW << "planets" << RESET 
+			 << " and " << BOLDGREEN << "space" << RESET << " around the ship." << endl;
 		 
 		if (!engineFixed)
 		{
-			cout << "The " << BOLDYELLOW << "piloting console" << RESET << " sits as a blank screen..." << endl
+			cout << "The " << BOLDGREEN << "piloting console" << RESET << " sits as a blank screen..." << endl
 			 	 << "The damage to the FTL engine must be causing the outage" << endl;
 		}
 		else if (engineFixed)
 		{
-			cout << "The " << BOLDYELLOW << " piloting console" << RESET << " has power again. The ship is back online!" << endl;
+			cout << "The " << BOLDGREEN << " piloting console" << RESET << " has power again. The ship is back online!" << endl;
 		}
 	}
 }
@@ -982,7 +982,7 @@ void game::lookAtCommand(vector<string> command)
 
 	}
 	//old datapad
-	else if (currRoom->getName() == "Tech Ruins" && command[1] == "Old datapad")
+	else if (currRoom->getName() == "Tech Ruin" && command[1] == "Old datapad")
 	{
 		cout << "It is an old datapad that was once owned by an inhabitant of the abandonded city." << endl
 			 << "There is a note pulled up on the screen that reads:" << endl
@@ -1025,7 +1025,7 @@ void game::lookAtCommand(vector<string> command)
 		{
 			cout << "The stone with lightning symbol is currently in this spot." << endl;
 		}
-		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Spiral Symbol") != roomItems.end())
+		else if (find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Spiral Symbol") != roomItems.end())
 		{
 			cout << "The stone with spiral symbol is currently in this spot." << endl;
 		}
@@ -1095,7 +1095,7 @@ void game::lookAtCommand(vector<string> command)
 		cout << "It is a nutrition wafer bar I usually take with me to eat on the go." << endl;
 	}
 	// broken FTL Engine
-	else if (currRoom->getName() == "Engine Room" && command[1] == "broken FTL engine")
+	else if (currRoom->getName() == "Engine Room" && find(command.begin(), command.end(), "broken FTL engine") != command.end())
 	{
 		if (engineFixed == true)
 		{
@@ -1345,16 +1345,19 @@ void game::takeCommand(vector<string> command)
 	{
 		if(find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Sword Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with sword symbol" << RESET << " out of altar slot 1 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Sword Symbol");
 			currRoom->removeInteractable("Slot 1: Stone with Sword Symbol");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Sword Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with sword symbol" << RESET << " out of altar slot 2 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Sword Symbol");
 			currRoom->removeInteractable("Slot 2: Stone with Sword Symbol");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Sword Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with sword symbol" << RESET << " out of altar slot 3 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Sword Symbol");
 			currRoom->removeInteractable("Slot 3: Stone with Sword Symbol");
 		}
@@ -1364,16 +1367,19 @@ void game::takeCommand(vector<string> command)
 	{
 		if(find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Lightning Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with lightning symbol" << RESET << " out of altar slot 1 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Lightning Symbol");
 			currRoom->removeInteractable("Slot 1: Stone with Lightning Symbol");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Lightning Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with lightning symbol" << RESET << " out of altar slot 2 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Lightning Symbol");
 			currRoom->removeInteractable("Slot 2: Stone with Lightning Symbol");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Lightning Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with lightning symbol" << RESET << " out of altar slot 3 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Lightning Symbol");
 			currRoom->removeInteractable("Slot 3: Stone with Lightning Symbol");
 		}
@@ -1383,16 +1389,19 @@ void game::takeCommand(vector<string> command)
 	{
 		if(find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Spiral Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with spiral symbol" << RESET << " out of altar slot 1 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Spiral Symbol");
 			currRoom->removeInteractable("Slot 1: Stone with Spiral Symbol");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Spiral Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with spiral symbol" << RESET << " out of altar slot 2 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Spiral Symbol");
 			currRoom->removeInteractable("Slot 2: Stone with Spiral Symbol");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Spiral Symbol") != roomItems.end())
 		{
+			cout << "You take the " << BOLDGREEN << "stone with spiral symbol" << RESET << " out of altar slot 3 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Spiral Symbol");
 			currRoom->removeInteractable("Slot 3: Stone with Spiral Symbol");
 		}
@@ -1515,12 +1524,12 @@ void game::cutCommand(vector<string> command)
 
 	//cout << "cut command sent..." << endl;
 	// cut bushes
-	if (command[1] == "Thistle filled bushes")
+	if (find(command.begin(), command.end(), "Thistle filled bushes") != command.end())
 	{
 		//check knife is in inventory
 		if (find(currInventory.begin(), currInventory.end(), "Knife with Runes") != currInventory.end() )
 		{
-			cout << "You cut the bushes using the knife with the strange runes to reveal the small lake to the west and the field to the east. \nOnly a pile of cut bushes remains." << endl;
+			cout << "You cut the bushes using the knife with the strange runes to reveal the pool of water to the west and the field to the east. \nOnly a pile of cut bushes remains." << endl;
 			//remove bushes from interactables
 			currRoom->removeInteractable("Thistle filled bushes");
 			// add pile of bushes to interactables
@@ -1534,7 +1543,7 @@ void game::cutCommand(vector<string> command)
 	}
 
 	// rock off animals back
-	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Stone with Sword Symbol")
+	if (currRoom->getName() == "Field with Grazing Animals" && find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end())
 	{
 		if (find(roomItems.begin(), roomItems.end(), "Sneak up on Animal") != roomItems.end())
 		{
@@ -1559,7 +1568,7 @@ void game::moveTowardCommand(vector<string> command)
 {
 	room * currRoom = player1->getLocation();
 
-	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange stone on its back")
+	if (currRoom->getName() == "Field with Grazing Animals" && find(command.begin(), command.end(), "Grazing Animal with a strange stone on its back") != command.end())
 	{
 		cout << "The herd senses you and moves further along the plains, but you can still see them." << endl
 			 << "Maybe I should be more stealthy next time..." << endl;
@@ -1577,7 +1586,7 @@ void game::sneakCommand(vector<string> command)
 {
 	room * currRoom = player1->getLocation();
 
-	if (currRoom->getName() == "Field with Grazing Animals" && command[1] == "Grazing Animal with a strange stone on its back")
+	if (currRoom->getName() == "Field with Grazing Animals" && find(command.begin(), command.end(), "Grazing Animal with a strange stone on its back") != command.end())
 	{
 		cout << "You sneak up on the grazing animal with the strange stone on its back..." << endl
 			 << "You notice the" << BOLDGREEN << " stone with sword symbol" << RESET << "is round and smooth ." << endl
@@ -1635,81 +1644,102 @@ void game::putCommand(vector<string> command)
 	}
 	else if(currRoom->getName() == "Magic Dome" && find(command.begin(), command.end(), "Slot1") != command.end())
 	{
-		if (find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
+		if (find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Sword Symbol") == roomItems.end() && find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Lightning Symbol") == roomItems.end() && find(roomItems.begin(), roomItems.end(), "Slot 1: Stone with Spiral Symbol") == roomItems.end())
 		{
-			cout << "You place the stone with sword symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 1: Stone with Sword Symbol");
-			player1->removeFromInventory("Stone with Sword Symbol");
-			currRoom->removeInteractable("Slot1");
-		}
-		else if (find(command.begin(), command.end(), "Stone with Lightning Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
-		{
-			cout << "You place the stone with lightning symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 1: Stone with Lightning Symbol");
-			player1->removeFromInventory("Stone with Lightning Symbol");
-			currRoom->removeInteractable("Slot1");
-		}
-		else if(find(command.begin(), command.end(), "Stone with Spiral Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
-		{
-			cout << "You place the stone with spiral symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 1: Stone with Spiral Symbol");
-			player1->removeFromInventory("Stone with Spiral Symbol");
-			currRoom->removeInteractable("Slot1");
-		}
+			if (find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with sword symbol in the first slot in the altar." << endl;
+				currRoom->addInteractable("Slot 1: Stone with Sword Symbol");
+				player1->removeFromInventory("Stone with Sword Symbol");
+				currRoom->removeInteractable("Slot1");
+			}
+			else if (find(command.begin(), command.end(), "Stone with Lightning Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with lightning symbol in the first slot in the altar." << endl;
+				currRoom->addInteractable("Slot 1: Stone with Lightning Symbol");
+				player1->removeFromInventory("Stone with Lightning Symbol");
+				currRoom->removeInteractable("Slot1");
+			}
+			else if(find(command.begin(), command.end(), "Stone with Spiral Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with spiral symbol in the first slot in the altar." << endl;
+				currRoom->addInteractable("Slot 1: Stone with Spiral Symbol");
+				player1->removeFromInventory("Stone with Spiral Symbol");
+				currRoom->removeInteractable("Slot1");
+			}
 
-		checkStones();
+			checkStones();
+		}
+		else
+		{
+			cout << "There already is a stone in that slot." << endl;
+		}
 	}
 	else if(currRoom->getName() == "Magic Dome" && find(command.begin(), command.end(), "Slot2") != command.end())
 	{
-		if (find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
+		if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Sword Symbol") == roomItems.end() && find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Lightning Symbol") == roomItems.end() && find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Spiral Symbol") == roomItems.end())
 		{
-			cout << "You place the stone with sword symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 2: Stone with Sword Symbol");
-			player1->removeFromInventory("Stone with Sword Symbol");
-			currRoom->removeInteractable("Slot2");
-		}
-		else if (find(command.begin(), command.end(), "Stone with Lightning Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
-		{
-			cout << "You place the stone with lightning symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 2: Stone with Lightning Symbol");
-			player1->removeFromInventory("Stone with Lightning Symbol");
-			currRoom->removeInteractable("Slot2");
-		}
-		else if(find(command.begin(), command.end(), "Stone with Spiral Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
-		{
-			cout << "You place the stone with spiral symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 2: Stone with Spiral Symbol");
-			player1->removeFromInventory("Stone with Spiral Symbol");
-			currRoom->removeInteractable("Slot2");
-		}
+			if (find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with sword symbol in the second slot in the altar." << endl;
+				currRoom->addInteractable("Slot 2: Stone with Sword Symbol");
+				player1->removeFromInventory("Stone with Sword Symbol");
+				currRoom->removeInteractable("Slot2");
+			}
+			else if (find(command.begin(), command.end(), "Stone with Lightning Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with lightning symbol in the second slot in the altar." << endl;
+				currRoom->addInteractable("Slot 2: Stone with Lightning Symbol");
+				player1->removeFromInventory("Stone with Lightning Symbol");
+				currRoom->removeInteractable("Slot2");
+			}
+			else if(find(command.begin(), command.end(), "Stone with Spiral Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with spiral symbol in the second slot in the altar." << endl;
+				currRoom->addInteractable("Slot 2: Stone with Spiral Symbol");
+				player1->removeFromInventory("Stone with Spiral Symbol");
+				currRoom->removeInteractable("Slot2");
+			}
 
-		checkStones();
+			checkStones();
+		}
+		else
+		{
+			cout << "There already is a stone in that slot." << endl;
+		}
 	}
 	else if(currRoom->getName() == "Magic Dome" && find(command.begin(), command.end(), "Slot3") != command.end())
 	{
-		if (find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
+		if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Sword Symbol") == roomItems.end() && find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Lightning Symbol") == roomItems.end() && find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Spiral Symbol") == roomItems.end())
 		{
-			cout << "You place the stone with sword symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 3: Stone with Sword Symbol");
-			player1->removeFromInventory("Stone with Sword Symbol");
-			currRoom->removeInteractable("Slot3");
-		}
-		else if (find(command.begin(), command.end(), "Stone with Lightning Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
-		{
-			cout << "You place the stone with lightning symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 3: Stone with Lightning Symbol");
-			player1->removeFromInventory("Stone with Lightning Symbol");
-			currRoom->removeInteractable("Slot3");
-		}
-		else if(find(command.begin(), command.end(), "Stone with Spiral Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
-		{
-			cout << "You place the stone with spiral symbol in the first slot in the altar." << endl;
-			currRoom->addInteractable("Slot 3: Stone with Spiral Symbol");
-			player1->removeFromInventory("Stone with Spiral Symbol");
-			currRoom->removeInteractable("Slot3");
-		}
+			if (find(command.begin(), command.end(), "Stone with Sword Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Sword Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with sword symbol in the third slot in the altar." << endl;
+				currRoom->addInteractable("Slot 3: Stone with Sword Symbol");
+				player1->removeFromInventory("Stone with Sword Symbol");
+				currRoom->removeInteractable("Slot3");
+			}
+			else if (find(command.begin(), command.end(), "Stone with Lightning Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Lightning Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with lightning symbol in the third slot in the altar." << endl;
+				currRoom->addInteractable("Slot 3: Stone with Lightning Symbol");
+				player1->removeFromInventory("Stone with Lightning Symbol");
+				currRoom->removeInteractable("Slot3");
+			}
+			else if(find(command.begin(), command.end(), "Stone with Spiral Symbol") != command.end() && find(currInventory.begin(), currInventory.end(), "Stone with Spiral Symbol") != currInventory.end())
+			{
+				cout << "You place the stone with spiral symbol in the third slot in the altar." << endl;
+				currRoom->addInteractable("Slot 3: Stone with Spiral Symbol");
+				player1->removeFromInventory("Stone with Spiral Symbol");
+				currRoom->removeInteractable("Slot3");
+			}
 
-		checkStones();
+			checkStones();
+		}
+		else
+		{
+			cout << "There already is a stone in that slot." << endl;
+		}
 	}
 	
 }
@@ -1745,7 +1775,7 @@ bool game::checkStones()
 		}
 		return true; 
 	}
-return false;
+	return false;
 }
 
 /******************************************************************************
