@@ -1348,18 +1348,21 @@ void game::takeCommand(vector<string> command)
 			cout << "You take the " << BOLDGREEN << "stone with sword symbol" << RESET << " out of altar slot 1 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Sword Symbol");
 			currRoom->removeInteractable("Slot 1: Stone with Sword Symbol");
+			currRoom->addInteractable("Slot1");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Sword Symbol") != roomItems.end())
 		{
 			cout << "You take the " << BOLDGREEN << "stone with sword symbol" << RESET << " out of altar slot 2 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Sword Symbol");
 			currRoom->removeInteractable("Slot 2: Stone with Sword Symbol");
+			currRoom->addInteractable("Slot2");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Sword Symbol") != roomItems.end())
 		{
 			cout << "You take the " << BOLDGREEN << "stone with sword symbol" << RESET << " out of altar slot 3 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Sword Symbol");
 			currRoom->removeInteractable("Slot 3: Stone with Sword Symbol");
+			currRoom->addInteractable("Slot3");
 		}
 	}
 	// take stone with lightning symbol off altar
@@ -1370,18 +1373,21 @@ void game::takeCommand(vector<string> command)
 			cout << "You take the " << BOLDGREEN << "stone with lightning symbol" << RESET << " out of altar slot 1 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Lightning Symbol");
 			currRoom->removeInteractable("Slot 1: Stone with Lightning Symbol");
+			currRoom->addInteractable("Slot1");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Lightning Symbol") != roomItems.end())
 		{
 			cout << "You take the " << BOLDGREEN << "stone with lightning symbol" << RESET << " out of altar slot 2 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Lightning Symbol");
 			currRoom->removeInteractable("Slot 2: Stone with Lightning Symbol");
+			currRoom->addInteractable("Slot2");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Lightning Symbol") != roomItems.end())
 		{
 			cout << "You take the " << BOLDGREEN << "stone with lightning symbol" << RESET << " out of altar slot 3 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Lightning Symbol");
 			currRoom->removeInteractable("Slot 3: Stone with Lightning Symbol");
+			currRoom->addInteractable("Slot3");
 		}
 	}
 	// take stone with spiral symbol off altar
@@ -1392,18 +1398,21 @@ void game::takeCommand(vector<string> command)
 			cout << "You take the " << BOLDGREEN << "stone with spiral symbol" << RESET << " out of altar slot 1 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Spiral Symbol");
 			currRoom->removeInteractable("Slot 1: Stone with Spiral Symbol");
+			currRoom->addInteractable("Slot1");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 2: Stone with Spiral Symbol") != roomItems.end())
 		{
 			cout << "You take the " << BOLDGREEN << "stone with spiral symbol" << RESET << " out of altar slot 2 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Spiral Symbol");
 			currRoom->removeInteractable("Slot 2: Stone with Spiral Symbol");
+			currRoom->addInteractable("Slot2");
 		}
 		else if (find(roomItems.begin(), roomItems.end(), "Slot 3: Stone with Spiral Symbol") != roomItems.end())
 		{
 			cout << "You take the " << BOLDGREEN << "stone with spiral symbol" << RESET << " out of altar slot 3 and add it to your inventory." << endl;
 			player1->addToInventory("Stone with Spiral Symbol");
 			currRoom->removeInteractable("Slot 3: Stone with Spiral Symbol");
+			currRoom->addInteractable("Slot3");
 		}
 	}
 	// take old nadion emitter
